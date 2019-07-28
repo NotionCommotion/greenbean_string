@@ -1,0 +1,14 @@
+{
+    "name": "concrete5/greenbean_data_integrator",
+    "description": "Interface for Greenbean API",
+    "type": "concrete5-package",
+    "minimum-stability": "stable",
+    "require": {
+        "twig/twig:^2.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Greenbean\Concrete5\Datalogger\\": "src"
+        }
+    }
+}
