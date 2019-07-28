@@ -5,6 +5,6 @@ class Greenbean extends Greenbeandashboardpagecontroller
     public function view()
     {
         $this->setAssets();
-        $this->twig('dashboard/greenbean.php', ['foo'=>123]);
+        $this->twig('dashboard/greenbean.php');
     }
 }

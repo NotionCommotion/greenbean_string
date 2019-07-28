@@ -1,0 +1,71 @@
+.help-btn {
+    float: right;
+    margin-right: 13px;
+}
+.help-btn a{
+    color:#fff;
+    font-size: 15px;
+    text-decoration:none;
+    line-height: 33px;
+    float:right;
+}
+
+#help-message { font-size:12px; padding:10px}
+
+/*Used for extra instructions*/
+
+.extraInstructions { text-align: center; color:#666666; font-size:10px; }
+
+/* Help Dialog */
+#dialog-help .header img {cursor:pointer;}
+#dialog-help ul.list li,#dialog-help div.content span.link,#dialog-help div.content a{color:#0066CA;cursor:pointer;text-decoration:none;}
+#dialog-help input.searchHelp {float:right; border:0; color:#929292; font-size:0.7em;}
+#dialog-help p.name {font-size: 24px;line-height: 1.4em; padding-bottom: 12px;}
+#dialog-help div.content, #dialog-help ul.list,#dialog-help p.tree {color: #666666;font-size: 12px;line-height: 1.4em;}
+#dialog-help div.content p {padding-bottom:12px;}
+#dialog-help ul.list {list-style-type: square;padding-top:10px;padding-left:20px;}
+#dialog-help p.tree span {cursor:pointer;}
+
+#dialog-help ul {
+    list-style-type: disc;
+    list-style-position: outside;
+}
+
+#dialog-help div.content>ul {
+    padding-left: 30px;
+    margin: 1em 0;
+}
+#dialog-help div.content ul li {
+    padding-bottom: 5px;
+}
+#dialog-help ol {
+    list-style-type: decimal;
+    list-style-position: inside;
+}
+#dialog-help ul ul, ol ul {
+    list-style-type: circle;
+    list-style-position: inside;
+    margin-left: 15px;
+}
+#dialog-help ol ol, ul ol {
+    list-style-type: lower-latin;
+    list-style-position: inside;
+    margin-left: 15px;
+}
+
+div.component-instructions {
+    font-size:12px;
+    padding:20px;
+    color:#666666;
+}
+div.component-instructions p{
+    padding:2px;
+}
+
+img.vertical-align {vertical-align:middle;}
+
+.look-editable{
+    border-bottom: 1px dashed #08c;
+    text-decoration: none;
+}
+.nowrap {white-space: nowrap;}

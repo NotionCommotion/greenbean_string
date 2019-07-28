@@ -1,0 +1,35 @@
+/*  .sortfixedtable td,.sortfixedtable th {border: 1px solid black;} Testing */
+
+th.sortfixedtable-sortable {
+    cursor: pointer;
+}
+/*
+.file-table th.sortfixedtable-sortable span,
+.child-details th.sortfixedtable-sortable span,
+.bidderTable th.sortfixedtable-sortable span,
+.dialog-compose table.bidList th.sortfixedtable-sortable span
+*/
+div.sortfixedtable th.sortfixedtable-sortable span{
+    padding-left: 20px;
+    background-image: url("bg.gif");
+    background-position:center;
+    background-repeat: no-repeat;
+}
+/*
+.file-table th.sortfixedtable-decending span,
+.child-details th.sortfixedtable-decending span,
+.bidderTable th.sortfixedtable-decending span,
+.dialog-compose table.bidList th.sortfixedtable-decending span {
+*/
+div.sortfixedtable th.sortfixedtable--decending span{
+    background-image: url("desc.gif");
+}
+/*
+.file-table th.sortfixedtable-accending span,
+.child-details th.sortfixedtable-accending span,
+.bidderTable th.sortfixedtable-accending span,
+.dialog-compose table.bidList th.sortfixedtable-accending span {
+*/
+div.sortfixedtable th.sortfixedtable-accending span{
+    background-image: url("asc.gif");
+}

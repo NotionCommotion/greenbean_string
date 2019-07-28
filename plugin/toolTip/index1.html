@@ -1,0 +1,51 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"> 
+    <head> 
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8"> 
+        <title>screenshot</title>  
+        <script src="http://code.jquery.com/jquery-latest.js" type="text/javascript"></script> 
+        <script src="jquery.toolTip.js" type="text/javascript"></script> 
+        <style type="text/css">
+
+            .myElement{margin:100px;}
+            .toolToolActive{color:blue;}
+
+            .myTooTip {
+                border:1px solid #CECECE;
+                background:white;
+                padding:10px;
+                display:none;
+                color:black;
+                font-size:11px;-moz-border-radius:4px;
+                box-shadow: 3px 1px 6px #505050;
+                -khtml-border-radius:4px;
+                -webkit-border-radius:4px;
+                border-radius:4px;
+            }
+        </style> 
+
+        <script type="text/javascript">
+            $(function(){
+                $('.myElement').toolTip({
+                    'speed':'slow',
+                    'class':'myTooTip',
+                    'mouseMove':true
+                });
+                $('#myDiv').on('click','p.myElement',function(){alert('Hello');});
+                $('.add').click(function(){$('#myDiv').append('<p class="myElement" data-id="4" title="Popup for New Doe">New Doe</p>');});
+                $('.destroy').click(function(){$('.myElement').toolTip('destroy');});
+            });
+        </script>
+    </head>
+
+    <body>
+        <div id="myDiv">
+            <a class="myElement" data-id="1" title="Popup for John Doe">John Doe</a>
+            <p class="myElement" data-id="2" title="Popup for Jane Doe">Jane Doe</p>
+            <p class="myElement" data-id="3" title="Popup for Baby Doe">Baby Doe</p>
+            <img class="myElement" title="Delete document" src="../../stdimages/icon_16/delete.png" alt="Delete document">
+        </div>
+        <p class="add">Add</p>
+        <p class="destroy">Destroy</p>
+    </body> 
+</html> 

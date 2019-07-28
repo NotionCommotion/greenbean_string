@@ -5,6 +5,16 @@ class Sandbox extends Greenbeandashboardpagecontroller
 {
     public function view()
     {
+        $rs=$this->serverBridge->getPageContent([
+            'pointList'=>['/points'],
+            'chartList'=>['/charts'],
+        ]);
+        $rs['page']=$args['page'];
+        $rs['html']=$this->base->getHtml($args['page']);
+        $rs['js']=[];
+        $rs['css']=[];
+        $rs['menu_main']=$this->base->getMenu('/preview');
+        return $this->view->render($response, 'front_edit.html', $rs);
         $this->setAssets();
         $this->twig('dashboard/greenbean/sandbox.php', ['foo'=>123]);
     }
@@ -13,13 +23,9 @@ class Sandbox extends Greenbeandashboardpagecontroller
     {
         //parent will add base assets required by all views
         return array_merge(parent::getAssets($assets), [
-            ['javascript', 'handlebars', '//cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.11/handlebars.js', ['local'=>false]],
-            ['css', 'bootstrap-editable.css', '//cdnjs.cloudflare.com/ajax/libs/x-editable/1.5.1/bootstrap3-editable/css/bootstrap-editable.css', ['local'=>false]],
-            ['javascript', 'bootstrap-editable', '//cdnjs.cloudflare.com/ajax/libs/x-editable/1.5.1/bootstrap3-editable/js/bootstrap-editable.min.js', ['local'=>false]],
-            ['javascript', 'settings.js', '/lib/gb/js/settings.js'],
-            ['javascript', 'editableAutocomplete', '/lib/gb/js/jquery.editableAutocomplete.js'],
-            ['javascript', 'upload.js', '/lib/plugins/upload/upload.js'],
-            ['css', 'upload.css', '/lib/plugins/upload/upload.css'],
+            ['javascript', 'tinymce', '//cdnjs.cloudflare.com/ajax/libs/tinymce/4.7.9/tinymce.min.js', ['local'=>false]],
+            ['javascript', 'preview_edit', 'js/preview_edit.js'],
+            ['css', 'preview_edit', 'css/preview_edit.css'],
         ]);
     }
 }

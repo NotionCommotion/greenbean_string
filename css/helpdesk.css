@@ -1,0 +1,33 @@
+/* Not currently being used  */
+
+
+#help-ticket-list td p:nth-child(2) {
+    margin-top: -10px;
+    font-size: 9px;
+}
+
+
+.ticket-list { font-size:11px; color:#707070; width:946px;  }
+.ticket-list th { text-align:left; padding:7px 3px; border-bottom:1px solid #999999; border-right:1px solid #E7E7E7; border-left:1px solid #fff; border-top:1px solid #E7E7E7; }
+.ticket-list th.type { text-align:center; width:150px;}
+.ticket-list td { padding:7px 3px; background:#FFF; border-top:1px solid #F1F1F1; border-bottom:1px solid #F1F1F1; border-right:1px solid #FFF; font-size:14px; }
+.ticket-list .rmbr { border-right:0; }
+.ticket-list .rmbl { border-left:0; }
+.ticket-list td a { text-decoration:none; color:#1B5DBE; }
+.ticket-list tr.bg { background:#F0F0F0; }
+.ticket-list tr.odd { background:#F1F1F1; }
+.ticket-list tr.odd td { background:#F1F1F1; border-top:1px solid #FFF; border-bottom:1px solid #FFF; }
+.ticket-list th.align-center { text-align:center; }
+.ticket-list .name { font-size:14px; margin-bottom:3px; }
+.ticket-list .date { font-size:11px; }
+.ticket-list .subject { font-size:14px; font-weight:700; margin-bottom:3px; }
+.ticket-list .message { font-size:11px; }
+.ticket-list tr td + td { text-align:center; }
+.ticket-list tr td + td + td { text-align:left; }
+.ticket-list tr.new .name { font-weight:bold; color:#323232; }
+.ticket-list tr.new td + td { color:#323232; font-weight:bold; }
+.ticket-list tr.new td + td + td { color:#323232; font-weight:bold; color:#707070; }
+
+#help-message { font-size:12px; padding:10px}
+
+#dialog-compose-ticket textarea {height: 250px;}

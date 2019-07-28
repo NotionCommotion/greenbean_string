@@ -10,13 +10,7 @@ trait CommonTrait
 
     //Future.  Inject path to templates, etc
 
-    public function __construct(...$args)
-    {
-        syslog(LOG_INFO, 'controller (testing only): '.json_encode($args));
-        parent::__construct(...$args);
-    }
-
-    protected function twig(string $template, array $variables, bool $render=true):string {
+    protected function twig(string $template, array $variables=[], bool $render=true):string {
         if(!$this->twig) {
             $this->twig = new \Twig\Environment(new \Twig\Loader\FilesystemLoader(__DIR__.'/../single_pages'), [
                 //'cache' => 'path/to/cache'    // Add when complete.  See auto_reload option

@@ -5,7 +5,16 @@ class Helpdesk extends Greenbeandashboardpagecontroller
 {
     public function view()
     {
-        $this->setAssets();
+        $params=$request->getQueryParams();
+        $rs=$this->serverBridge->getPageContent([
+            'tickets'=>['/helpdesk', $params],
+            'message_types'=>'/helpdesk/topics',
+        ]);
+        //print_r($rs);exit;
+        if(!empty($params['statusId'])) $rs['statusId']=$params['statusId'];
+        $rs['menu_main']=$this->base->getMenu('/helpdesk');
+        return $this->view->render($response, 'helpdesk.html',$rs);
+       $this->setAssets();
         $this->twig('dashboard/greenbean/helpdesk.php', ['foo'=>123]);
     }
 
@@ -14,12 +23,12 @@ class Helpdesk extends Greenbeandashboardpagecontroller
         //parent will add base assets required by all views
         return array_merge(parent::getAssets($assets), [
             ['javascript', 'handlebars', '//cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.11/handlebars.js', ['local'=>false]],
-            ['css', 'bootstrap-editable.css', '//cdnjs.cloudflare.com/ajax/libs/x-editable/1.5.1/bootstrap3-editable/css/bootstrap-editable.css', ['local'=>false]],
+            ['css', 'bootstrap-editable', '//cdnjs.cloudflare.com/ajax/libs/x-editable/1.5.1/bootstrap3-editable/css/bootstrap-editable.css', ['local'=>false]],
             ['javascript', 'bootstrap-editable', '//cdnjs.cloudflare.com/ajax/libs/x-editable/1.5.1/bootstrap3-editable/js/bootstrap-editable.min.js', ['local'=>false]],
-            ['javascript', 'helpdesk.js', '/lib/gb/js/helpdesk.js'],
-            ['javascript', 'editableAutocomplete', '/lib/gb/js/jquery.editableAutocomplete.js'],
-            ['javascript', 'sortfixedtable', '/lib/plugins/sortfixedtable/jquery.sortfixedtable.js'],
-            ['css', 'sortfixedtable.css', '/lib/plugins/sortfixedtable/sortfixedtable.css'],
+            ['javascript', 'helpdesk', 'js/helpdesk.js'],
+            ['javascript', 'editableAutocomplete', 'js/jquery.editableAutocomplete.js'],
+            ['javascript', 'sortfixedtable', 'plugin/sortfixedtable/jquery.sortfixedtable.js'],
+            ['css', 'sortfixedtable', 'plugin/sortfixedtable/sortfixedtable.css'],
         ]);
     }
 }

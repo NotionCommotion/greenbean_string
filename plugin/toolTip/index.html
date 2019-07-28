@@ -1,0 +1,136 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"> 
+    <head> 
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8"> 
+        <title>screenshot</title>  
+        <script src="http://code.jquery.com/jquery-latest.js" type="text/javascript"></script> 
+        <style type="text/css">
+
+            .myElement{margin:100px;}
+            .toolToolActive{color:blue;}
+
+            .myTooTip {
+                border:1px solid #CECECE;
+                background:white;
+                padding:10px;
+                display:none;
+                color:black;
+                font-size:11px;-moz-border-radius:4px;
+                box-shadow: 3px 1px 6px #505050;
+                -khtml-border-radius:4px;
+                -webkit-border-radius:4px;
+                border-radius:4px;
+            }
+        </style> 
+
+        <script type="text/javascript">
+            (function($){
+                var defaults = {
+                    'class'    : '', // Css class(es) to add to tooltip (along with standardToolTip).
+                    'mouseMove': true, // A flag indicating whether to move tooltip with mouse.
+                    'speed'    : 'fast', // The speed at which to fade in the tool tip.
+                    'delay'    : 250, // Delay (in ms) before opening the popup.
+                    'xOffset'  : 20,
+                    'yOffset'  : 10
+                };
+
+                var methods = {
+                    init : function (options) {
+                        // Create settings using the defaults extended with any options provided.
+                        var settings = $.extend({}, defaults, options);
+
+                        return this.each(function () {
+                            var title,
+                            timeoutID,
+                            $t,
+                            toolTip;
+
+                            // Wrap the content of the current element in a span.
+                            $t = $(this).wrapInner('<span />');
+
+                            $t.children('span').hover(function(e) {
+                                if(!$t.hasClass('toolToolActive')) {
+                                    title = $t.attr('title');
+                                    $t.attr('title','');  // Remove the title so that it doesn't show on hover.
+
+                                    timeoutID = window.setTimeout(function () {
+                                        // Create a div to be the tooltip pop up, add the styling as well as
+                                        // the html (from the display function) to it and then fade the element in
+                                        // using the speed specified in the settings.
+                                        toolTip = $('<div />')
+                                        .addClass('standardToolTip ' + settings['class'])
+                                        .html(title)
+                                        .css('top', (e.pageY - settings.yOffset) + 'px')
+                                        .css('left', (e.pageX + settings.xOffset) + 'px')
+                                        .css('position', 'absolute')
+                                        .appendTo('body')
+                                        .fadeIn(settings.speed);
+
+                                        $t.addClass('toolToolActive');
+
+                                        }, settings.delay);
+                                }
+                                },
+                                function () {
+                                    window.clearTimeout(timeoutID);
+                                    $t.attr('title', title);
+
+                                    if ($t.hasClass('toolToolActive')) {
+                                        toolTip.remove();
+                                        $t.removeClass('toolToolActive');
+                                    }
+                            });
+
+                            $t.mousemove(function (e) {
+                                if (settings.mouseMove && $t.hasClass('toolToolActive')) {
+                                    toolTip.css('top', (e.pageY - settings.yOffset) + 'px')
+                                    .css('left', (e.pageX + settings.xOffset) + 'px');
+                                }
+                            });
+                        });
+                    },
+                    destroy : function () {
+                        return this.each(function () {
+                            var $e = $(this);
+                            $e.html($e.children('span').html());
+                        });
+                    }
+                };
+
+                $.fn.toolTip = function(method) {
+                    this.data('tooltip',true);
+                    $(document).on('mouseenter',this.selector,function(){
+                        if(!$(this).data('tooltip'))
+
+                            $(this).toolTip({
+                                'class':'myTooTip'
+                            });                              });
+                    if (methods[method]) {
+                        return methods[method].apply(this, Array.prototype.slice.call(arguments, 1));
+                    } else if (typeof method === 'object' || ! method) {
+                        return methods.init.apply(this, arguments);
+                    } else {
+                        $.error('Method ' +  method + ' does not exist on jQuery.toolTip');
+                    }    
+                };
+                }(jQuery));
+            $(function(){
+                $('.myElement').toolTip({
+                    'class':'myTooTip'
+                });
+
+
+                $('.add').click(function(){$('#myDiv').append('<p class="myElement" data-id="4" title="Popup for New Doe">New Doe</p>');});
+            });
+        </script>
+    </head>
+
+    <body>
+        <div id="myDiv">
+            <p class="myElementx" data-id="1" title="Popup for John Doe">John Doe</p>
+            <p class="myElementx" data-id="2" title="Popup for Jane Doe">Jane Doe</p>
+            <p class="myElementx" data-id="3" title="Popup for Baby Doe">Baby Doe</p>
+        </div>
+        <p class="add">Add</p>
+    </body> 
+</html> 

@@ -1,0 +1,426 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+        <title>Sortfixedtable</title>
+        <script src="//code.jquery.com/jquery-latest.js" type="text/javascript"></script>
+        <script src="jquery.sortfixedtable.js" type="text/javascript"></script>
+        <style type="text/css">
+
+            .myTable tbody tr {
+                background-color: #CCCCCC;
+                color:#6600CC;
+            }
+            .myTable tbody tr.sortfixedtable-even {
+                background-color: #EEEEEE;
+                color:#CC0066;
+            }
+
+            th.sortfixedtable-sortable {
+                cursor: pointer;
+            }
+
+            th.sortfixedtable-sortable span {
+                padding-right: 10px; /*Override padding-right to allow for image*/
+                background-image: url("bg.gif");
+                background-position:right center;
+                background-repeat: no-repeat;
+            }
+
+            th.sortfixedtable-decending span {
+                background-image: url("desc.gif");
+            }
+            th.sortfixedtable-accending span {
+                background-image: url("asc.gif");
+            }
+
+            /*
+            th.sortfixedtable-sortable {
+                cursor: pointer;
+                padding-right: 10px; /*Override padding-right to allow for image* /
+                background-image: url("bg.gif");
+                background-position:right center;
+                background-repeat: no-repeat;
+            }
+
+            th.sortfixedtable-decending {
+                background-image: url("desc.gif");
+                background-position:right center;
+                background-repeat: no-repeat;
+            }
+            th.sortfixedtable-accending {
+                background-image: url("asc.gif");
+                background-position:right center;
+                background-repeat: no-repeat;
+            }
+            */
+
+            td,th {
+                text-align:left;
+                border:1px solid black;
+            }
+
+            .myTable {width:600px;}
+            .myTable th.col2 {width:100px;}
+            .myTable th.col3 {width:100px;}
+            .myTable th.col4 {width:100px;}
+        </style>
+
+        <script type="text/javascript">
+            $(function(){
+                $('#create').click(function(){
+                    $('#myTable').sortfixedtable({
+                        'height'    : '300',  //Height of tbody in pixals (not total table!).  Don't include px
+                        'myclass'   : 'myTableParent',
+                        'autoSort'  : 3,
+                        'sortAll'   : false,    //Defaults to sorting all columns
+                        'sort'      : {0:true,2:true,3:true}        //Sort indexes.  Reverses sortAll
+                    });
+                });
+
+                $('#destroy').click(function(){
+                    $('#myTable').sortfixedtable('destroy');
+                });
+
+                $('#update').click(function(){
+                    $('#myTable').sortfixedtable('update');
+                });
+
+                $('#sort').click(function(){
+                    $('#myTable').sortfixedtable('sort',1);
+                });
+
+            });
+        </script>
+    </head>
+
+    <body>
+
+        <button id="create">Create</button>
+        <button id="destroy">Destroy</button>
+        <!-- <button id="update">Update</button> -->
+        <button id="sort">Sort</button>
+
+        <table id="myTable" class="myTable">
+            <thead>
+                <tr>
+                    <th class="col1">Header 1</th>
+                    <th class="col2">Header Two</th>
+                    <th class="col3">Head 3</th>
+                    <th class="col4">Header 4</th>
+                </tr>
+            </thead>
+            <tfoot>
+                <tr>
+                    <td>Footer One</td>
+                    <td>Foot 2</td>
+                    <td>Footer 3</td>
+                    <td>Footer Four</td>
+                </tr>
+            </tfoot>
+            <tbody>
+                <tr><td>Circus</td><td>Alphabet</td><td>Family</td><td>-51</td></tr>
+                <tr><td>Junk</td><td>Desk</td><td>Drink</td><td>37</td></tr>
+                <tr><td>Rock</td><td>Chocolates</td><td>Sandwich</td><td>-59</td></tr>
+                <tr><td>Banana</td><td>Umbrella</td><td>Library</td><td>-32</td></tr>
+                <tr><td>Fork</td><td>Library</td><td>Electricity</td><td>31</td></tr>
+                <tr><td>Salt</td><td>Gemstone</td><td>Game</td><td>64</td></tr>
+                <tr><td>Earth</td><td>Clock</td><td>Clown</td><td>-98</td></tr>
+                <tr><td>Space Shuttle</td><td>Planet</td><td>Horoscope</td><td>-19</td></tr>
+                <tr><td>Aeroplane</td><td>Saddle</td><td>Fungus</td><td>-29</td></tr>
+                <tr><td>Surveyor</td><td>Drink</td><td>Meat</td><td>19</td></tr>
+                <tr><td>Train</td><td>Chess Board</td><td>Feather</td><td>8</td></tr>
+                <tr><td>Fire</td><td>Flower</td><td>Plane</td><td>-38</td></tr>
+                <tr><td>Meat</td><td>Bank</td><td>Bridge</td><td>-34</td></tr>
+                <tr><td>Foot</td><td>Finger</td><td>Sandwich</td><td>96</td></tr>
+                <tr><td>Boss</td><td>Highway</td><td>Hammer</td><td>-18</td></tr>
+                <tr><td>Gloves</td><td>Stomach</td><td>Sun</td><td>74</td></tr>
+                <tr><td>Vacuum</td><td>Clown</td><td>Sandpaper</td><td>98</td></tr>
+                <tr><td>Ears</td><td>Sun</td><td>Carrot</td><td>22</td></tr>
+                <tr><td>Chief</td><td>Kitchen</td><td>Garden</td><td>-71</td></tr>
+                <tr><td>Monster</td><td>Tapestry</td><td>Grapes</td><td>48</td></tr>
+                <tr><td>Alphabet</td><td>Bridge</td><td>Sandwich</td><td>39</td></tr>
+                <tr><td>Spectrum</td><td>Child</td><td>Hose</td><td>-26</td></tr>
+                <tr><td>Sun</td><td>Junk</td><td>Sun</td><td>-98</td></tr>
+                <tr><td>Skeleton</td><td>Teeth</td><td>Baby</td><td>58</td></tr>
+                <tr><td>Shop</td><td>Coffee-shop</td><td>Software</td><td>-12</td></tr>
+                <tr><td>Cup</td><td>Horoscope</td><td>Bee</td><td>-59</td></tr>
+                <tr><td>Bomb</td><td>Sandpaper</td><td>Train</td><td>74</td></tr>
+                <tr><td>Man</td><td>Baby</td><td>Library</td><td>37</td></tr>
+                <tr><td>Baby</td><td>Passport</td><td>Potato</td><td>-10</td></tr>
+                <tr><td>Robot</td><td>Liquid</td><td>Perfume</td><td>-32</td></tr>
+                <tr><td>Sandpaper</td><td>School</td><td>Mouth</td><td>64</td></tr>
+                <tr><td>Shop</td><td>Meat</td><td>Mosquito</td><td>-57</td></tr>
+                <tr><td>Nail</td><td>Bed</td><td>Car</td><td>-64</td></tr>
+                <tr><td>Rocket</td><td>Cup</td><td>Square</td><td>54</td></tr>
+                <tr><td>Drink</td><td>Ears</td><td>Bathroom</td><td>-32</td></tr>
+                <tr><td>Boss</td><td>Diamond</td><td>Fan</td><td>56</td></tr>
+                <tr><td>Tennis racquet</td><td>Bee</td><td>Airport</td><td>11</td></tr>
+                <tr><td>Post-office</td><td>Clown</td><td>Worm</td><td>51</td></tr>
+                <tr><td>Airforce</td><td>Church</td><td>Bridge</td><td>-52</td></tr>
+                <tr><td>Magnet</td><td>Highway</td><td>Drink</td><td>8</td></tr>
+                <tr><td>Sandwich</td><td>Planet</td><td>Television</td><td>-93</td></tr>
+                <tr><td>Staircase</td><td>Cave</td><td>Bed</td><td>64</td></tr>
+                <tr><td>Tongue</td><td>Pendulum</td><td>Rock</td><td>43</td></tr>
+                <tr><td>Backpack</td><td>Kaleidoscope</td><td>Shower</td><td>-10</td></tr>
+                <tr><td>Girl</td><td>Liquid</td><td>Junk</td><td>-50</td></tr>
+                <tr><td>Banana</td><td>Carpet</td><td>Star</td><td>-71</td></tr>
+                <tr><td>Jet fighter</td><td>Jet fighter</td><td>Hieroglyph</td><td>-57</td></tr>
+                <tr><td>Dung</td><td>Liquid</td><td>Car</td><td>56</td></tr>
+                <tr><td>Kitchen</td><td>Brain</td><td>Comet</td><td>66</td></tr>
+                <tr><td>Junk</td><td>Button</td><td>Bowl</td><td>25</td></tr>
+                <tr><td>Carpet</td><td>Bank</td><td>God</td><td>34</td></tr>
+                <tr><td>Rifle</td><td>Car-race</td><td>Desk</td><td>-51</td></tr>
+                <tr><td>Feather</td><td>Game</td><td>Sunglasses</td><td>90</td></tr>
+                <tr><td>Adult</td><td>Liquid</td><td>Post-office</td><td>-52</td></tr>
+                <tr><td>Circle</td><td>Sandpaper</td><td>Telescope</td><td>67</td></tr>
+                <tr><td>Shower</td><td>Needle</td><td>Circle</td><td>-8</td></tr>
+                <tr><td>Rainbow</td><td>Solid</td><td>Earth</td><td>99</td></tr>
+                <tr><td>Crystal</td><td>Printer</td><td>Book</td><td>40</td></tr>
+                <tr><td>Rifle</td><td>Chair</td><td>Woman</td><td>-64</td></tr>
+                <tr><td>Necklace</td><td>Foot</td><td>Game</td><td>70</td></tr>
+                <tr><td>Record</td><td>Earth</td><td>Weapon</td><td>-91</td></tr>
+                <tr><td>Plane</td><td>Web</td><td>Stomach</td><td>-55</td></tr>
+                <tr><td>Prison</td><td>God</td><td>Cave</td><td>-49</td></tr>
+                <tr><td>Electricity</td><td>Apple</td><td>Rifle</td><td>-29</td></tr>
+                <tr><td>Torpedo</td><td>Plane</td><td>Adult</td><td>-12</td></tr>
+                <tr><td>Skeleton</td><td>Money $$$$</td><td>Drill</td><td>80</td></tr>
+                <tr><td>Ring</td><td>Prison</td><td>Navy</td><td>44</td></tr>
+                <tr><td>Car-race</td><td>Triangle</td><td>Button</td><td>68</td></tr>
+                <tr><td>Treadmill</td><td>Diamond</td><td>Videotape</td><td>45</td></tr>
+                <tr><td>Salt</td><td>Earth</td><td>Potato</td><td>10</td></tr>
+                <tr><td>Square</td><td>Fork</td><td>Navy</td><td>-58</td></tr>
+                <tr><td>Jet fighter</td><td>Slave</td><td>Tongue</td><td>63</td></tr>
+                <tr><td>Shoes</td><td>Meteor</td><td>Sword</td><td>-99</td></tr>
+                <tr><td>Television</td><td>Drink</td><td>God</td><td>-69</td></tr>
+                <tr><td>Bible</td><td>Treadmill</td><td>Family</td><td>92</td></tr>
+                <tr><td>Bomb</td><td>Barbecue</td><td>Mist</td><td>99</td></tr>
+                <tr><td>PaintBrush</td><td>Thermometer</td><td>Button</td><td>5</td></tr>
+                <tr><td>Library</td><td>Sandpaper</td><td>Brain</td><td>88</td></tr>
+                <tr><td>Rifle</td><td>Typewriter</td><td>Ice-cream</td><td>-18</td></tr>
+                <tr><td>Post-office</td><td>Compass</td><td>Balloon</td><td>35</td></tr>
+                <tr><td>Cycle</td><td>Navy</td><td>Gate</td><td>-47</td></tr>
+                <tr><td>Bathtub</td><td>Meteor</td><td>Banana</td><td>83</td></tr>
+                <tr><td>Sunglasses</td><td>Fan</td><td>Comet</td><td>-85</td></tr>
+                <tr><td>Airport</td><td>Book</td><td>Treadmill</td><td>84</td></tr>
+                <tr><td>Bird</td><td>Elephant</td><td>Bird</td><td>-80</td></tr>
+                <tr><td>Guitar</td><td>Bathroom</td><td>Balloon</td><td>-38</td></tr>
+                <tr><td>Surveyor</td><td>Bathtub</td><td>Banana</td><td>-30</td></tr>
+                <tr><td>Data Base</td><td>Church</td><td>Hose</td><td>-73</td></tr>
+                <tr><td>Bottle</td><td>Leg</td><td>Bottle</td><td>65</td></tr>
+                <tr><td>Cappuccino</td><td>Circus</td><td>Pillow</td><td>69</td></tr>
+                <tr><td>Snail</td><td>Rainbow</td><td>Shower</td><td>-44</td></tr>
+                <tr><td>Air</td><td>Gloves</td><td>Fruit</td><td>9</td></tr>
+                <tr><td>Bird</td><td>Cup</td><td>Airport</td><td>25</td></tr>
+                <tr><td>Feather</td><td>Compact Disc</td><td>Treadmill</td><td>-100</td></tr>
+                <tr><td>Pebble</td><td>Dress</td><td>Horoscope</td><td>-99</td></tr>
+                <tr><td>Car-race</td><td>Kaleidoscope</td><td>Sphere</td><td>52</td></tr>
+                <tr><td>Guitar</td><td>Meat</td><td>Magnet</td><td>68</td></tr>
+                <tr><td>Bible</td><td>Sex</td><td>Drill</td><td>96</td></tr>
+                <tr><td>Air</td><td>Aircraft Carrier</td><td>Mouth</td><td>-9</td></tr>
+                <tr><td>Alphabet</td><td>Compass</td><td>Rock</td><td>80</td></tr>
+                <tr><td>Bible</td><td>Leg</td><td>Skeleton</td><td>78</td></tr>
+                <tr><td>Clock</td><td>Onion</td><td>Room</td><td>-5</td></tr>
+                <tr><td>Drill</td><td>Record</td><td>Book</td><td>41</td></tr>
+                <tr><td>Maze</td><td>Monster</td><td>Magnet</td><td>-21</td></tr>
+                <tr><td>Liquid</td><td>Weapon</td><td>Earth</td><td>95</td></tr>
+                <tr><td>Junk</td><td>Needle</td><td>Coffee-shop</td><td>-41</td></tr>
+                <tr><td>Radar</td><td>Spoon</td><td>Telescope</td><td>-22</td></tr>
+                <tr><td>Parachute</td><td>Surveyor</td><td>Barbecue</td><td>-79</td></tr>
+                <tr><td>Drill</td><td>Drink</td><td>Pants</td><td>32</td></tr>
+                <tr><td>Staircase</td><td>Album</td><td>Knife</td><td>-9</td></tr>
+                <tr><td>Carrot</td><td>Army</td><td>Fan</td><td>89</td></tr>
+                <tr><td>Nail</td><td>Sex</td><td>Circus</td><td>33</td></tr>
+                <tr><td>Rocket</td><td>Freeway</td><td>Baby</td><td>86</td></tr>
+                <tr><td>Tiger</td><td>Vulture</td><td>Tunnel</td><td>40</td></tr>
+                <tr><td>Electricity</td><td>Monster</td><td>Family</td><td>86</td></tr>
+                <tr><td>Game</td><td>Crystal</td><td>Sandpaper</td><td>-33</td></tr>
+                <tr><td>Data Base</td><td>Milk</td><td>Rope</td><td>5</td></tr>
+                <tr><td>Vacuum</td><td>Salt</td><td>Tapestry</td><td>-57</td></tr>
+                <tr><td>Balloon</td><td>Sex</td><td>God</td><td>98</td></tr>
+                <tr><td>Drill</td><td>Feather</td><td>Girl</td><td>82</td></tr>
+                <tr><td>Chess Board</td><td>Shower</td><td>Tennis racquet</td><td>-23</td></tr>
+                <tr><td>Weapon</td><td>Pants</td><td>Liquid</td><td>60</td></tr>
+                <tr><td>Girl</td><td>Spectrum</td><td>Compass</td><td>52</td></tr>
+                <tr><td>Carpet</td><td>Rock</td><td>Foot</td><td>70</td></tr>
+                <tr><td>Computer</td><td>Thermometer</td><td>Microscope</td><td>88</td></tr>
+                <tr><td>Tongue</td><td>Airforce</td><td>Book</td><td>-19</td></tr>
+                <tr><td>Umbrella</td><td>Balloon</td><td>Pepper</td><td>44</td></tr>
+                <tr><td>Treadmill</td><td>Saddle</td><td>Worm</td><td>-24</td></tr>
+                <tr><td>Fork</td><td>Software</td><td>Record</td><td>66</td></tr>
+                <tr><td>School</td><td>Navy</td><td>Wheelchair</td><td>2</td></tr>
+                <tr><td>Horse</td><td>Dress</td><td>Circle</td><td>18</td></tr>
+                <tr><td>Pants</td><td>Mosquito</td><td>Shower</td><td>71</td></tr>
+                <tr><td>Planet</td><td>Needle</td><td>Album</td><td>-92</td></tr>
+                <tr><td>Water</td><td>Sandpaper</td><td>Hat</td><td>-50</td></tr>
+                <tr><td>Electricity</td><td>Explosive</td><td>Maze</td><td>32</td></tr>
+                <tr><td>Kaleidoscope</td><td>Child</td><td>Worm</td><td>22</td></tr>
+                <tr><td>Electricity</td><td>Alphabet</td><td>Map</td><td>6</td></tr>
+                <tr><td>Post-office</td><td>Church</td><td>Bed</td><td>-72</td></tr>
+                <tr><td>Television</td><td>Rock</td><td>Pocket</td><td>41</td></tr>
+                <tr><td>Vacuum</td><td>Clown</td><td>Festival</td><td>-16</td></tr>
+                <tr><td>Toilet</td><td>Water</td><td>Floodlight</td><td>68</td></tr>
+                <tr><td>Thermometer</td><td>X-ray</td><td>Knife</td><td>-63</td></tr>
+                <tr><td>Leather jacket</td><td>Egg</td><td>Spice</td><td>77</td></tr>
+                <tr><td>Compass</td><td>Sunglasses</td><td>Thermometer</td><td>-78</td></tr>
+                <tr><td>Pants</td><td>Air</td><td>Wheelchair</td><td>-41</td></tr>
+                <tr><td>Hat</td><td>Tunnel</td><td>Festival</td><td>-72</td></tr>
+                <tr><td>Rope</td><td>Sphere</td><td>Water</td><td>-65</td></tr>
+                <tr><td>Bomb</td><td>Rifle</td><td>Cave</td><td>-85</td></tr>
+                <tr><td>Pendulum</td><td>Circus</td><td>Man</td><td>72</td></tr>
+                <tr><td>Sandwich</td><td>Boy</td><td>Backpack</td><td>44</td></tr>
+                <tr><td>Clown</td><td>Tiger</td><td>Air</td><td>30</td></tr>
+                <tr><td>Crystal</td><td>Signature</td><td>Planet</td><td>26</td></tr>
+                <tr><td>Skeleton</td><td>Dung</td><td>Drink</td><td>-36</td></tr>
+                <tr><td>Bridge</td><td>Pants</td><td>Coffee</td><td>16</td></tr>
+                <tr><td>Fan</td><td>Eraser</td><td>Aircraft Carrier</td><td>-9</td></tr>
+                <tr><td>Typewriter</td><td>Vulture</td><td>Library</td><td>-6</td></tr>
+                <tr><td>Plane</td><td>Potato</td><td>Game</td><td>45</td></tr>
+                <tr><td>Water</td><td>Surveyor</td><td>Airforce</td><td>37</td></tr>
+                <tr><td>Train</td><td>Bowl</td><td>Child</td><td>-68</td></tr>
+                <tr><td>Brain</td><td>Bee</td><td>Floodlight</td><td>-82</td></tr>
+                <tr><td>Sword</td><td>Maze</td><td>Chess Board</td><td>-22</td></tr>
+                <tr><td>Air</td><td>Feather</td><td>Microscope</td><td>-58</td></tr>
+                <tr><td>Stomach</td><td>Crystal</td><td>X-ray</td><td>-61</td></tr>
+                <tr><td>Kitchen</td><td>Perfume</td><td>Vulture</td><td>-92</td></tr>
+                <tr><td>Slave</td><td>Butterfly</td><td>Gas</td><td>-4</td></tr>
+                <tr><td>Banana</td><td>Hieroglyph</td><td>Bird</td><td>3</td></tr>
+                <tr><td>Rifle</td><td>Umbrella</td><td>Eraser</td><td>42</td></tr>
+                <tr><td>Film</td><td>Parachute</td><td>Chisel</td><td>-95</td></tr>
+                <tr><td>Surveyor</td><td>Coffee</td><td>Tongue</td><td>-7</td></tr>
+                <tr><td>Plane</td><td>Spice</td><td>Tiger</td><td>11</td></tr>
+                <tr><td>Pocket</td><td>Onion</td><td>School</td><td>-75</td></tr>
+                <tr><td>Toilet</td><td>Kaleidoscope</td><td>Satellite</td><td>-95</td></tr>
+                <tr><td>Alphabet</td><td>Diamond</td><td>Desk</td><td>-1</td></tr>
+                <tr><td>Junk</td><td>Drum</td><td>Boy</td><td>86</td></tr>
+                <tr><td>Banana</td><td>Car</td><td>Tapestry</td><td>-65</td></tr>
+                <tr><td>Church</td><td>Coffee-shop</td><td>Backpack</td><td>63</td></tr>
+                <tr><td>Girl</td><td>Needle</td><td>Car-race</td><td>22</td></tr>
+                <tr><td>Aeroplane</td><td>Vacuum</td><td>Cup</td><td>-91</td></tr>
+                <tr><td>Egg</td><td>Clock</td><td>Sunglasses</td><td>-5</td></tr>
+                <tr><td>Eraser</td><td>Umbrella</td><td>Airport</td><td>30</td></tr>
+                <tr><td>Bomb</td><td>Software</td><td>Freeway</td><td>-59</td></tr>
+                <tr><td>Maze</td><td>Chief</td><td>Shower</td><td>-1</td></tr>
+                <tr><td>Bee</td><td>Map</td><td>Sex</td><td>-1</td></tr>
+                <tr><td>Necklace</td><td>Bible</td><td>Hammer</td><td>-96</td></tr>
+                <tr><td>Staircase</td><td>Clock</td><td>Sun</td><td>58</td></tr>
+                <tr><td>Cup</td><td>Mosquito</td><td>Window</td><td>70</td></tr>
+                <tr><td>Airport</td><td>Baby</td><td>Sandpaper</td><td>58</td></tr>
+                <tr><td>Car</td><td>Chess Board</td><td>Rainbow</td><td>-87</td></tr>
+                <tr><td>Girl</td><td>Ice-cream</td><td>Sandwich</td><td>-29</td></tr>
+                <tr><td>Woman</td><td>Gloves</td><td>Knife</td><td>56</td></tr>
+                <tr><td>Tongue</td><td>Satellite</td><td>Bomb</td><td>81</td></tr>
+                <tr><td>Cup</td><td>Banana</td><td>Television</td><td>89</td></tr>
+                <tr><td>Ring</td><td>Signature</td><td>Man</td><td>-6</td></tr>
+                <tr><td>Cappuccino</td><td>Planet</td><td>Coffee</td><td>1</td></tr>
+                <tr><td>Film</td><td>Ring</td><td>Maze</td><td>-45</td></tr>
+                <tr><td>Jet fighter</td><td>Egg</td><td>Passport</td><td>97</td></tr>
+                <tr><td>Freeway</td><td>Game</td><td>Bathroom</td><td>36</td></tr>
+                <tr><td>Flower</td><td>Swimming Pool</td><td>Pendulum</td><td>-85</td></tr>
+                <tr><td>Chocolates</td><td>Air</td><td>Alphabet</td><td>-83</td></tr>
+                <tr><td>Compact Disc</td><td>Drill</td><td>Data Base</td><td>22</td></tr>
+                <tr><td>Cave</td><td>Car-race</td><td>Radar</td><td>-70</td></tr>
+                <tr><td>Pocket</td><td>Passport</td><td>Rifle</td><td>-69</td></tr>
+                <tr><td>Spiral</td><td>Gloves</td><td>Fire</td><td>-36</td></tr>
+                <tr><td>Slave</td><td>Festival</td><td>Air</td><td>-8</td></tr>
+                <tr><td>Grapes</td><td>Vacuum</td><td>Rocket</td><td>66</td></tr>
+                <tr><td>Horse</td><td>Bible</td><td>Bottle</td><td>39</td></tr>
+                <tr><td>Microscope</td><td>X-ray</td><td>Banana</td><td>-73</td></tr>
+                <tr><td>Game</td><td>Parachute</td><td>Monster</td><td>-95</td></tr>
+                <tr><td>Saddle</td><td>Aircraft Carrier</td><td>Space Shuttle</td><td>21</td></tr>
+                <tr><td>Car-race</td><td>Salt</td><td>Circus</td><td>-36</td></tr>
+                <tr><td>Typewriter</td><td>Finger</td><td>Horoscope</td><td>-27</td></tr>
+                <tr><td>Carpet</td><td>Room</td><td>Fork</td><td>-82</td></tr>
+                <tr><td>Rock</td><td>School</td><td>Drum</td><td>-35</td></tr>
+                <tr><td>Circus</td><td>Record</td><td>Carpet</td><td>-12</td></tr>
+                <tr><td>Milkshake</td><td>Spectrum</td><td>Brain</td><td>7</td></tr>
+                <tr><td>Slave</td><td>Maze</td><td>Eyes</td><td>94</td></tr>
+                <tr><td>Ice-cream</td><td>Ring</td><td>Airport</td><td>-18</td></tr>
+                <tr><td>Sandpaper</td><td>Ice</td><td>Bible</td><td>100</td></tr>
+                <tr><td>Leather jacket</td><td>School</td><td>Weapon</td><td>31</td></tr>
+                <tr><td>Airport</td><td>Spiral</td><td>Passport</td><td>16</td></tr>
+                <tr><td>Gas</td><td>Microscope</td><td>Ears</td><td>29</td></tr>
+                <tr><td>Bird</td><td>Earth</td><td>Roof</td><td>-67</td></tr>
+                <tr><td>Diamond</td><td>Shower</td><td>Meteor</td><td>71</td></tr>
+                <tr><td>Coffee-shop</td><td>Freeway</td><td>Feather</td><td>-8</td></tr>
+                <tr><td>Flower</td><td>Pendulum</td><td>Gemstone</td><td>22</td></tr>
+                <tr><td>Rock</td><td>Potato</td><td>Maze</td><td>59</td></tr>
+                <tr><td>Umbrella</td><td>Maze</td><td>Carpet</td><td>99</td></tr>
+                <tr><td>Bird</td><td>Restaurant</td><td>Radar</td><td>-54</td></tr>
+                <tr><td>Kaleidoscope</td><td>Baby</td><td>Tennis racquet</td><td>-63</td></tr>
+                <tr><td>Cycle</td><td>Elephant</td><td>Bible</td><td>12</td></tr>
+                <tr><td>Fire</td><td>Eraser</td><td>Pyramid</td><td>-40</td></tr>
+                <tr><td>Plane</td><td>Button</td><td>Game</td><td>22</td></tr>
+                <tr><td>Guitar</td><td>Jet fighter</td><td>Milkshake</td><td>16</td></tr>
+                <tr><td>Robot</td><td>Room</td><td>Water</td><td>-40</td></tr>
+                <tr><td>Fungus</td><td>Kitchen</td><td>Spot Light</td><td>73</td></tr>
+                <tr><td>Room</td><td>Software</td><td>Pebble</td><td>14</td></tr>
+                <tr><td>Bathroom</td><td>Family</td><td>Hieroglyph</td><td>-17</td></tr>
+                <tr><td>Vampire</td><td>Carrot</td><td>Ice</td><td>10</td></tr>
+                <tr><td>Printer</td><td>Roof</td><td>Wheelchair</td><td>6</td></tr>
+                <tr><td>Web</td><td>Treadmill</td><td>Bird</td><td>-34</td></tr>
+                <tr><td>Star</td><td>Mist</td><td>Cave</td><td>-68</td></tr>
+                <tr><td>Planet</td><td>Typewriter</td><td>Egg</td><td>-34</td></tr>
+                <tr><td>Vampire</td><td>Hat</td><td>Bed</td><td>35</td></tr>
+                <tr><td>Potato</td><td>Surveyor</td><td>Fire</td><td>-93</td></tr>
+                <tr><td>Compass</td><td>Telescope</td><td>Pyramid</td><td>-84</td></tr>
+                <tr><td>Slave</td><td>Chisel</td><td>Perfume</td><td>16</td></tr>
+                <tr><td>Circle</td><td>Circus</td><td>Toilet</td><td>-4</td></tr>
+                <tr><td>Banana</td><td>Videotape</td><td>Swimming Pool</td><td>32</td></tr>
+                <tr><td>Car-race</td><td>Drill</td><td>Bomb</td><td>28</td></tr>
+                <tr><td>Toilet</td><td>Hat</td><td>Album</td><td>-28</td></tr>
+                <tr><td>Gloves</td><td>Parachute</td><td>Shop</td><td>98</td></tr>
+                <tr><td>Gas</td><td>Saddle</td><td>Jet fighter</td><td>85</td></tr>
+                <tr><td>Library</td><td>Navy</td><td>Web</td><td>3</td></tr>
+                <tr><td>Film</td><td>Navy</td><td>Tiger</td><td>-43</td></tr>
+                <tr><td>Compass</td><td>Banana</td><td>Barbecue</td><td>39</td></tr>
+                <tr><td>Skeleton</td><td>Monster</td><td>Shower</td><td>42</td></tr>
+                <tr><td>Mist</td><td>Bomb</td><td>Aeroplane</td><td>44</td></tr>
+                <tr><td>X-ray</td><td>Square</td><td>Staircase</td><td>-70</td></tr>
+                <tr><td>Torpedo</td><td>Torpedo</td><td>Magnet</td><td>-64</td></tr>
+                <tr><td>Saddle</td><td>Cave</td><td>Tiger</td><td>26</td></tr>
+                <tr><td>Circle</td><td>Slave</td><td>Alphabet</td><td>73</td></tr>
+                <tr><td>Button</td><td>Arm</td><td>Stomach</td><td>-28</td></tr>
+                <tr><td>Grapes</td><td>Coffee-shop</td><td>Knife</td><td>-37</td></tr>
+                <tr><td>Shoes</td><td>Jet fighter</td><td>Necklace</td><td>-38</td></tr>
+                <tr><td>Star</td><td>Kitchen</td><td>Room</td><td>89</td></tr>
+                <tr><td>Button</td><td>Horoscope</td><td>Diamond</td><td>-95</td></tr>
+                <tr><td>Diamond</td><td>Fungus</td><td>Perfume</td><td>-38</td></tr>
+                <tr><td>Leather jacket</td><td>Book</td><td>Garden</td><td>70</td></tr>
+                <tr><td>Spectrum</td><td>Aircraft Carrier</td><td>Bed</td><td>-24</td></tr>
+                <tr><td>School</td><td>Salt</td><td>Meteor</td><td>-16</td></tr>
+                <tr><td>Restaurant</td><td>Cappuccino</td><td>Maze</td><td>-73</td></tr>
+                <tr><td>Leg</td><td>Milk</td><td>Tapestry</td><td>-32</td></tr>
+                <tr><td>Ice</td><td>Bee</td><td>Album</td><td>-39</td></tr>
+                <tr><td>Barbecue</td><td>Skeleton</td><td>Desk</td><td>-69</td></tr>
+                <tr><td>PaintBrush</td><td>Air</td><td>Circus</td><td>90</td></tr>
+                <tr><td>Surveyor</td><td>Pebble</td><td>Videotape</td><td>75</td></tr>
+                <tr><td>Bed</td><td>Earth</td><td>Rocket</td><td>-86</td></tr>
+                <tr><td>Book</td><td>Salt</td><td>Aircraft Carrier</td><td>53</td></tr>
+                <tr><td>Post-office</td><td>Hieroglyph</td><td>Bomb</td><td>-2</td></tr>
+                <tr><td>Bible</td><td>Spectrum</td><td>Hat</td><td>80</td></tr>
+                <tr><td>Nail</td><td>Shop</td><td>Ears</td><td>-73</td></tr>
+                <tr><td>Horse</td><td>Solid</td><td>Butterfly</td><td>92</td></tr>
+                <tr><td>Hat</td><td>Perfume</td><td>Parachute</td><td>41</td></tr>
+                <tr><td>Rocket</td><td>Bathroom</td><td>Spot Light</td><td>-7</td></tr>
+                <tr><td>Drum</td><td>Vampire</td><td>Insect</td><td>-33</td></tr>
+                <tr><td>Explosive</td><td>Tunnel</td><td>Ice-cream</td><td>-93</td></tr>
+                <tr><td>Spectrum</td><td>Meat</td><td>Pyramid</td><td>51</td></tr>
+                <tr><td>Necklace</td><td>Spice</td><td>Wheelchair</td><td>-40</td></tr>
+                <tr><td>Sun</td><td>Foot</td><td>Book</td><td>43</td></tr>
+                <tr><td>Car</td><td>Shoes</td><td>Desk</td><td>29</td></tr>
+                <tr><td>Bank</td><td>Navy</td><td>Treadmill</td><td>79</td></tr>
+                <tr><td>Necklace</td><td>Backpack</td><td>Game</td><td>3</td></tr>
+                <tr><td>Bomb</td><td>Sphere</td><td>Slave</td><td>14</td></tr>
+                <tr><td>Nail</td><td>Gemstone</td><td>Clown</td><td>-38</td></tr>
+                <tr><td>Pepper</td><td>Circle</td><td>Worm</td><td>38</td></tr>
+                <tr><td>Freeway</td><td>Swimming Pool</td><td>Torch</td><td>0</td></tr>
+                <tr><td>Bottle</td><td>Horse</td><td>Baby</td><td>-68</td></tr>
+                <tr><td>Toilet</td><td>Treadmill</td><td>Liquid</td><td>97</td></tr>
+                <tr><td>Backpack</td><td>Egg</td><td>Pocket</td><td>-59</td></tr>
+                <tr><td>Hieroglyph</td><td>Tennis racquet</td><td>Tiger</td><td>66</td></tr>
+            </tbody>
+        </table>
+
+    </body>
+</html>

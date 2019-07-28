@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+        <title>Testing</title>  
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.js" type="text/javascript"></script>
+        <link href="//ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/themes/ui-lightness/jquery-ui.css" type="text/css" rel="stylesheet" />
+        <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/jquery-ui.js" type="text/javascript"></script>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/blueimp-file-upload/9.5.7/jquery.iframe-transport.js" type="text/javascript"></script>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/blueimp-file-upload/9.5.7/jquery.fileupload.js" type="text/javascript"></script>
+        <script src="jquery.makeInput.js" type="text/javascript"></script>
+        <style type="text/css">
+            .makeInput {
+                border: 8px solid gray;
+                margin:18px;padding:7px;
+            }
+            p.makeInput {
+                width: 120px;
+            }
+            #inline-block {
+                display: inline-block;
+            }
+            #float {
+                float:right;
+            }
+            #position-absolute {
+                position: absolute;
+                left: 300px;
+                top: 20px;
+            }
+            #position-relative {
+                position: relative;
+                left: 380px;
+                top: -120px;
+            }
+            #float-position-relative {
+                float:right;
+                position: relative;
+                right: 50px;
+                top: -120px;
+            }
+            #position-fixed {
+                position: fixed;
+                left: 230px;
+                top: 80px;
+            }
+            #img {width:100px;height:100px;}
+            div {margin:5px;padding:10px;}
+            .pointer{cursor:pointer;border: 1px solid black;margin:50px;padding:50px;}
+        </style> 
+        <script type="text/javascript"> 
+            $(function () {
+                'use strict';
+                $('.makeInput').makeInput({name:'bla'}).fileupload({add: function (e, data) {alert(data.originalFiles[0].name+' submitted');}});
+
+                $('<div/>').dialog({
+                    open: function( event, ui ) {
+                        if(!this._upload_btn){
+                            this._upload_btn=$("#_upload_btn").makeInput({name:'bla'}).fileupload({add: function (e, data) {alert(data.originalFiles[0].name+' submitted');}})
+                        }
+                    },
+                    buttons: [
+                        {
+                            id: '_upload_btn',
+                            text: 'Upload',
+                            click    : function() {return false;}
+                        },
+                    ]
+                });
+
+                $('body').prepend("<p>space</p><p>space</p><p>space</p>");
+                
+                $('#button').makeInput('resize');                
+
+            });
+        </script>
+    </head>
+
+    <body>
+        <div id="dialog"></div>
+
+        <div>bla bla bla<a href="javascript:void(0)" class="makeInput">inline</a>bla bla bla</div>
+        <p class="makeInput">block</p>
+        <p class="makeInput">inline-block</p>
+        <img class="makeInput" src="http://i.imgur.com/pxMdZ8D.png" alt="bla" />
+        <img class="makeInput" src="http://i.imgur.com/pxMdZ8D.png" alt="bla" id="img" />
+        <img class="makeInput" src="http://i.imgur.com/pxMdZ8D.png" alt="bla" height="40" width="40" />
+        <p class="makeInput" id="position-relative">position-relative</p>
+        <p class="makeInput" id="float-position-relative">float-position-relative</p>
+        <p class="makeInput" id="position-absolute">position-absolute</p>
+        <p class="makeInput" id="float">float</p>
+        <p class="makeInput" id="position-fixed">position-fixed</p>
+        <button class="makeInput" id="button" data-type="button">Button</button>
+        <input class="makeInput" id="input-button" type="button" value="input-button" />
+        <input class="makeInput" id="input-submit" type="submit" value="input-submit" />
+    </body> 
+</html> 

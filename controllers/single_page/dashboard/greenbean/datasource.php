@@ -5,6 +5,20 @@ class Datasource extends Greenbeandashboardpagecontroller
 {
     public function view()
     {
+        $rs=$this->serverBridge->getPageContent([
+            'sources'=>['/sources', array_merge($request->getQueryParams(),['verbose'=>true])],
+            'virtualLans'=>'/tags/lans',
+            'defaultValues'=>'/account',
+        ]);
+        //print_r($rs);exit;
+        //Remove next two lines after account settings is fixed on server.
+        $rs['defaultValues']['gateway']=$rs['defaultValues']['client'];
+        unset($rs['defaultValues']['client']);
+        $rs['sources']=$this->base->sortSources($rs['sources']);
+        if(!$rs['defaultValues']) $rs['defaultValues']=$this->base->getDefaultValues();
+        if(!$rs['virtualLans']) $rs['virtualLans']=['virtualLans'=>[], 'virtualLanId'=>null];
+        $rs['menu_main']=$this->base->getMenu('/sources');
+        return $this->view->render($response, 'sources.html', $rs);
         $this->setAssets();
         $this->twig('dashboard/greenbean/datasource.php', ['foo'=>123]);
     }
@@ -13,9 +27,9 @@ class Datasource extends Greenbeandashboardpagecontroller
     {
         //parent will add base assets required by all views
         return array_merge(parent::getAssets($assets), [
-            ['javascript', 'sources.js', '/lib/gb/js/sources.js'],
-            ['javascript', 'sortfixedtable', '/lib/plugins/sortfixedtable/jquery.sortfixedtable.js'],
-            ['css', 'sortfixedtable.css', '/lib/plugins/sortfixedtable/sortfixedtable.css'],
+            ['javascript', 'sources', 'js/sources.js'],
+            ['javascript', 'sortfixedtable', 'plugin/sortfixedtable/jquery.sortfixedtable.js'],
+            ['css', 'sortfixedtable', 'plugin/sortfixedtable/sortfixedtable.css'],
         ]);
     }
 }

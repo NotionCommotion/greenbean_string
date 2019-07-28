@@ -22,12 +22,12 @@ abstract class Greenbeandashboardpagecontroller extends DashboardPageController
             ['javascript', 'blockUI', '//cdnjs.cloudflare.com/ajax/libs/jquery.blockUI/2.66.0-2013.10.09/jquery.blockUI.min.js', ['local'=>false]],
             ['javascript', 'jquery.validate', '//ajax.aspnetcdn.com/ajax/jquery.validate/1.14.0/jquery.validate.js', ['local'=>false]],
             ['javascript', 'additional-methods', '//ajax.aspnetcdn.com/ajax/jquery.validate/1.14.0/additional-methods.js', ['local'=>false]],
-            ['javascript', 'common.js', '/lib/gb/js/common.js'],
-            ['javascript', 'printIt', '/lib/gb/js/printIt.js'],
-            ['javascript', 'manual.js', '/lib/gb/js/manual.js'],
-            ['javascript', 'my-validation-methods', '/lib/gb/js/my-validation-methods.js'],
-            ['css', 'my.style.css', '/lib/gb/css/style.css'],
-            ['css', 'manual.css', '/lib/gb/css/manual.css'],
+            ['javascript', 'common.js', 'js/common.js'],
+            ['javascript', 'printIt', 'js/printIt.js'],
+            ['javascript', 'manual.js', 'js/manual.js'],
+            ['javascript', 'my-validation-methods', 'js/my-validation-methods.js'],
+            ['css', 'my.style.css', 'css/style.css'],
+            ['css', 'manual.css', 'css/manual.css'],
         ]);
     }
 }
