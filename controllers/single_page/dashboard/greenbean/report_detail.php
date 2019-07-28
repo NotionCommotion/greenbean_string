@@ -5,13 +5,11 @@ class ReportDetail extends Greenbeandashboardpagecontroller
 {
     public function view()
     {
-       $rs=$this->serverBridge->getPageContent(['report'=>"/reports/$args[id]"]);
-        //print_r($rs);exit;
+        $rs=$this->serverBridge->getPageContent(['report'=>"/reports/$args[id]"]);
         $rs=empty($rs['report'])?$this->base->getDefaultReportValues():$rs['report'];
-        $rs['menu_main']=$this->base->getMenu('/reports');
-        return $this->view->render($response, 'reports.html',$rs);
+        //$rs['menu_main']=$this->base->getMenu('/reports');
         $this->setAssets();
-        $this->twig('dashboard/greenbean/report.php', ['foo'=>123]);
+        $this->twig('dashboard/greenbean/report_detail.php', $rs);
     }
 
     protected function getAssets(array $assets=[])

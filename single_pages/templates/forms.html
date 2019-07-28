@@ -1,0 +1,153 @@
+{% macro input(name, value, type, size) %}
+<input type="{{ type|default('text') }}" name="{{ name }}" value="{{ value|e }}" size="{{ size|default(20) }}" />
+{% endmacro %}
+
+{% macro fileTable(files,id) %}
+<table class="table" id="{{ id }}">
+    <thead><tr><th>Name</th><th>Size</th><th>Date</th><th></th></tr></thead>
+    <tbody>
+        {% for row in files %}
+        {% if row.path is defined %}
+        <tr{{ (row.id is defined?' data-id="'~row.id~'"')|raw }}><td><a href="{{ row.path }}" target="_blank">{{ row.name }}</a></td><td>{{ row.size }}</td><td>{{ row.date }}</td><td><img alt="Delete File" title="Delete File" src="/lib/gb/stdimages/icon_16/delete.png" class="vtip delete" height="16" width="16"></td></tr>
+        {% else %}
+        <tr{{ (row.id is defined?' data-id="'~row.id~'"')|raw }}><td>{{ row.name }}</td><td>{{ row.size }}</td><td>{{ row.date }}</td><td><img alt="Delete File" title="Delete File" src="/lib/gb/stdimages/icon_16/delete.png" class="vtip delete" height="16" width="16"></td></tr>
+        {% endif %}
+        {% endfor %}
+    </tbody>
+</table>
+{% endmacro %}
+
+{% macro listCSS(list) %}
+{% for item in list %}
+<link rel="stylesheet" type="text/css" href="{{ item }}" />
+{% endfor %}
+{% endmacro %}
+
+{% macro listJS(list) %}
+{% for item in list %}
+<script src="{{ item }}"></script>
+{% endfor %}
+{% endmacro %}
+
+{% macro menu(menu,active) %}
+{# menu is an associated array of containing:
+name.  required
+path or id: One of the two are required.  If both, URL will use path
+path.  optional and defaults to javascript:void(0)
+id.  optional and defaults to not adding an id to the item.
+nw.  optional and defalts to false.  This is a flag for a new window.
+class.  optional and defaults to not adding an class to the item.
+dropdown. optional and dropdown menu similar to main menu
+#}
+{% for item in menu %}
+{% set path = item.path is defined?item.path:"javascript:void(0)" %}
+{% set class = item.class is defined?item.class:"" %}
+{% if (path == active) %}
+{% set class = class~' active ' %}
+{% endif%}
+{% if loop.first %}
+{% set class = class~' first ' %}
+{% elseif loop.last %}
+{% set class = class~' last ' %}
+{% endif %}
+{% if item.dropdown is defined %}
+<li class="{{ class|trim }} dropdown">
+    <a href="#" class="dropdown-toggle" data-toggle="dropdown">{{item.name}}
+        <span class="caret"></span></a>
+    <ul class="dropdown-menu">
+        {# Why doesn't recursive work?  {{ forms.menu(item.dropdown,false) }} #}
+        {% for dropdown in item.dropdown %}
+        <li><a href="{{ dropdown.path }}{{ dropdown.nw is defined and dropdown.nw ? ' target="_blank"' }}">{{ dropdown.name }}</a></li>
+        {% endfor %}
+    </ul>
+</li>
+{% else %}
+<li class="{{ class|trim }}">
+    <a href="{{ path }}"{{ item.nw is defined and item.nw ? ' target="_blank"' }}{{ item.id is defined ? (' id="'~item.id~'"')|raw }}>{{ item.name }}</a>
+</li>
+{% endif %}
+{% endfor %}
+{% endmacro %}
+
+{% macro list(list) %}
+{#
+list is an array containing names.
+#}
+{% for item in list %}
+<li class="{{ cycle(['even', 'odd'], loop.index0) }}">{{ item }}</li>
+{% endfor %}
+{% endmacro %}
+
+{% macro listScript(list) %}
+{% for item in list %}
+{{ item|raw }}
+{% endfor %}
+{% endmacro %}
+
+{% macro linklist(list,cid,controller,title) %}
+{#
+list is an array containing id and name.  Links are created.
+#}
+{% for item in list %}
+<li class="{{ cycle(['even', 'odd'], loop.index0) }}">
+    <a href="/{{ cid }}/{{ controller }}?{{ item.id }}" class="linkPreview" title="{{ title }}">{{ item.name }}</a>
+</li>
+{% endfor %}
+{% endmacro %}
+
+{% macro select(options,selected) %}
+{# Creates a select menu based on given array (id/name pairs) (doesn't include <select> tags) #}
+{% for item in options %}
+<option value="{{ item.id }}" {{ item.id==selected ? ' selected="selected"' }} >{{ item.name }}</option>
+{% endfor %}
+{% endmacro %}
+
+{% macro selectValue(options,selected) %}
+{# Creates a select menu based on given array (id/value pairs) (doesn't include <select> tags) #}
+{% for item in options %}
+<option value="{{ item.id }}" {{ item.id==selected ? ' selected="selected"' }} >{{ item.value }}</option>
+{% endfor %}
+{% endmacro %}
+
+{% macro select_id(options,selected) %}
+{# Creates a select menu based on given array (id only) (doesn't include <select> tags) #}
+{% for item in options %}
+<option value="{{ item }}" {{ item==selected ? ' selected="selected"' }} >{{ item }}</option>
+{% endfor %}
+{% endmacro %}
+
+{% macro select_assoc(options,selected) %}
+{# Creates a select menu based on given an associated array id=>name (doesn't include <select> tags) #}
+{% for key,item in options %}
+<option value="{{ key }}" {{ key==selected ? ' selected="selected"' }} >{{ item }}</option>
+{% endfor %}
+{% endmacro %}
+
+{% macro yesNo(name,checked) %}
+<input type="radio" name="{{ name }}" value="1" {{ checked?'checked="checked"' }} />Yes
+<input type="radio" name="{{ name}}" value="0" {{ not checked?'checked="checked"' }} />No
+{% endmacro %}
+
+
+{% macro getPoints(name, functions) %}
+<td class="point">{{ name }}</td>
+<td class='functions'>
+    {% for function in ['mean','integral','sum','min','max'] %}
+    <label class="checkbox-inline"><input type="checkbox" value='{{ function }}'{{ function in functions?' checked':'' }}>{{ function|capitalize }}</label>
+    {% endfor %}
+</td>
+<td><img alt="Delete Point" src="/lib/gb/stdimages/icon_16/delete.png" title="Delete Point" class="vtip delete" height="16" width="16"></td>
+{% endmacro %}
+
+{% macro displayErrors(errors) %}
+{% if errors is not empty %}
+<div class="error">
+<p>Errors</p>
+<ul>
+    {% for error in errors %}
+    <li>{{error}}</li>
+    {% endfor %}
+</ul>
+</div>
+{% endif %}
+{% endmacro %}

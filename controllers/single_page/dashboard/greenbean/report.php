@@ -6,7 +6,7 @@ class Report extends Greenbeandashboardpagecontroller
     public function view()
     {
         $this->setAssets();
-        $this->twig('dashboard/greenbean/report.php', ['foo'=>123]);
+        $this->twig('dashboard/greenbean/report.php');
     }
 
     protected function getAssets(array $assets=[])

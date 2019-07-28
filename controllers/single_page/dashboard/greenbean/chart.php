@@ -12,13 +12,11 @@ class Chart extends Greenbeandashboardpagecontroller
             'chartTypes'=>'/charts/themes',
             'defaultValues'=>'/account',
         ]);
-        //print_r($rs['chartTypes']);exit;
         //$rs['chartTypes']=$this->base->sortChartTypes($rs['chartTypes']);
         if(!$rs['defaultValues']) $rs['defaultValues']=$this->base->getDefaultValues();
-        $rs['menu_main']=$this->base->getMenu('/charts');
-        return $this->view->render($response, 'charts.html', $rs);
+        //$rs['menu_main']=$this->base->getMenu('/charts');
         $this->setAssets();
-        $this->twig('dashboard/greenbean/chart.php', ['foo'=>123]);
+        $this->twig('dashboard/greenbean/charts.php', $rs);
     }
 
     protected function getAssets(array $assets=[])

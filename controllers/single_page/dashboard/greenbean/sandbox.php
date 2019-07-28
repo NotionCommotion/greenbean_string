@@ -9,22 +9,16 @@ class Sandbox extends Greenbeandashboardpagecontroller
             'page'=>$args['page'],
             'html'=>$this->base->getHtml($args['page']),
             'displayUnit'=>$this->settings['config']['displayUnit'],
-            'menu_main'=>$this->base->getMenu('/preview')
+            'menu_main'=>$this->base->getMenu('/sandbox')
         ];
         $rs=array_merge($rs, $rs['html']?$this->base->getResourceFiles($args['page']):['js'=>[],'css'=>[]]);
-        return $this->view->render($response, 'preview.html', $rs);
         $this->setAssets();
-        $this->twig('dashboard/greenbean/sandbox.php', ['foo'=>123]);
+        $this->twig('dashboard/greenbean/sandbox.php', $rs);
     }
 
     protected function getAssets(array $assets=[])
     {
         //parent will add base assets required by all views
-        return array_merge(parent::getAssets($assets), [
-            ['javascript', 'tinymce', '//cdnjs.cloudflare.com/ajax/libs/tinymce/4.7.9/tinymce.min.js', ['local'=>false]],
-            ['javascript', 'preview_edit', 'js/preview_edit.js'],
-            ['css', 'preview_edit', 'css/preview_edit.css'],
-        ]);
         return array_merge(parent::getAssets($assets), [
             ['javascript', 'highcharts', '//code.highcharts.com/highcharts.js', ['local'=>false]],
             ['javascript', 'highcharts-more', '//code.highcharts.com/highcharts-more.js', ['local'=>false]],

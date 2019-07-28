@@ -13,15 +13,13 @@ class Point extends Greenbeandashboardpagecontroller
             'defaultValues'=>'/account',
             'points'=>['/points', array_merge($request->getQueryParams(),['verbose'=>true])],
         ]);
-        //print_r($rs);exit;
         //if(!$rs['defaultValues']) $rs['defaultValues']=$this->base->getDefaultValues();
         //$rs['defaultValues']['virtualLanId']=$rs['virtualLans']['virtualLanId']??null;
         $rs['defaultValues']['virtualLanId']=$rs['defaultValues']['base']['virtualLanId'];
         //$rs['virtualLans']=$rs['virtualLans']['virtualLans']??[];
-        $rs['menu_main']=$this->base->getMenu('/points');
-        return $this->view->render($response, 'points.html', $rs);
+        //$rs['menu_main']=$this->base->getMenu('/points');
         $this->setAssets();
-        $this->twig('dashboard/greenbean/point.php', ['foo'=>123]);
+        $this->twig('dashboard/greenbean/points.php', $rs);
     }
 
     protected function getAssets(array $assets=[])

@@ -22,6 +22,7 @@ class Controller extends Package
     private const  SINGLE_PAGES = [
         '/dataReporter' => ['cName'=>'Data Reporter'],
         '/dashboard/greenbean/report' => ['cName'=>'Report Manager'],
+        '/dashboard/greenbean/report_detail' => ['exclude_nav'=>true],
         '/dashboard/greenbean' => ['cName'=>'Greenbean', 'cDescription'=>'Greenbean Energy and Environmmental Data Manager'],
         '/dashboard/greenbean/point' => ['cName'=>'Point Manager'],
         '/dashboard/greenbean/chart' => ['cName'=>'Chart Manager'],

@@ -10,12 +10,10 @@ class Helpdesk extends Greenbeandashboardpagecontroller
             'tickets'=>['/helpdesk', $params],
             'message_types'=>'/helpdesk/topics',
         ]);
-        //print_r($rs);exit;
         if(!empty($params['statusId'])) $rs['statusId']=$params['statusId'];
-        $rs['menu_main']=$this->base->getMenu('/helpdesk');
-        return $this->view->render($response, 'helpdesk.html',$rs);
-       $this->setAssets();
-        $this->twig('dashboard/greenbean/helpdesk.php', ['foo'=>123]);
+        //$rs['menu_main']=$this->base->getMenu('/helpdesk');
+        $this->setAssets();
+        $this->twig('dashboard/greenbean/helpdesk.php', $rs);
     }
 
     protected function getAssets(array $assets=[])
