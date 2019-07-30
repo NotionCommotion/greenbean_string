@@ -1,32 +1,5 @@
 {% import "forms.html" as forms %}
-
-{% set _css = [
-'//cdnjs.cloudflare.com/ajax/libs/x-editable/1.5.1/bootstrap3-editable/css/bootstrap-editable.css',
-'//cdnjs.cloudflare.com/ajax/libs/jstree/3.3.6/themes/default/style.min.css'
-] %}
-{% set _js = [
-'//cdnjs.cloudflare.com/ajax/libs/jquery.blockUI/2.66.0-2013.10.09/jquery.blockUI.min.js',
-'//cdnjs.cloudflare.com/ajax/libs/x-editable/1.5.1/bootstrap3-editable/js/bootstrap-editable.min.js',
-'//ajax.aspnetcdn.com/ajax/jquery.validate/1.14.0/jquery.validate.js',
-'//ajax.aspnetcdn.com/ajax/jquery.validate/1.14.0/additional-methods.js',
-'//cdn.jsdelivr.net/npm/jquery.initialize@1.3.0/jquery.initialize.min.js',
-'//cdnjs.cloudflare.com/ajax/libs/jstree/3.3.6/jstree.min.js'
-] %}
-{% set _jsMin = [
-'/lib/gb/js/jquery.editableAutocomplete.js',
-'/lib/gb/js/my-validation-methods.js',
-'/lib/gb/js/source_bacnet_gateway.js',
-'/lib/plugins/toolTip/jquery.toolTip.js'
-] %}
-{% set _cssMin = [
-'/lib/plugins/toolTip/toolTip.css'
-] %}
-{% extends "main.html" %}
-
-{% block content %}
-
-{{ forms.displayErrors(errors??null, 'Gateway - BACnet') }}
-
+{{ forms.displayErrors(errors??[]) }}
 <div id="list-header">
     <div class="btn-group float-right">
         <button class="btn btn-danger dropdown-toggle" data-toggle="dropdown">Control Gateway<span class="caret"></span></button>
@@ -173,5 +146,3 @@
 </div>
 
 <input type="hidden" id=sourceId value="{{ source.id | default("") }}" />
-
-{% endblock %}

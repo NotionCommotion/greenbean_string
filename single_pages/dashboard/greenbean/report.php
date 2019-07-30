@@ -1,4 +1,5 @@
 {# Similar to front end but also allows the ability to save/modify/delete a report template. #}
+{% import "forms.html" as forms %}
 <div id="list-header">
     <button type="button" class="btn btn-primary download-data">Download Data</button>
     {% if id %}

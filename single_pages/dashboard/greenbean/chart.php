@@ -1,3 +1,4 @@
+{% import "forms.html" as forms %}
 <div id="list-header">
     <button class="btn btn-primary add">Add New</button>
     <h1>Charts</h1>

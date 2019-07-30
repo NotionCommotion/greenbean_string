@@ -5,20 +5,19 @@ class Settings extends GreenbeanDashboardPageController
 {
     public function view()
     {
-        $rs=$this->serverBridge->getPageContent([
+        $rs=$this->getServerBridge()->getPageContent([
             'defaultValues'=>'/account',
             'virtualLans'=>'/tags/lans'
         ]);
-        $rs['datalogger']=['ip'=>$this->serverBridge->getHost(),'key'=>$this->serverBridge->getConfigParam(['headers','X-GreenBean-Key'])];
+        $rs['datalogger']=['ip'=>$this->getServerBridge()->getHost(),'key'=>$this->getServerBridge()->getConfigParam(['headers','X-GreenBean-Key'])];
         if(!$rs['defaultValues']) {
             syslog(LOG_ERR, 'Account is missing default data');
-            $rs['defaultValues']=$this->base->getDefaultValues();
+            $rs['defaultValues']=$this->gbHelper->getDefaultValues();
         }
         if(!$rs['virtualLans']) {
             syslog(LOG_ERR, 'Account is missing virtual LAN');
             $rs['virtualLans']=['virtualLans'=>[], 'virtualLanId'=>null];
         }
-        //$rs['menu_main']=$this->base->getMenu('/account');
         $this->twig('dashboard/greenbean/settings.php', $rs);
         $this->setAssets();
     }

@@ -5,19 +5,18 @@ class Datasource extends GreenbeanDashboardPageController
 {
     public function view()
     {
-        $rs=$this->serverBridge->getPageContent([
-            'sources'=>['/sources', array_merge($request->getQueryParams(),['verbose'=>true])],
+        $rs=$this->getServerBridge()->getPageContent([
+            'sources'=>['/sources', array_merge($this->getParameters(),['verbose'=>true])],
             'virtualLans'=>'/tags/lans',
             'defaultValues'=>'/account',
         ]);
         //Remove next two lines after account settings is fixed on server.
         $rs['defaultValues']['gateway']=$rs['defaultValues']['client'];
         unset($rs['defaultValues']['client']);
-        $rs['sources']=$this->base->sortSources($rs['sources']);
-        if(!$rs['defaultValues']) $rs['defaultValues']=$this->base->getDefaultValues();
+        $rs['sources']=$this->gbHelper->sortSources($rs['sources']);
+        if(!$rs['defaultValues']) $rs['defaultValues']=$this->gbHelper->getDefaultValues();
         if(!$rs['virtualLans']) $rs['virtualLans']=['virtualLans'=>[], 'virtualLanId'=>null];
-        //$rs['menu_main']=$this->base->getMenu('/sources');
-        $this->twig('dashboard/greenbean/datasources.php', $rs);
+        $this->twig('dashboard/greenbean/datasource.php', $rs);
         $this->setAssets();
     }
 

@@ -78,7 +78,8 @@ class RouteList implements RouteListInterface
         }
     }
 
-    private function addProxyRoutes(array $routes, $router) {
+    private function addProxyRoutes(array $routes, $router)
+    {
         foreach ($routes as $route=>$methods) {
             foreach ($methods as $method) {
                 $router->$method('/api'.$route, function() {

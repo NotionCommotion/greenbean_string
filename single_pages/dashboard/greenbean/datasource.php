@@ -1,21 +1,4 @@
 {% import "forms.html" as forms %}
-
-{% set _css = [] %}
-{% set _js = [
-'//cdnjs.cloudflare.com/ajax/libs/jquery.blockUI/2.66.0-2013.10.09/jquery.blockUI.min.js',
-'//ajax.aspnetcdn.com/ajax/jquery.validate/1.14.0/jquery.validate.js',
-'//ajax.aspnetcdn.com/ajax/jquery.validate/1.14.0/additional-methods.js'
-] %}
-{% set _cssMin = ['/lib/plugins/sortfixedtable/sortfixedtable.css'] %}
-{% set _jsMin = [
-'/lib/gb/js/jquery.editableAutocomplete.js',
-'/lib/gb/js/my-validation-methods.js',
-'/lib/plugins/sortfixedtable/jquery.sortfixedtable.js',
-'/lib/gb/js/sources.js'
-] %}
-{% extends "main.html" %}
-
-{% block content %}
 <div id="list-header">
     <button class="btn btn-primary" id='addBacnetGateway'>Add New</button>
     <h1>Data Sources - BACnet Gateway</h1>
@@ -219,4 +202,3 @@
     </form>
 </div>
 #}
-{% endblock %}

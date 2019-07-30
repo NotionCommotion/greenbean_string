@@ -1,25 +1,4 @@
-{% set _css = [
-'//cdnjs.cloudflare.com/ajax/libs/x-editable/1.5.1/bootstrap3-editable/css/bootstrap-editable.css'
-] %}
-{% set _js = [
-'//cdnjs.cloudflare.com/ajax/libs/jquery.blockUI/2.66.0-2013.10.09/jquery.blockUI.min.js',
-'//cdnjs.cloudflare.com/ajax/libs/x-editable/1.5.1/bootstrap3-editable/js/bootstrap-editable.min.js',
-'//ajax.aspnetcdn.com/ajax/jquery.validate/1.14.0/jquery.validate.js',
-'//ajax.aspnetcdn.com/ajax/jquery.validate/1.14.0/additional-methods.js',
-'//cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.11/handlebars.js'
-] %}
-{% set _cssMin = ['/lib/plugins/sortfixedtable/sortfixedtable.css'] %}
-{% set _jsMin = [
-'/lib/gb/js/jquery.editableAutocomplete.js',
-'/lib/gb/js/my-validation-methods.js',
-'/lib/plugins/sortfixedtable/jquery.sortfixedtable.js',
-'/lib/gb/js/helpdesk.js'
-] %}
-
 {% import "forms.html" as forms %}
-{% extends "main.html" %}
-
-{% block content %}
 <h2>Help Desk</h2>
 {{ forms.displayErrors(errors??null) }}
 
@@ -115,5 +94,3 @@
     </form>
 
 </div>
-
-{% endblock %}

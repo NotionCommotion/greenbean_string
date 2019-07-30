@@ -1,15 +1,37 @@
 <?php
 namespace Concrete\Package\GreenbeanDataIntegrator\Controller\SinglePage\Dashboard;
 use Concrete\Core\Page\Controller\DashboardPageController;
-use Greenbean\Concrete5\GreenbeanDataIntegrator\CommonTrait;
 use Concrete\Core\User\User;
 use Concrete\Core\User\UserInfo;
+use Concrete\Core\Support\Facade\Events;
+use Greenbean\Concrete5\GreenbeanDataIntegrator\GbHelper;
 use Package;
 
 abstract class GreenbeanDashboardPageController extends DashboardPageController
 {
-    use CommonTrait;
+    private $twig, $serverBridge;
+    protected $gbHelper;
     protected const PKGHANDLE = 'greenbean_data_integrator';    //How should this be accomplished?
+
+    public function __construct(...$args)
+    {
+        $this->gbHelper=new GbHelper(); //How should this be injected?
+        parent::__construct(...$args);
+    }
+
+    public function on_start()
+    {
+        //Events::addListener('on_start', function($event) {syslog(LOG_ERR, 'GreenbeanDashboardPageController::on_start: '.$this->getControllerActionPath());});
+
+        //Why bother doing this in on_start() instead of just the view?
+        if($assets=$this->getAssets()) {
+            $assetList = \Concrete\Core\Asset\AssetList::getInstance();
+            foreach($assets as $asset) {
+                $asset=array_merge($asset, count($asset)===3?[[],'greenbean_data_integrator']:['greenbean_data_integrator']);
+                $assetList->register(...$asset);    //returns JavascriptAsset if javascript, etc
+            }
+        }
+    }
 
     public function on_before_render() {
         //Doesn't work with on_start()?
@@ -21,6 +43,23 @@ abstract class GreenbeanDashboardPageController extends DashboardPageController
         }
     }
 
+    //Future.  Inject path to templates, etc
+    protected function twig(string $template, array $variables=[], bool $render=true):string
+    {
+        if(!$this->twig) {
+            $this->twig = new \Twig\Environment(new \Twig\Loader\FilesystemLoader(__DIR__.'/../../../single_pages'), [
+                //'cache' => 'path/to/cache'    // Add when complete.  See auto_reload option
+                'debug'=>true,
+                //'strict_variables'=>true
+            ]);
+        }
+        $html = $this->twig->render($template, $variables);
+        if($render) {
+            $this->set('html', $html);
+            $this->render('/twig');
+        }
+        return $html;
+    }
 
     protected function validCredentials(bool $confirm=true):bool
     {
@@ -44,6 +83,12 @@ abstract class GreenbeanDashboardPageController extends DashboardPageController
             //how do I inform user that credentials were bad?
             return false;
         }
+    }
+
+    protected function getServerBridge()
+    {
+        if(!$this->serverBridge) $this->serverBridge = $this->app->make('\Greenbean\ServerBridge\ServerBridge');
+        return $this->serverBridge;
     }
 
     /**
@@ -74,5 +119,22 @@ abstract class GreenbeanDashboardPageController extends DashboardPageController
             ['css', 'my.style.css', 'css/style.css'],
             ['css', 'manual.css', 'css/manual.css'],
         ]);
+    }
+
+    //How should this be accompished?
+    //Pass array to override with given assets or null to override and include no assets.
+    protected function setAssets(?array $assets=[])
+    {
+        //$this->requireAsset('jquery/ui'); //v1.11.4
+        if($assets) {
+            foreach($assets as $asset) {
+                $this->requireAsset($asset[0], $asset[1]);
+            }
+        }
+        elseif($assets && $assets=$this->getAssets()) {
+            foreach($assets as $asset) {
+                $this->requireAsset($asset[0], $asset[1]);
+            }
+        }
     }
 }

@@ -3,15 +3,15 @@ namespace Concrete\Package\GreenbeanDataIntegrator\Controller\SinglePage\Dashboa
 use Concrete\Package\GreenbeanDataIntegrator\Controller\SinglePage\dashboard\GreenbeanDashboardPageController;
 class Sandbox extends GreenbeanDashboardPageController
 {
-    public function view()
+    public function view($page)
     {
         $rs=[
-            'page'=>$args['page'],
-            'html'=>$this->base->getHtml($args['page']),
+            'page'=>$page,
+            'html'=>$this->gbHelper->getHtml($page),
             'displayUnit'=>$this->settings['config']['displayUnit'],
-            'menu_main'=>$this->base->getMenu('/sandbox')
+            'menu_main'=>$this->gbHelper->getMenu('/sandbox')
         ];
-        $rs=array_merge($rs, $rs['html']?$this->base->getResourceFiles($args['page']):['js'=>[],'css'=>[]]);
+        $rs=array_merge($rs, $rs['html']?$this->gbHelper->getResourceFiles($page):['js'=>[],'css'=>[]]);
         $this->twig('dashboard/greenbean/sandbox.php', $rs);
         $this->setAssets();
     }

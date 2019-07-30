@@ -1,6 +1,7 @@
 <?php
 namespace Concrete\Package\GreenbeanDataIntegrator\Controller\SinglePage;
-class DataReporter extends GreenbeanPageController
+use Concrete\Core\Page\Controller\PageController;
+class DataReporter extends PageController
 {
     public function view()
     {

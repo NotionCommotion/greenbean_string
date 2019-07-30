@@ -1,14 +1,3 @@
-{% extends "main.html" %}
-
-{% set _js = js |merge([
-'//cdnjs.cloudflare.com/ajax/libs/tinymce/4.7.9/tinymce.min.js'
-]) %}
-
-{% set _jsMin = ['/lib/gb/js/front_edit.js'] %}
-{% set _css = css %}
-{% set _cssMin = ['/lib/gb/css/frontedit.css'] %}
-
-{% block content %}
 <input type="hidden" value="{{page}}" id="page" />
 <a href="javascript:void(0)" id="addResources">Add Resources</a>
 <div id="frontContent" class="frontContentEdit">
@@ -54,4 +43,3 @@
         <tbody></tbody>
     </table>
 </div>
-{% endblock %}

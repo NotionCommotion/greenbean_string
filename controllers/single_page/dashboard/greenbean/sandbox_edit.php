@@ -3,17 +3,16 @@ namespace Concrete\Package\GreenbeanDataIntegrator\Controller\SinglePage\Dashboa
 use Concrete\Package\GreenbeanDataIntegrator\Controller\SinglePage\dashboard\GreenbeanDashboardPageController;
 class SandboxEdit extends GreenbeanDashboardPageController
 {
-    public function view()
+    public function view($page)
     {
-        $rs=$this->serverBridge->getPageContent([
+        $rs=$this->getServerBridge()->getPageContent([
             'pointList'=>['/points'],
             'chartList'=>['/charts'],
         ]);
         $rs['page']=$args['page'];
-        $rs['html']=$this->base->getHtml($args['page']);
+        $rs['html']=$this->gbHelper->getHtml($page);
         $rs['js']=[];
         $rs['css']=[];
-        //$rs['menu_main']=$this->base->getMenu('/sandbox');
         $this->twig('dashboard/greenbean/sandboxEdit.php', $rs);
         $this->setAssets();
     }

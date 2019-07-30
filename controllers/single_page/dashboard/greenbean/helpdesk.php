@@ -5,13 +5,12 @@ class Helpdesk extends GreenbeanDashboardPageController
 {
     public function view()
     {
-        $params=$request->getQueryParams();
-        $rs=$this->serverBridge->getPageContent([
+        $params=$this->getParameters();
+        $rs=$this->getServerBridge()->getPageContent([
             'tickets'=>['/helpdesk', $params],
             'message_types'=>'/helpdesk/topics',
         ]);
         if(!empty($params['statusId'])) $rs['statusId']=$params['statusId'];
-        //$rs['menu_main']=$this->base->getMenu('/helpdesk');
         $this->setAssets();
         $this->twig('dashboard/greenbean/helpdesk.php', $rs);
     }

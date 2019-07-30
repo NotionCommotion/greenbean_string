@@ -3,11 +3,10 @@ namespace Concrete\Package\GreenbeanDataIntegrator\Controller\SinglePage\Dashboa
 use Concrete\Package\GreenbeanDataIntegrator\Controller\SinglePage\dashboard\GreenbeanDashboardPageController;
 class ReportDetail extends GreenbeanDashboardPageController
 {
-    public function view()
+    public function view($id)
     {
-        $rs=$this->serverBridge->getPageContent(['report'=>"/reports/$args[id]"]);
-        $rs=empty($rs['report'])?$this->base->getDefaultReportValues():$rs['report'];
-        //$rs['menu_main']=$this->base->getMenu('/reports');
+        $rs=$this->getServerBridge()->getPageContent(['report'=>"/reports/$id"]);
+        $rs=empty($rs['report'])?$this->gbHelper->getDefaultReportValues():$rs['report'];
         $this->twig('dashboard/greenbean/report_detail.php', $rs);
         $this->setAssets();
     }

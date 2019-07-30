@@ -1,24 +1,19 @@
 <?php
 namespace Concrete\Package\GreenbeanDataIntegrator\Controller\SinglePage\Dashboard\Greenbean;
 use Concrete\Package\GreenbeanDataIntegrator\Controller\SinglePage\dashboard\GreenbeanDashboardPageController;
-use Package; // or \Package::getByHandle('my_package') using the global namespace
 class Point extends GreenbeanDashboardPageController
 {
     public function view()
     {
-        $rs=$this->serverBridge->getPageContent([
+        $rs=$this->getServerBridge()->getPageContent([
             'aggrTypes'=>'/points/aggregate/types',
             'timeUnit'=>'/units/time',
             'pointSources'=>['/sources', ['fields'=>['protocol']]],    //add extra field "property" as well as default id and name
             'virtualLans'=>'/tags/lans',
             'defaultValues'=>'/account',
-            'points'=>['/points', array_merge($request->getQueryParams(),['verbose'=>true])],
+            'points'=>['/points', array_merge($this->getParameters(), ['verbose'=>true])],
         ]);
-        //if(!$rs['defaultValues']) $rs['defaultValues']=$this->base->getDefaultValues();
-        //$rs['defaultValues']['virtualLanId']=$rs['virtualLans']['virtualLanId']??null;
         $rs['defaultValues']['virtualLanId']=$rs['defaultValues']['base']['virtualLanId'];
-        //$rs['virtualLans']=$rs['virtualLans']['virtualLans']??[];
-        //$rs['menu_main']=$this->base->getMenu('/points');
         $this->twig('dashboard/greenbean/point.php', $rs);
         $this->setAssets();
     }

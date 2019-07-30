@@ -6,6 +6,9 @@ use Concrete\Core\Database\EntityManager\Provider\StandardPackageProvider;
 use Concrete\Core\Package\Package as Package;
 use Concrete\Core\Page\Single as SinglePage;
 use Greenbean\Concrete5\GreenbeanDataIntegrator\RouteList;
+use Greenbean\ServerBridge\ServerBridge;
+use Concrete\Core\Application\Application;
+use Concrete\Core\Support\Facade\Events;
 
 defined('C5_EXECUTE') OR die("Access Denied.");
 
@@ -13,7 +16,7 @@ class Controller extends Package implements ProviderAggregateInterface
 {
 
     protected $appVersionRequired = '8.2';
-    protected $pkgVersion = '0.3';
+    protected $pkgVersion = '0.4';
     protected $pkgHandle = 'greenbean_data_integrator';
     protected $pkgName = 'Greenbean Data Integrator';
     protected $pkgDescription = 'Interface to the Greenbean data Api';
@@ -35,37 +38,42 @@ class Controller extends Package implements ProviderAggregateInterface
         '/dashboard/greenbean/settings' => ['cName'=>'Account Settings'],
         '/dashboard/greenbean/manual' => ['cName'=>'Users Manual'],
         '/dashboard/greenbean/helpdesk' => ['cName'=>'Help Desk'],
-        '/dashboard/greenbean/configure' => ['cName'=>'Configure'],
+        '/dashboard/greenbean/configure' => ['exclude_nav'=>true],
     ];
 
     private const  PAGE_PROPERTIES = ['cName'=>null, 'cCacheFullPageContent'=>null, 'cCacheFullPageContentLifetimeCustom'=>null, 'cCacheFullPageContentOverrideLifetime'=>null, 'cDescription'=>null, 'cDatePublic'=>null, 'uID'=>null, 'pTemplateID'=>null, 'ptID'=>null, 'cHandle'=>null, 'cFilename'=>null];
 
-    public function install() {
+    public function install()
+    {
         $pkg = parent::install();
         //BlockType::installBlockTypeFromPackage('event_calendar', $pkg);
         $this->installSinglePages($pkg);
     }
 
-    public function upgrade() {
+    public function upgrade()
+    {
         parent::upgrade();
         $pkg = Package::getByHandle('greenbean_data_integrator');
         //if (!is_object(BlockType::getByHandle('greenbean_data_integrator'))) { BlockType::installBlockTypeFromPackage('greenbean_data_integrator', $this);}
         $this->installSinglePages($pkg);
     }
 
-    public function on_start() {
-        require_once $this->getPackagePath() . '/vendor/autoload.php';
+    public function on_start()
+    {
+       require_once $this->getPackagePath() . '/vendor/autoload.php';
 
         $config = $this->getFileConfig()->get('server');
-        $this->app->bind('someDescription', function(Application $app) use($config) {
+        $this->app->bind(ServerBridge::class, function(Application $app) use($config) {
             $headers=['X-GreenBean-Key' => $config['api']];
             if($user = $app->make('session')->get('greenbeen-user')) {
-                $headers['X-GreenBean-UserId'] = $user['id'];
+                syslog(LOG_INFO, json_encode($user));
+                $headers['X-GreenBean-UserId'] = $user->id;
             }
-            return new \Greenbean\ServerBridge\ServerBridge(
+            return new ServerBridge(
                 new \GuzzleHttp\Client(['base_uri' => 'https://'.$config['host'],'headers' => $headers])
             );
         });
+
         $router = $this->app->make('router');
         $list = new RouteList();
         $list->loadRoutes($router);
@@ -80,7 +88,8 @@ class Controller extends Package implements ProviderAggregateInterface
         return $provider;
     }
 
-    private function installSinglePages($pkg) {
+    private function installSinglePages($pkg)
+    {
         //??? Loader::model('single_page');
         foreach(self::SINGLE_PAGES as $route=>$properties) {
             $sp = SinglePage::add($route, $pkg);    //returns \Concrete\Core\Page\Page

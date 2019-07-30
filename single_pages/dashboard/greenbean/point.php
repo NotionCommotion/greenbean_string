@@ -1,26 +1,4 @@
-{% set _css = [
-'//cdnjs.cloudflare.com/ajax/libs/x-editable/1.5.1/bootstrap3-editable/css/bootstrap-editable.css'
-] %}
-{% set _js = [
-'//cdnjs.cloudflare.com/ajax/libs/jquery.blockUI/2.66.0-2013.10.09/jquery.blockUI.min.js',
-'//cdnjs.cloudflare.com/ajax/libs/x-editable/1.5.1/bootstrap3-editable/js/bootstrap-editable.min.js',
-'//ajax.aspnetcdn.com/ajax/jquery.validate/1.14.0/jquery.validate.js',
-'//ajax.aspnetcdn.com/ajax/jquery.validate/1.14.0/additional-methods.js',
-'//cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.11/handlebars.js'
-] %}
-{% set _cssMin = ['/lib/plugins/sortfixedtable/sortfixedtable.css'] %}
-{% set _jsMin = [
-'/lib/gb/js/jquery.editableAutocomplete.js',
-'/lib/gb/js/my-validation-methods.js',
-'/lib/plugins/sortfixedtable/jquery.sortfixedtable.js',
-'/lib/gb/js/points.js'
-] %}
-
 {% import "forms.html" as forms %}
-{% extends "main.html" %}
-
-{% block content %}
-
 <div id="list-header">
     <button class="btn btn-secondary customPointReport">Custom Point Report</button>
     <button class="btn btn-primary add">Add New</button>
@@ -63,7 +41,7 @@
             <td>{{ row.device_id is defined ? row.device_id~"/"~row.object_id~"/"~row.object_type:'N/A' }}
             <td>{{ row.virtualLanName??'N/A' }}</td>
             <td>{{ row.sourceName??'N/A' }}</td>
-            <td><img alt="Delete Point" src="/lib/gb/stdimages/icon_16/delete.png" title="Delete Point" class="vtip delete" height="16" width="16"></td>
+            <td><img alt="Delete Point" src="images/delete.png" title="Delete Point" class="vtip delete" height="16" width="16"></td>
         </tr>
         {% endfor %}
     </tbody>
@@ -424,5 +402,3 @@
 </script>
 
 {% endverbatim %}
-
-{% endblock %}

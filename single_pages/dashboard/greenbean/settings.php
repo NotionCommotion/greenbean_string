@@ -1,25 +1,4 @@
 {% import "forms.html" as forms %}
-
-{% set _css = [
-'//cdnjs.cloudflare.com/ajax/libs/x-editable/1.5.1/bootstrap3-editable/css/bootstrap-editable.css',
-'/lib/plugins/upload/upload.css'
-] %}
-{% set _js = [
-'//cdnjs.cloudflare.com/ajax/libs/jquery.blockUI/2.66.0-2013.10.09/jquery.blockUI.min.js',
-'//cdnjs.cloudflare.com/ajax/libs/x-editable/1.5.1/bootstrap3-editable/js/bootstrap-editable.min.js',
-'//ajax.aspnetcdn.com/ajax/jquery.validate/1.14.0/jquery.validate.js',
-'//ajax.aspnetcdn.com/ajax/jquery.validate/1.14.0/additional-methods.js',
-'//cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.11/handlebars.js'
-] %}
-{% set _jsMin = [
-'/lib/gb/js/jquery.editableAutocomplete.js',
-'/lib/gb/js/my-validation-methods.js',
-'/lib/gb/js/settings.js',
-'/lib/plugins/upload/upload.js'
-] %}
-{% extends "main.html" %}
-
-{% block content %}
 <h2>Settings</h2>
 {{ forms.displayErrors(errors??null) }}
 <h3>Virtual Lans</h3>
@@ -131,5 +110,3 @@
     </div>
     <div id=display-import>Success!</div>
 </div>
-
-{% endblock %}

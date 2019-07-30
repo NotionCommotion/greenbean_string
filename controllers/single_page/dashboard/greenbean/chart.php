@@ -5,16 +5,15 @@ class Chart extends GreenbeanDashboardPageController
 {
     public function view()
     {
-        $rs=$this->serverBridge->getPageContent([
-            'charts'=>['/charts', array_merge($request->getQueryParams(),['verbose'=>true])],
+        $rs=$this->getServerBridge()->getPageContent([
+            'charts'=>['/charts', array_merge($this->getParameters(),['verbose'=>true])],
             'aggrTypes'=>'/points/aggregate/types',
             'timeUnit'=>'/units/time',
             'chartTypes'=>'/charts/themes',
             'defaultValues'=>'/account',
         ]);
-        //$rs['chartTypes']=$this->base->sortChartTypes($rs['chartTypes']);
-        if(!$rs['defaultValues']) $rs['defaultValues']=$this->base->getDefaultValues();
-        //$rs['menu_main']=$this->base->getMenu('/charts');
+        //$rs['chartTypes']=$this->gbHelper->sortChartTypes($rs['chartTypes']);
+        if(!$rs['defaultValues']) $rs['defaultValues']=$this->gbHelper->getDefaultValues();
         $this->twig('dashboard/greenbean/chart.php', $rs);
         $this->setAssets();
     }

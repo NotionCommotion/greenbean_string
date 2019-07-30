@@ -3,15 +3,14 @@ namespace Concrete\Package\GreenbeanDataIntegrator\Controller\SinglePage\Dashboa
 use Concrete\Package\GreenbeanDataIntegrator\Controller\SinglePage\dashboard\GreenbeanDashboardPageController;
 class DatasourceBacnet extends GreenbeanDashboardPageController
 {
-    public function view()
+    public function view($id)
     {
         //Currently only allows BACnet sources
-        $rs=$this->serverBridge->getPageContent([
-            'source'=>"/sources/$arg[id]",
+        $rs=$this->getServerBridge()->getPageContent([
+            'source'=>"/sources/$id",
             'virtualLans'=>'/tags/lans'
         ]);
         if(!$rs['virtualLans']) $rs['virtualLans']=['virtualLans'=>[], 'virtualLanId'=>null];
-        //$rs['menu_main']=$this->base->getMenu('/sources');
         $this->twig('dashboard/greenbean/bacnet_datasource.php', $rs);
         $this->setAssets();
     }
