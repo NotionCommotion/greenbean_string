@@ -1,7 +1,7 @@
 <?php
 namespace Concrete\Package\GreenbeanDataIntegrator\Controller\SinglePage\Dashboard\Greenbean;
-use Concrete\Package\GreenbeanDataIntegrator\Controller\SinglePage\dashboard\Greenbeandashboardpagecontroller;
-class DatasourceBacnet extends Greenbeandashboardpagecontroller
+use Concrete\Package\GreenbeanDataIntegrator\Controller\SinglePage\dashboard\GreenbeanDashboardPageController;
+class DatasourceBacnet extends GreenbeanDashboardPageController
 {
     public function view()
     {
@@ -12,8 +12,8 @@ class DatasourceBacnet extends Greenbeandashboardpagecontroller
         ]);
         if(!$rs['virtualLans']) $rs['virtualLans']=['virtualLans'=>[], 'virtualLanId'=>null];
         //$rs['menu_main']=$this->base->getMenu('/sources');
-        $this->setAssets();
         $this->twig('dashboard/greenbean/bacnet_datasource.php', $rs);
+        $this->setAssets();
     }
 
     protected function getAssets(array $assets=[])

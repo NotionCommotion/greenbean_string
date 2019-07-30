@@ -1,5 +1,5 @@
 <?php
-namespace Greenbean\Concrete5\Datalogger;
+namespace Greenbean\Concrete5\GreenbeanDataIntegrator;
 use Concrete\Core\Routing\RouteListInterface;
 use Concrete\Core\Routing\Router;
 

@@ -1,7 +1,7 @@
 <?php
 namespace Concrete\Package\GreenbeanDataIntegrator\Controller\SinglePage\Dashboard\Greenbean;
-use Concrete\Package\GreenbeanDataIntegrator\Controller\SinglePage\dashboard\Greenbeandashboardpagecontroller;
-class Settings extends Greenbeandashboardpagecontroller
+use Concrete\Package\GreenbeanDataIntegrator\Controller\SinglePage\dashboard\GreenbeanDashboardPageController;
+class Settings extends GreenbeanDashboardPageController
 {
     public function view()
     {
@@ -19,8 +19,8 @@ class Settings extends Greenbeandashboardpagecontroller
             $rs['virtualLans']=['virtualLans'=>[], 'virtualLanId'=>null];
         }
         //$rs['menu_main']=$this->base->getMenu('/account');
-        $this->setAssets();
         $this->twig('dashboard/greenbean/settings.php', $rs);
+        $this->setAssets();
     }
 
     protected function getAssets(array $assets=[])

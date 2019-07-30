@@ -1,7 +1,8 @@
 <?php
 namespace Concrete\Package\GreenbeanDataIntegrator\Controller\SinglePage\Dashboard\Greenbean;
-use Concrete\Package\GreenbeanDataIntegrator\Controller\SinglePage\dashboard\Greenbeandashboardpagecontroller;
-class Point extends Greenbeandashboardpagecontroller
+use Concrete\Package\GreenbeanDataIntegrator\Controller\SinglePage\dashboard\GreenbeanDashboardPageController;
+use Package; // or \Package::getByHandle('my_package') using the global namespace
+class Point extends GreenbeanDashboardPageController
 {
     public function view()
     {
@@ -18,8 +19,8 @@ class Point extends Greenbeandashboardpagecontroller
         $rs['defaultValues']['virtualLanId']=$rs['defaultValues']['base']['virtualLanId'];
         //$rs['virtualLans']=$rs['virtualLans']['virtualLans']??[];
         //$rs['menu_main']=$this->base->getMenu('/points');
+        $this->twig('dashboard/greenbean/point.php', $rs);
         $this->setAssets();
-        $this->twig('dashboard/greenbean/points.php', $rs);
     }
 
     protected function getAssets(array $assets=[])

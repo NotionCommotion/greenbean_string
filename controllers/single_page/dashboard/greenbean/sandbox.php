@@ -1,7 +1,7 @@
 <?php
 namespace Concrete\Package\GreenbeanDataIntegrator\Controller\SinglePage\Dashboard\Greenbean;
-use Concrete\Package\GreenbeanDataIntegrator\Controller\SinglePage\dashboard\Greenbeandashboardpagecontroller;
-class Sandbox extends Greenbeandashboardpagecontroller
+use Concrete\Package\GreenbeanDataIntegrator\Controller\SinglePage\dashboard\GreenbeanDashboardPageController;
+class Sandbox extends GreenbeanDashboardPageController
 {
     public function view()
     {
@@ -12,8 +12,8 @@ class Sandbox extends Greenbeandashboardpagecontroller
             'menu_main'=>$this->base->getMenu('/sandbox')
         ];
         $rs=array_merge($rs, $rs['html']?$this->base->getResourceFiles($args['page']):['js'=>[],'css'=>[]]);
-        $this->setAssets();
         $this->twig('dashboard/greenbean/sandbox.php', $rs);
+        $this->setAssets();
     }
 
     protected function getAssets(array $assets=[])

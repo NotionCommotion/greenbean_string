@@ -348,19 +348,6 @@ $(function(){
         modal       : true,
     });
 
-    $(".logoff").click(function(e){
-        e.preventDefault();
-        $.ajax({
-            type:'DELETE',
-            url: '/logon',
-            success: function (rsp){
-                location.reload();
-            },
-            error: function (xhr) {
-                alert('Error: '+xhr.responseJSON.message);
-            }
-        });
-    });
 });
 
 $.extend($.ui.dialog.prototype.options, {

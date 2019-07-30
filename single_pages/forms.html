@@ -140,14 +140,9 @@ list is an array containing id and name.  Links are created.
 {% endmacro %}
 
 {% macro displayErrors(errors) %}
-{% if errors is not empty %}
-<div class="error">
-<p>Errors</p>
-<ul>
-    {% for error in errors %}
-    <li>{{error}}</li>
-    {% endfor %}
-</ul>
+{% for error in errors %}
+<div class="alert alert-danger">
+    {{error}}
 </div>
-{% endif %}
+{% endfor %}
 {% endmacro %}

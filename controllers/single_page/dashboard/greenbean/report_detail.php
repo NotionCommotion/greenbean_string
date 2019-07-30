@@ -1,15 +1,15 @@
 <?php
 namespace Concrete\Package\GreenbeanDataIntegrator\Controller\SinglePage\Dashboard\Greenbean;
-use Concrete\Package\GreenbeanDataIntegrator\Controller\SinglePage\dashboard\Greenbeandashboardpagecontroller;
-class ReportDetail extends Greenbeandashboardpagecontroller
+use Concrete\Package\GreenbeanDataIntegrator\Controller\SinglePage\dashboard\GreenbeanDashboardPageController;
+class ReportDetail extends GreenbeanDashboardPageController
 {
     public function view()
     {
         $rs=$this->serverBridge->getPageContent(['report'=>"/reports/$args[id]"]);
         $rs=empty($rs['report'])?$this->base->getDefaultReportValues():$rs['report'];
         //$rs['menu_main']=$this->base->getMenu('/reports');
-        $this->setAssets();
         $this->twig('dashboard/greenbean/report_detail.php', $rs);
+        $this->setAssets();
     }
 
     protected function getAssets(array $assets=[])

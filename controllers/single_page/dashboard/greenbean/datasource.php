@@ -1,7 +1,7 @@
 <?php
 namespace Concrete\Package\GreenbeanDataIntegrator\Controller\SinglePage\Dashboard\Greenbean;
-use Concrete\Package\GreenbeanDataIntegrator\Controller\SinglePage\dashboard\Greenbeandashboardpagecontroller;
-class Datasource extends Greenbeandashboardpagecontroller
+use Concrete\Package\GreenbeanDataIntegrator\Controller\SinglePage\dashboard\GreenbeanDashboardPageController;
+class Datasource extends GreenbeanDashboardPageController
 {
     public function view()
     {
@@ -17,8 +17,8 @@ class Datasource extends Greenbeandashboardpagecontroller
         if(!$rs['defaultValues']) $rs['defaultValues']=$this->base->getDefaultValues();
         if(!$rs['virtualLans']) $rs['virtualLans']=['virtualLans'=>[], 'virtualLanId'=>null];
         //$rs['menu_main']=$this->base->getMenu('/sources');
-        $this->setAssets();
         $this->twig('dashboard/greenbean/datasources.php', $rs);
+        $this->setAssets();
     }
 
     protected function getAssets(array $assets=[])

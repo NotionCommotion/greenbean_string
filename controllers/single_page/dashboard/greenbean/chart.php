@@ -1,7 +1,7 @@
 <?php
 namespace Concrete\Package\GreenbeanDataIntegrator\Controller\SinglePage\Dashboard\Greenbean;
-use Concrete\Package\GreenbeanDataIntegrator\Controller\SinglePage\dashboard\Greenbeandashboardpagecontroller;
-class Chart extends Greenbeandashboardpagecontroller
+use Concrete\Package\GreenbeanDataIntegrator\Controller\SinglePage\dashboard\GreenbeanDashboardPageController;
+class Chart extends GreenbeanDashboardPageController
 {
     public function view()
     {
@@ -15,8 +15,8 @@ class Chart extends Greenbeandashboardpagecontroller
         //$rs['chartTypes']=$this->base->sortChartTypes($rs['chartTypes']);
         if(!$rs['defaultValues']) $rs['defaultValues']=$this->base->getDefaultValues();
         //$rs['menu_main']=$this->base->getMenu('/charts');
+        $this->twig('dashboard/greenbean/chart.php', $rs);
         $this->setAssets();
-        $this->twig('dashboard/greenbean/charts.php', $rs);
     }
 
     protected function getAssets(array $assets=[])
