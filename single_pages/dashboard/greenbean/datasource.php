@@ -29,7 +29,7 @@
                 <td>{{ row.device_id }}</td>
                 <td>{{ row.timeout }}</td>
                 <td>{{ row.discovery_timeout }}</td>
-                <td><img alt="Delete Source" src="/lib/gb/stdimages/icon_16/delete.png" title="Delete Source" class="vtip delete" height="16" width="16"></td>
+                <td><img alt="Delete Source" src="/packages/greenbean_data_integrator/images/delete.png" title="Delete Source" class="vtip delete" height="16" width="16"></td>
             </tr>
             {% endfor %}
         </tbody>
@@ -60,7 +60,7 @@
             <td>{{ row.url }}</td>
             <td>{{ row.port }}</td>
             <td>{{ row.encryptKey }}</td>
-            <td><img alt="Delete Source" src="/lib/gb/stdimages/icon_16/delete.png" title="Delete Source" class="vtip delete" height="16" width="16"></td>
+            <td><img alt="Delete Source" src="/packages/greenbean_data_integrator/images/delete.png" title="Delete Source" class="vtip delete" height="16" width="16"></td>
         </tr>
         {% endfor %}
     </tbody>
@@ -86,7 +86,7 @@
             <td>{{ row.url }}</td>
             <td>{{ row.port }}</td>
             <td>{{ row.encryptKey }}</td>
-            <td><img alt="Delete Source" src="/lib/gb/stdimages/icon_16/delete.png" title="Delete Source" class="vtip delete" height="16" width="16"></td>
+            <td><img alt="Delete Source" src="/packages/greenbean_data_integrator/images/delete.png" title="Delete Source" class="vtip delete" height="16" width="16"></td>
         </tr>
         {% endfor %}
     </tbody>

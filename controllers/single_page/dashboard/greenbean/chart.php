@@ -14,8 +14,8 @@ class Chart extends GreenbeanDashboardPageController
         ]);
         //$rs['chartTypes']=$this->gbHelper->sortChartTypes($rs['chartTypes']);
         if(!$rs['defaultValues']) $rs['defaultValues']=$this->gbHelper->getDefaultValues();
-        $this->twig('dashboard/greenbean/chart.php', $rs);
         $this->setAssets();
+        $this->twig('dashboard/greenbean/chart.php', $rs);
     }
 
     protected function getAssets(array $assets=[])

@@ -12,8 +12,8 @@ class Sandbox extends GreenbeanDashboardPageController
             'menu_main'=>$this->gbHelper->getMenu('/sandbox')
         ];
         $rs=array_merge($rs, $rs['html']?$this->gbHelper->getResourceFiles($page):['js'=>[],'css'=>[]]);
-        $this->twig('dashboard/greenbean/sandbox.php', $rs);
         $this->setAssets();
+        $this->twig('dashboard/greenbean/sandbox.php', $rs);
     }
 
     protected function getAssets(array $assets=[])

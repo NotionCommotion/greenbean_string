@@ -11,8 +11,8 @@ class DatasourceBacnet extends GreenbeanDashboardPageController
             'virtualLans'=>'/tags/lans'
         ]);
         if(!$rs['virtualLans']) $rs['virtualLans']=['virtualLans'=>[], 'virtualLanId'=>null];
-        $this->twig('dashboard/greenbean/bacnet_datasource.php', $rs);
         $this->setAssets();
+        $this->twig('dashboard/greenbean/bacnet_datasource.php', $rs);
     }
 
     protected function getAssets(array $assets=[])

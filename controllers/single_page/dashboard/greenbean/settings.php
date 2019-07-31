@@ -18,8 +18,8 @@ class Settings extends GreenbeanDashboardPageController
             syslog(LOG_ERR, 'Account is missing virtual LAN');
             $rs['virtualLans']=['virtualLans'=>[], 'virtualLanId'=>null];
         }
-        $this->twig('dashboard/greenbean/settings.php', $rs);
         $this->setAssets();
+        $this->twig('dashboard/greenbean/settings.php', $rs);
     }
 
     protected function getAssets(array $assets=[])

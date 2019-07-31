@@ -14,8 +14,8 @@ class Point extends GreenbeanDashboardPageController
             'points'=>['/points', array_merge($this->getParameters(), ['verbose'=>true])],
         ]);
         $rs['defaultValues']['virtualLanId']=$rs['defaultValues']['base']['virtualLanId'];
-        $this->twig('dashboard/greenbean/point.php', $rs);
         $this->setAssets();
+        $this->twig('dashboard/greenbean/point.php', $rs);
     }
 
     protected function getAssets(array $assets=[])

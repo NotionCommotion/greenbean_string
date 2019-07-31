@@ -35,6 +35,7 @@ abstract class GreenbeanDashboardPageController extends DashboardPageController
 
     public function on_before_render() {
         //Doesn't work with on_start()?
+        syslog(LOG_ERR, json_encode(get_class_methods($this->app)));
         if($this->getControllerActionPath()==='/dashboard/greenbean/configure' || $this->app->make('session')->has('greenbeen-user') || $this->validCredentials()) {
             parent::on_before_render();
         }
@@ -123,15 +124,16 @@ abstract class GreenbeanDashboardPageController extends DashboardPageController
 
     //How should this be accompished?
     //Pass array to override with given assets or null to override and include no assets.
-    protected function setAssets(?array $assets=[])
+    protected function setAssets(?array $assets=null)
     {
+        syslog(LOG_INFO, 'xxx'.json_encode($assets));
         //$this->requireAsset('jquery/ui'); //v1.11.4
-        if($assets) {
+        if(is_array($assets)) {
             foreach($assets as $asset) {
                 $this->requireAsset($asset[0], $asset[1]);
             }
         }
-        elseif($assets && $assets=$this->getAssets()) {
+        elseif($assets=$this->getAssets()) {
             foreach($assets as $asset) {
                 $this->requireAsset($asset[0], $asset[1]);
             }

@@ -7,8 +7,8 @@ class ReportDetail extends GreenbeanDashboardPageController
     {
         $rs=$this->getServerBridge()->getPageContent(['report'=>"/reports/$id"]);
         $rs=empty($rs['report'])?$this->gbHelper->getDefaultReportValues():$rs['report'];
-        $this->twig('dashboard/greenbean/report_detail.php', $rs);
         $this->setAssets();
+        $this->twig('dashboard/greenbean/report_detail.php', $rs);
     }
 
     protected function getAssets(array $assets=[])

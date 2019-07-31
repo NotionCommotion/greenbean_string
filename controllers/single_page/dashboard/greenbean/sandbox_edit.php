@@ -13,8 +13,8 @@ class SandboxEdit extends GreenbeanDashboardPageController
         $rs['html']=$this->gbHelper->getHtml($page);
         $rs['js']=[];
         $rs['css']=[];
-        $this->twig('dashboard/greenbean/sandboxEdit.php', $rs);
         $this->setAssets();
+        $this->twig('dashboard/greenbean/sandboxEdit.php', $rs);
     }
 
     protected function getAssets(array $assets=[])

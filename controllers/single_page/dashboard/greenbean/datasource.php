@@ -16,8 +16,8 @@ class Datasource extends GreenbeanDashboardPageController
         $rs['sources']=$this->gbHelper->sortSources($rs['sources']);
         if(!$rs['defaultValues']) $rs['defaultValues']=$this->gbHelper->getDefaultValues();
         if(!$rs['virtualLans']) $rs['virtualLans']=['virtualLans'=>[], 'virtualLanId'=>null];
-        $this->twig('dashboard/greenbean/datasource.php', $rs);
         $this->setAssets();
+        $this->twig('dashboard/greenbean/datasource.php', $rs);
     }
 
     protected function getAssets(array $assets=[])
