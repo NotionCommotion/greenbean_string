@@ -1,3 +1,58 @@
+main App
+    shutdown
+    dispatch
+    clearCaches
+    isInstalled
+    checkPageCache
+    handleAutomaticUpdates
+    setupPackageAutoloaders
+    setupPackages
+    setupFilesystem
+    isRunThroughCommandLineInterface
+    handleURLSlashes
+    handleCanonicalURLRedirection
+    environment
+    detectEnvironment
+    build
+    getRuntime
+    getRegisteredAliases
+    getRegisteredInstances
+    bindShared
+    when
+    bound
+    resolved
+    isAlias
+    bind
+    addContextualBinding
+    bindIf
+    singleton
+    share
+    extend
+    instance
+    tag
+    tagged
+    alias
+    rebinding
+    refresh
+    wrap
+    call
+    make
+    resolving
+    afterResolving
+    isShared
+    getBindings
+    forgetInstance
+    forgetInstances
+    flush
+    getInstance
+    setInstance
+    offsetExists
+    offsetGet
+    offsetSet
+    offsetUnset
+    __get
+    __set
+
 Concrete\Core\Page\Controller\DashboardPageController
     view
     getAssets
@@ -117,6 +172,29 @@ Concrete\Core\Package\Package
     getPackageDependencies
     getErrorText
     destroyProxyClasses
+
+Concrete\Core\Routing\Router
+    __construct
+    buildGroup
+    get
+    head
+    post
+    put
+    patch
+    delete
+    options
+    all
+    resolveAction
+    getRoutes
+    getActionFactory
+    addRoute
+    getRouteByPath
+    matchRoute
+    loadRouteList
+    register
+    registerMultiple
+    route
+    setThemeByRoute
 
 User
     getByUserID

@@ -82,7 +82,7 @@ $(function() {
             content=dialog.find('div.content').empty(),
             list=dialog.find('ul.list').empty(),
             tree=dialog.find('p.tree').empty();
-            $.getJSON('/api/manual/'+id, function (data){
+            $.getJSON('api/manual/'+id, function (data){
                 console.log(data);
                 name.text(data.name);
                 content.html(data.content);

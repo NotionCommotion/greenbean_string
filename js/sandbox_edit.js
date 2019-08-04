@@ -30,7 +30,7 @@ $(function(){
         save_onsavecallback: function () {
             $.ajax({
                 type:'PUT',
-                url:'/preview/edit/'+$('#page').val(),
+                url:'preview/edit/'+$('#page').val(),
                 data:{content: tinyMCE.activeEditor.getContent()},
                 success: function (rsp){
                     window.location = "/preview/"+$('#page').val();

@@ -5,7 +5,7 @@ class Manual extends GreenbeanDashboardPageController
 {
     public function view()
     {
-        $this->setAssets();
+        $this->addAssets();
         $this->twig('dashboard/greenbean/manual.php');
     }
 }

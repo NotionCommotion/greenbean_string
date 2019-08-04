@@ -12,7 +12,7 @@ $(function(){
     });
 
     var validator=false;
-    $.getJSON( '/api/reports/validation', function(validObj) {
+    $.getJSON( 'api/reports/validation', function(validObj) {
         console.log(validObj);
         validator = $( "#dialog-trend-report form" ).validate({rules: validObj.rules,messages: validObj.messages});
     });
@@ -87,7 +87,7 @@ $(function(){
                         $.blockUI();
                         $.ajax({
                             type:'POST',
-                            url:'/api/reports',
+                            url:'api/reports',
                             data:$form.serializeArray(),
                             //dataType: 'json',
                             success: function (rsp){
@@ -191,7 +191,7 @@ $(function(){
     var editTemplate=Handlebars.compile($("#hb_reports").html());
     $(".table.existing-reports tbody td.link").click(function(e){
         var reportsId=$(this).parent().data('id');
-        $.getJSON( '/api/reports/'+reportsId, function(json) {
+        $.getJSON( 'api/reports/'+reportsId, function(json) {
             var dialog=$('#dialog-editReport').html(editTemplate).data('id',json.id).dialog('open');
         });
     });

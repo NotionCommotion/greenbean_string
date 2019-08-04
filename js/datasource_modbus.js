@@ -3,7 +3,7 @@ $(function(){
     alert('source_modbus_gateway.js is not complete');
     $(".source-list td.sourceName").click(function(e){
         var sourceId=$(this).parent().data('id');
-        $.getJSON( '/api/sources/'+sourceId, function(json) {
+        $.getJSON( 'api/sources/'+sourceId, function(json) {
             function virtualLans(){
                 var virtualLans=[];
                 $.each($('#default-virtual-lans').data('virtual-lans'), function( index, value ) {
@@ -13,7 +13,7 @@ $(function(){
             }
             var dialog=$('#dialog-editSource').html(hb[json.type+json.protocol](json)).data('id',json.id).dialog('open');
             dialog.find('a.hb_name').myEdit('text',sourceId,'name',{title:'Name'});
-            dialog.find('a.hb_virtualLan').myEdit('select',sourceId,'virtualLanId',{title:'Virtual LAN', source:virtualLans,value:json.virtualLanId, pk: sourceId, url: '/api/sources/'+sourceId});
+            dialog.find('a.hb_virtualLan').myEdit('select',sourceId,'virtualLanId',{title:'Virtual LAN', source:virtualLans,value:json.virtualLanId, pk: sourceId, url: 'api/sources/'+sourceId});
             switch(json.type){
                 case 'gateway':
                     dialog.find('a.hb_guid').myEdit('text',sourceId,'guid',{title:'GUID'});

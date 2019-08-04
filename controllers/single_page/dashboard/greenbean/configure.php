@@ -12,7 +12,7 @@ class Configure extends GreenbeanDashboardPageController
     private function _view(array $errors=[])
     {
         syslog(LOG_INFO, 'errors: '.json_encode($errors));
-        $this->setAssets();
+        $this->addAssets([['javascript', 'configure']]);
         $this->twig('dashboard/greenbean/configure.php', ['action'=>$this->action('submit'), 'errors'=>$errors]);
     }
 
@@ -39,13 +39,5 @@ class Configure extends GreenbeanDashboardPageController
             $fc->save('server.api', $_POST['api']);
             $this->redirect('/dashboard/greenbean');
         }
-    }
-
-    protected function getAssets(array $assets=[])
-    {
-        //parent will add base assets required by all views
-        return array_merge(parent::getAssets($assets), [
-            ['javascript', 'configure', 'js/configure.js'],
-        ]);
     }
 }

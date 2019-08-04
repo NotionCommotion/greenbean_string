@@ -14,21 +14,15 @@ class Point extends GreenbeanDashboardPageController
             'points'=>['/points', array_merge($this->getParameters(), ['verbose'=>true])],
         ]);
         $rs['defaultValues']['virtualLanId']=$rs['defaultValues']['base']['virtualLanId'];
-        $this->setAssets();
+        $this->addAssets([
+            ['javascript', 'handlebars'],
+            //['bootstrap-editable'],
+            ['javascript', 'bootstrap-editable'],
+            ['javascript', 'points'],
+            ['javascript', 'editableAutocomplete'],
+            ['sortfixedtable']
+            ]
+        );
         $this->twig('dashboard/greenbean/point.php', $rs);
-    }
-
-    protected function getAssets(array $assets=[])
-    {
-        //parent will add base assets required by all views
-        return array_merge(parent::getAssets($assets), [
-            ['javascript', 'handlebars', '//cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.11/handlebars.js', ['local'=>false]],
-            ['css', 'bootstrap-editable', '//cdnjs.cloudflare.com/ajax/libs/x-editable/1.5.1/bootstrap3-editable/css/bootstrap-editable.css', ['local'=>false]],
-            ['javascript', 'bootstrap-editable', '//cdnjs.cloudflare.com/ajax/libs/x-editable/1.5.1/bootstrap3-editable/js/bootstrap-editable.min.js', ['local'=>false]],
-            ['javascript', 'points', 'js/points.js'],
-            ['javascript', 'editableAutocomplete', 'js/jquery.editableAutocomplete.js'],
-            ['javascript', 'sortfixedtable', 'plugin/sortfixedtable/jquery.sortfixedtable.js'],
-            ['css', 'sortfixedtable', 'plugin/sortfixedtable/sortfixedtable.css'],
-        ]);
     }
 }

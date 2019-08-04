@@ -13,17 +13,7 @@ class SandboxEdit extends GreenbeanDashboardPageController
         $rs['html']=$this->gbHelper->getHtml($page);
         $rs['js']=[];
         $rs['css']=[];
-        $this->setAssets();
+        $this->addAssets([['javascript', 'tinymce'], ['sandbox_edit']]);
         $this->twig('dashboard/greenbean/sandboxEdit.php', $rs);
-    }
-
-    protected function getAssets(array $assets=[])
-    {
-        //parent will add base assets required by all views
-        return array_merge(parent::getAssets($assets), [
-            ['javascript', 'tinymce', '//cdnjs.cloudflare.com/ajax/libs/tinymce/4.7.9/tinymce.min.js', ['local'=>false]],
-            ['javascript', 'sandbox_edit', 'js/sandbox_edit.js'],
-            ['css', 'sandbox_edit', 'css/sandbox_edit.css'],
-        ]);
     }
 }

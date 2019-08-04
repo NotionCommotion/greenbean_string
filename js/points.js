@@ -11,7 +11,7 @@ $(function(){
             ajaxOptions: {type: method},
             send: 'always',
             name: name,
-            url: '/api/points/'+pk
+            url: 'api/points/'+pk
             }, options);
         if(type=='autocomplete') {
             //editable.params callback set in editableAutocomplete (or callback in these scripts)
@@ -31,7 +31,7 @@ $(function(){
                 return this.myEdit('select',null,'sign',{title:'Addition or Subtractive', source: [{value:1,text:'Positive'},{value:0,text:'Negative'}], validate: function(){
                     //kludge workaround
                     var $this=$(this);
-                    $this.editable('option', 'url', '/api/points/'+pointId+'/custom/'+$this.closest('tr').data('id'));
+                    $this.editable('option', 'url', 'api/points/'+pointId+'/custom/'+$this.closest('tr').data('id'));
                 }});
                 break;
             case 'custom.subpoint':
@@ -48,7 +48,7 @@ $(function(){
                             var editable=$this.data("editable");    //How to do this without using jQuery data()?
                             $this.blur().parent().next().find('button.editable-submit').css('opacity', 1).off('click.prevent');
                             editable.option('params', function() {return {pointId: ui.item.id};});
-                            editable.option('url', '/api/points/'+pointId+'/custom/'+$this.closest('tr').data('id'));
+                            editable.option('url', 'api/points/'+pointId+'/custom/'+$this.closest('tr').data('id'));
                         }
                 });
                 break;
@@ -130,16 +130,16 @@ $(function(){
         }
     });
 
-    $.getJSON( '/api/points/validation', function(validObj) {
+    $.getJSON( 'api/points/validation', function(validObj) {
 
-        $('#addPointBacnet').myValid(validObj.bacnet, {url:'/api/points'});
-        $('#addPointCust').myValid(validObj.custom, {url:'/api/points'});
-        $('#addPointAggr').myValid(validObj.aggregate, {url:'/api/points'});
-        $('#addPointDelta').myValid(validObj.delta, {url:'/api/points'});
-        $('#addPointHistoric').myValid(validObj.historic, {url:'/api/points'});
+        $('#addPointBacnet').myValid(validObj.bacnet, {url:'api/points'});
+        $('#addPointCust').myValid(validObj.custom, {url:'api/points'});
+        $('#addPointAggr').myValid(validObj.aggregate, {url:'api/points'});
+        $('#addPointDelta').myValid(validObj.delta, {url:'api/points'});
+        $('#addPointHistoric').myValid(validObj.historic, {url:'api/points'});
         $('#dialog-addPointCust form').myValid(validObj.custom_add, {
             url: function(){
-                return '/api/points/'+$(this).data('id')+'/custom';
+                return 'api/points/'+$(this).data('id')+'/custom';
             }, success: function(rsp){
                 $.unblockUI();
                 var clone=$('#clone-custom');
@@ -235,7 +235,7 @@ $(function(){
             var $row=$(this).closest('tr');
             $.ajax({
                 type:'DELETE',
-                url:'/api/points/'+$row.data('id'),
+                url:'api/points/'+$row.data('id'),
                 //dataType: 'json',
                 //data: {force:true}, //force will delete point even if datalogger is not available
                 success: function (rsp){
@@ -260,7 +260,7 @@ $(function(){
             row=$this.closest('tr');
             $.ajax({
                 type:'DELETE',
-                url:'/api/points/'+$this.closest('table').data('id')+'/custom/'+row.data('id'),
+                url:'api/points/'+$this.closest('table').data('id')+'/custom/'+row.data('id'),
                 //dataType: 'json',
                 success: function (rsp){
                     $.unblockUI();
@@ -316,7 +316,7 @@ $(function(){
                 case 'pollrate': dialog.find('a.hb_pollrate').myEdit('text',pointId,'pollrate',{title:'BACnet Point Pollrate'});break;
                 case 'covLifetime': dialog.find('a.hb_covLifetime').myEdit('text',pointId,'covLifetime',{title:'BACnet Point COV Lifetime'});break;
                 case 'bacnetPoint':
-                    dialog.find('a.hb_bacnet').myEdit('autocomplete',pointId,'pointId',{title:'Point Name', placement: 'bottom'}, { //, url: '/api/points/'+pointId
+                    dialog.find('a.hb_bacnet').myEdit('autocomplete',pointId,'pointId',{title:'Point Name', placement: 'bottom'}, { //, url: 'api/points/'+pointId
                         source: function( request, response ) { //Get existing bacnet objects
                             $.getJSON( "/api/sources/"+json.source.id+"/bacnet/deviceobjects", {term:request.term}, function(json) {
                                 var data=[];
@@ -334,7 +334,7 @@ $(function(){
                             console.log(editable)
                             $this.blur().parent().next().find('button.editable-submit').css('opacity', 1).off('click.prevent');
                             editable.option('params', {bacnetObject: params});
-                            editable.option('url', '/api/points/'+pointId);
+                            editable.option('url', 'api/points/'+pointId);
                         }
                     });
                     break;
@@ -355,7 +355,7 @@ $(function(){
 
     $("#point-list td.ptName").click(function(e){
         var pointId=$(this).parent().data('id');
-        $.getJSON( '/api/points/'+pointId, function(json) {
+        $.getJSON( 'api/points/'+pointId, function(json) {
             //console.log(json)
             //console.log(JSON.stringify(json))
             var nodes=['name', 'unit', 'slope', 'intercept'];

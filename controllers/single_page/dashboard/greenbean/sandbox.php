@@ -12,19 +12,7 @@ class Sandbox extends GreenbeanDashboardPageController
             'menu_main'=>$this->gbHelper->getMenu('/sandbox')
         ];
         $rs=array_merge($rs, $rs['html']?$this->gbHelper->getResourceFiles($page):['js'=>[],'css'=>[]]);
-        $this->setAssets();
+        $this->addAssets([['highcharts'],['dynamic_update']]);
         $this->twig('dashboard/greenbean/sandbox.php', $rs);
-    }
-
-    protected function getAssets(array $assets=[])
-    {
-        //parent will add base assets required by all views
-        return array_merge(parent::getAssets($assets), [
-            ['javascript', 'highcharts', '//code.highcharts.com/highcharts.js', ['local'=>false]],
-            ['javascript', 'highcharts-more', '//code.highcharts.com/highcharts-more.js', ['local'=>false]],
-            ['javascript', 'solid-gauge', '//code.highcharts.com/modules/solid-gauge.js', ['local'=>false]],
-            ['javascript', 'dynamic_update', '//cdn.greenbeantech.net/libraries/greenbean-public/1.0/dynamic_update.js', ['local'=>false]],
-            ['css', 'dynamic_update', '//cdn.greenbeantech.net/libraries/greenbean-public/1.0/dynamic_update.css', ['local'=>false]],
-        ]);
     }
 }

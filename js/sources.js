@@ -26,7 +26,7 @@ $(function(){
             var t=$(this);
             $.ajax({
                 type: "GET",
-                url:'/api/sources/bacnet/defaults',
+                url:'api/sources/bacnet/defaults',
                 success: function(defaults){
                     defaults.name='';
                     defaults.guid='';
@@ -65,7 +65,7 @@ $(function(){
         $.blockUI();
         $.ajax({
             type:'POST',
-            url:'/api/sources',
+            url:'api/sources',
             data:$(this).find(':input').serializeArray(),   //Make sure type=$(this).data('type')
             //dataType: 'json',
             success: function (rsp){
@@ -86,7 +86,7 @@ $(function(){
             var $row=$(this).closest('tr');
             $.ajax({
                 type:'DELETE',
-                url:'/api/sources/'+$row.data('id'),
+                url:'api/sources/'+$row.data('id'),
                 //dataType: 'json',
                 success: function (rsp){
                     $.unblockUI();

@@ -1,12 +1,12 @@
 Composer packages:
 
 Install:
-composer require concrete5/sample_composer_package
-./vendor/bin/concrete5 c5:package-install sample_composer_package
+composer require concrete5/your_package_name
+./vendor/bin/concrete5 c5:package-install your_package_name
 
 Create new:
 Using this project as a skeleton
-composer create-project concrete5/sample_composer_package
+composer create-project concrete5/your_package_name
 Once this is done, modify the composer.json to have information about your project and an updated name. Then set up your VCS
 Add to github and then packaglist.
 
@@ -34,13 +34,13 @@ This project is a concrete5 sample package that is powered entirely by [composer
 To install this package on a [composer based concrete5](https://github.com/concrete5/composer) site, make sure you already have `composer/installers` then run:
 
 ```sh
-$ composer install concrete5/sample_composer_package
+$ composer install concrete5/your_package_name
 ```
 
 Then install the package
 
 ```sh
-$ ./vendor/bin/concrete5 c5:package-install sample_composer_package
+$ ./vendor/bin/concrete5 c5:package-install your_package_name
 ```
 
 
@@ -51,7 +51,7 @@ $ ./vendor/bin/concrete5 c5:package-install sample_composer_package
 First, use `composer create-project` to begin your own package project.
 
 ```php
-$ composer create-project concrete5/sample_composer_package
+$ composer create-project concrete5/your_package_name
 ```
 
 Once this is done, modify the `composer.json` to have information about your project and an updated name.

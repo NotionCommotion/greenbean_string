@@ -18,21 +18,14 @@ class Settings extends GreenbeanDashboardPageController
             syslog(LOG_ERR, 'Account is missing virtual LAN');
             $rs['virtualLans']=['virtualLans'=>[], 'virtualLanId'=>null];
         }
-        $this->setAssets();
-        $this->twig('dashboard/greenbean/settings.php', $rs);
-    }
-
-    protected function getAssets(array $assets=[])
-    {
-        //parent will add base assets required by all views
-        return array_merge(parent::getAssets($assets), [
-            ['javascript', 'handlebars', '//cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.11/handlebars.js', ['local'=>false]],
-            ['css', 'bootstrap-editable', '//cdnjs.cloudflare.com/ajax/libs/x-editable/1.5.1/bootstrap3-editable/css/bootstrap-editable.css', ['local'=>false]],
-            ['javascript', 'bootstrap-editable', '//cdnjs.cloudflare.com/ajax/libs/x-editable/1.5.1/bootstrap3-editable/js/bootstrap-editable.min.js', ['local'=>false]],
-            ['javascript', 'settings', 'js/settings.js'],
-            ['javascript', 'editableAutocomplete', 'js/jquery.editableAutocomplete.js'],
-            ['javascript', 'upload', 'plugin/upload/upload.js'],
-            ['css', 'upload', 'plugin/upload/upload.css'],
+        $this->addAssets([
+            ['javascript', 'handlebars'],
+            //['bootstrap-editable'],
+            ['javascript', 'bootstrap-editable'],
+            ['javascript', 'settings'],
+            ['javascript', 'editableAutocomplete'],
+            ['upload'],
         ]);
+        $this->twig('dashboard/greenbean/settings.php', $rs);
     }
 }

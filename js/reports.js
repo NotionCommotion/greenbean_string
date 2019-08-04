@@ -222,7 +222,7 @@ $(function(){
                 $.ajax({
                     type:'GET',
                     //dataType: "json",
-                    url: '/api/query/trend',
+                    url: 'api/query/trend',
                     data: params,
                     success: function(data){
                         console.log('chart', data)
@@ -251,7 +251,7 @@ $(function(){
 
     var reportId=$('#id').val();
     //console.log(reportId)
-    $('#name').editable({title:'Report Name', placement: 'right', ajaxOptions: {type: "PUT"}, url: '/api/reports/'+reportId, send: 'always'}).toggle(reportId!=0);
+    $('#name').editable({title:'Report Name', placement: 'right', ajaxOptions: {type: "PUT"}, url: 'api/reports/'+reportId, send: 'always'}).toggle(reportId!=0);
 
     var points={};
     $('#points-table tbody tr.point-row').each(function(){
@@ -401,7 +401,7 @@ $(function(){
         height      : 500,
         open        : function(){
             $.blockUI();
-            $.getJSON( '/api/reports', function(reports) {
+            $.getJSON( 'api/reports', function(reports) {
                 var clone=$('#clone-report');
                 var tbody=clone.closest('table').find('tbody').empty();
                 $.each(reports, function(i,report){
@@ -419,7 +419,7 @@ $(function(){
             var $row=$(this).closest('tr');
             $.ajax({
                 type:'DELETE',
-                url:'/api/reports/'+$row.data('id'),
+                url:'api/reports/'+$row.data('id'),
                 //dataType: 'json',
                 success: function (rsp){
                     $.unblockUI();
@@ -438,7 +438,7 @@ $(function(){
         data.name=$('#name').text();
         $.ajax({
             type:'PUT',
-            url:'/api/reports/'+reportId,
+            url:'api/reports/'+reportId,
             data:data,
             //dataType: 'json',
             success: function(rsp) {
@@ -471,7 +471,7 @@ $(function(){
                     var dialog=$(this)
                     $.ajax({
                         type:'POST',
-                        url:'/api/reports',
+                        url:'api/reports',
                         data:data,
                         //dataType: 'json',
                         success: function (rsp){
@@ -493,7 +493,7 @@ $(function(){
 
     /*
     var validator=false;
-    $.getJSON( '/api/reports/validation', function(validObj) {
+    $.getJSON( 'api/reports/validation', function(validObj) {
     console.log(validObj);
     validator = $( "#dialog-trend-report form" ).validate({rules: validObj.rules,messages: validObj.messages});
     });

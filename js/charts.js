@@ -8,7 +8,7 @@ $(function(){
         if(!name && options.url) {
             //Used for chart option only.  Kind of a kludge.
             //console.log(type, pk, name, options, optionsAutocomplete, method)
-            options.url='/api/chart/'+pk+'/options/'+options.url;
+            options.url='api/chart/'+pk+'/options/'+options.url;
             options.params=function(params) {
                 return params.value;
             }
@@ -19,7 +19,7 @@ $(function(){
             ajaxOptions: {type: method},
             send: 'always',
             name: name,
-            url: '/api/chart/'+pk
+            url: 'api/chart/'+pk
             }, options);
         if(type=='autocomplete') {
             //editable.params callback set in editableAutocomplete (or callback in these scripts)
@@ -56,7 +56,7 @@ $(function(){
                 return this.myEdit('text',chartId,'name',{title:'Legend', validate: function(){
                     //kludge workaround
                     var $this=$(this);
-                    $this.editable('option', 'url', '/api/chart/'+chartId+'/series/0/data/'+$this.closest('tr').index());
+                    $this.editable('option', 'url', 'api/chart/'+chartId+'/series/0/data/'+$this.closest('tr').index());
                 }});
                 break;
             case 'pie.point':
@@ -67,7 +67,7 @@ $(function(){
                         $this.blur().parent().next().find('button.editable-submit').css('opacity', 1).off('click.prevent');
                         editable.option('params', function() {return {pointId: ui.item.id};});
                         //Currently, pie charts only support a single series
-                        editable.option('url', '/api/chart/'+chartId+'/series/0/data/'+editable.$element.parent().closest('tr').index())
+                        editable.option('url', 'api/chart/'+chartId+'/series/0/data/'+editable.$element.parent().closest('tr').index())
                     }
                 });
                 break;
@@ -79,7 +79,7 @@ $(function(){
                         $this.blur().parent().next().find('button.editable-submit').css('opacity', 1).off('click.prevent');
                         editable.option('params', function() {return {pointId: ui.item.id};});
                         //Currently, gauge charts only support a single series, and gauges per Highchart can only have a single point
-                        editable.option('url', '/api/chart/'+chartId+'/series/0/data/0')
+                        editable.option('url', 'api/chart/'+chartId+'/series/0/data/0')
                     }
                 });
                 break;
@@ -87,28 +87,28 @@ $(function(){
                 return this.myEdit('text',chartId,'name',{title:'Series Name',validate: function(){
                     //kludge workaround
                     var $this=$(this);
-                    $this.editable('option', 'url', '/api/chart/'+chartId+'/series/'+$this.closest('tr').index());
+                    $this.editable('option', 'url', 'api/chart/'+chartId+'/series/'+$this.closest('tr').index());
                 }});
                 break;
             case 'time.historyTimeValue':
                 return this.myEdit('text',chartId,'historyTimeValue',{title:'Time Offset',validate: function(){
                     //kludge workaround
                     var $this=$(this);
-                    $this.editable('option', 'url', '/api/chart/'+chartId+'/series/'+$this.closest('tr').index());
+                    $this.editable('option', 'url', 'api/chart/'+chartId+'/series/'+$this.closest('tr').index());
                 }});
                 break;
             case 'time.historyTimeUnit':
                 return this.myEdit('select',chartId,'historyTimeUnit',{title:'Time Offset Units', source: unitsTime, validate: function(){
                     //kludge workaround
                     var $this=$(this);
-                    $this.editable('option', 'url', '/api/chart/'+chartId+'/series/'+$this.closest('tr').index());
+                    $this.editable('option', 'url', 'api/chart/'+chartId+'/series/'+$this.closest('tr').index());
                 }});
                 break;
             case 'time.aggrType':
                 return this.myEdit('select',chartId,'aggrType',{title:'Aggregate Function', source: aggrTypes, validate: function(){
                     //kludge workaround
                     var $this=$(this);
-                    $this.editable('option', 'url', '/api/chart/'+chartId+'/series/'+$this.closest('tr').index());
+                    $this.editable('option', 'url', 'api/chart/'+chartId+'/series/'+$this.closest('tr').index());
                 }});
                 break;
             case 'time.point':
@@ -119,7 +119,7 @@ $(function(){
                         var editable=$this.data("editable");    //How to do this without using jQuery data()?
                         $this.blur().parent().next().find('button.editable-submit').css('opacity', 1).off('click.prevent');
                         editable.option('params', function() {return {pointId: ui.item.id};});
-                        editable.option('url', '/api/chart/'+chartId+'/series/'+editable.$element.parent().closest('tr').index())
+                        editable.option('url', 'api/chart/'+chartId+'/series/'+editable.$element.parent().closest('tr').index())
                         // {term:request.term, type:['real','custom'],trend:1/* , fields:['id','name'] */}, function(json) {
                     }
                 });
@@ -220,7 +220,7 @@ $(function(){
             var $row=$(this).closest('tr');
             $.ajax({
                 type:'DELETE',
-                url:'/api/chart/'+$row.data('id'),
+                url:'api/chart/'+$row.data('id'),
                 //dataType: 'json',
                 success: function (rsp){
                     $.unblockUI();
@@ -251,8 +251,8 @@ $(function(){
         width       : 1200,
         modal       : true
     });
-
     dialogEditChart.on('click','a.clone-chart',function() {$("#dialog-cloneChart").dialog("open");});
+
     $("#dialog-cloneChart").dialog({
         autoOpen    : false,
         resizable   : false,
@@ -276,7 +276,7 @@ $(function(){
                     var dialog=$(this)
                     $.ajax({
                         type:'POST',
-                        url:'/api/chart/clone/'+dialog.data('id'),
+                        url:'api/chart/clone/'+dialog.data('id'),
                         data:{name:name},
                         //dataType: 'json',
                         success: function (rsp){dialog.dialog("close");},
@@ -325,7 +325,7 @@ $(function(){
                         //kludge workaround
                         console.log('url callback', params, this)
                         var $this=$(this);
-                        $this.editable('option', 'url', '/api/chart/'+chartId+'/series/'+$this.closest('tr').index());
+                        $this.editable('option', 'url', 'api/chart/'+chartId+'/series/'+$this.closest('tr').index());
                     }});
                     break;
                 case 'time.series': dialog.find('.hb_series').myEditRows('time.series', chartId); break;
@@ -340,7 +340,7 @@ $(function(){
                             var $td=editable.$element.parent()
                             var category = $td.closest('table').find('th').eq($td.index()).index()-1;
                             var series=$td.parent().index();
-                            editable.option('url', '/api/chart/'+chartId+'/series/'+series+'/data/'+category)
+                            editable.option('url', 'api/chart/'+chartId+'/series/'+series+'/data/'+category)
                         }
                     }).on("shown", function(ev, editable) {
                         const buttons = editable.container.$form.find(".editable-buttons")[0];
@@ -359,7 +359,7 @@ $(function(){
                     dialog.find('a.hb_category').myEdit('text',chartId,'name',{title:'Category Name', validate: function(){
                         //kludge workaround
                         var $this=$(this);
-                        $this.editable('option', 'url', '/api/chart/'+chartId+'/category/'+($this.parent().index()-1) );
+                        $this.editable('option', 'url', 'api/chart/'+chartId+'/category/'+($this.parent().index()-1) );
                     }});
                     break;
                 case 'pie.data': dialog.find('a.hb_category').myEditRows('pie.data',chartId);break;
@@ -382,7 +382,7 @@ $(function(){
     $("#chart-list td.chName").click(function(e){
         var chartId=$(this).parent().data('id');
         $("#dialog-cloneChart").data('id',chartId);
-        $.getJSON( '/api/chart/'+chartId, function(json) {
+        $.getJSON( 'api/chart/'+chartId, function(json) {
             var nodes=['name', 'type', 'theme', 'pointNames', 'title', 'subtitle', 'legend', 'crosshairY'];
             switch(json.type){
                 case 'category':
@@ -436,7 +436,7 @@ $(function(){
                         //Start at 1 to skip label row
                         $.ajax({
                             type:'PUT',
-                            url:'/api/chart/'+chartId+'/series/'+(oldIndex-1),
+                            url:'api/chart/'+chartId+'/series/'+(oldIndex-1),
                             data: {position: newIndex-1},
                             error: function (xhr) {
                                 console.log('Error updating position: '+xhr.responseJSON.message);
@@ -452,7 +452,7 @@ $(function(){
                         //Subtract 1 for the label column
                         $.ajax({
                             type:'PUT',
-                            url:'/api/chart/'+chartId+'/category/'+(oldIndex-1),
+                            url:'api/chart/'+chartId+'/category/'+(oldIndex-1),
                             data: {position: newIndex-1},
                             error: function (xhr) {
                                 console.log('Error updating position: '+xhr.responseJSON.message);
@@ -471,7 +471,7 @@ $(function(){
                         var seriesPosition=0;  //API supports multiple series, but currently this app only supports one series
                         $.ajax({
                             type:'PUT',
-                            url:'/api/chart/'+chartId+'/series/'+seriesPosition+'/data/'+(oldIndex-2),
+                            url:'api/chart/'+chartId+'/series/'+seriesPosition+'/data/'+(oldIndex-2),
                             data: {position: newIndex-2},
                             error: function (xhr) {
                                 console.log('Error updating position: '+xhr.responseJSON.message);
@@ -489,7 +489,7 @@ $(function(){
                         //Subtract 2 for the label row and clone
                         $.ajax({
                             type:'PUT',
-                            url:'/api/chart/'+chartId+'/series/'+(oldIndex-2),
+                            url:'api/chart/'+chartId+'/series/'+(oldIndex-2),
                             data: {position: newIndex-2},
                             error: function (xhr) {
                                 console.log('Error updating position: '+xhr.responseJSON.message);
@@ -537,8 +537,8 @@ $(function(){
             var $this=$(this);
             $.ajax({
                 type:'DELETE',
-                //url:'/api/chart/'+$this.closest('div.dialog-editChart').data('id')+'/series/'+$this.closest('tr').data('id'),
-                url:'/api/chart/'+$this.closest('div.dialog-editChart').data('id')+'/series/'+$this.closest('tr').index(),
+                //url:'api/chart/'+$this.closest('div.dialog-editChart').data('id')+'/series/'+$this.closest('tr').data('id'),
+                url:'api/chart/'+$this.closest('div.dialog-editChart').data('id')+'/series/'+$this.closest('tr').index(),
                 //dataType: 'json',
                 success: function (rsp){
                     //Instead of reloading page, do dynamicly
@@ -559,8 +559,8 @@ $(function(){
             var $this=$(this);
             $.ajax({
                 type:'DELETE',
-                //url:'/api/chart/'+$this.closest('div.dialog-editChart').data('id')+'/category/'+$this.closest('th').index(),
-                url:'/api/chart/'+$this.closest('div.dialog-editChart').data('id')+'/category/'+($this.closest('th').index()-1),
+                //url:'api/chart/'+$this.closest('div.dialog-editChart').data('id')+'/category/'+$this.closest('th').index(),
+                url:'api/chart/'+$this.closest('div.dialog-editChart').data('id')+'/category/'+($this.closest('th').index()-1),
                 //dataType: 'json',
                 success: function (rsp){
                     //Instead of reloading page, do dynamicly
@@ -580,7 +580,7 @@ $(function(){
             var $this=$(this),tr=$this.closest('tr');
             $.ajax({
                 type:'DELETE',
-                url:'/api/chart/'+$this.closest('div.dialog-editChart').data('id')+'/series/0/data/'+tr.index(),  //Currently, pie only support a single series
+                url:'api/chart/'+$this.closest('div.dialog-editChart').data('id')+'/series/0/data/'+tr.index(),  //Currently, pie only support a single series
                 //dataType: 'json',
                 success: function (rsp){
                     $.unblockUI();
@@ -600,8 +600,8 @@ $(function(){
             //rangeTimeValue only used for time points
             $.ajax({
                 type:'DELETE',
-                //url:'/api/chart/'+$this.closest('div.dialog-editChart').data('id')+'/series/'+tr.index(),
-                url:'/api/chart/'+$this.closest('div.dialog-editChart').data('id')+'/series/'+tr.index(),
+                //url:'api/chart/'+$this.closest('div.dialog-editChart').data('id')+'/series/'+tr.index(),
+                url:'api/chart/'+$this.closest('div.dialog-editChart').data('id')+'/series/'+tr.index(),
                 //dataType: 'json',
                 success: function (rsp){
                     $.unblockUI();
@@ -792,7 +792,7 @@ $(function(){
                     if(!optionsObj) return false;
                     $.ajax({
                         type:'PUT',
-                        url:'/api/chart/'+t.data('id')+'/options',
+                        url:'api/chart/'+t.data('id')+'/options',
                         data: JSON.stringify(optionsObj),
                         contentType: "application/json; charset=utf-8",
                         success: function (){
@@ -811,7 +811,7 @@ $(function(){
                 "class"  : 'gray',
                 click    : function() {
                     var t=$(this);
-                    $.get( '/api/chart/'+t.data('id')+'/options',function(optionsObj){
+                    $.get( 'api/chart/'+t.data('id')+'/options',function(optionsObj){
                         t.children('textarea').val(JSON.stringify(optionsObj, null, "\t"));
                     });
                 }
@@ -824,7 +824,7 @@ $(function(){
         ]
     });
 
-    $.getJSON( '/api/charts/validation', function(validObj) {
+    $.getJSON( 'api/charts/validation', function(validObj) {
         //console.log(validObj)
         /*
         At a minimum, all charts must be send the required base chart data (see api documents) to create the chart without any series or series data.
@@ -835,7 +835,7 @@ $(function(){
         */
         //Either add contentType: 'application/json' and use JSON.stringify or don't add contentType and use param()
         $('#add-category-chart').myValid(validObj.category, {
-            url:'/api/charts',
+            url:'api/charts',
             contentType: "application/json; charset=utf-8",
             data: function(form){
                 var commonInputs=document.getElementById('common-inputs');
@@ -846,7 +846,7 @@ $(function(){
             }
         });
         $('#add-pie-chart').myValid(validObj.pie, {
-            url:'/api/charts',
+            url:'api/charts',
             contentType: "application/json; charset=utf-8",
             data: function(form){
                 //Include series without a point.  This frontend application only implements single series for pie charts, thus calls series "dummy"
@@ -858,7 +858,7 @@ $(function(){
             }
         });
         $('#add-time-chart').myValid(validObj.time, {
-            url:'/api/charts',
+            url:'api/charts',
             contentType: "application/json; charset=utf-8",
             data: function(form){
                 var commonInputs=document.getElementById('common-inputs');
@@ -868,7 +868,7 @@ $(function(){
             }
         });
         $('#add-gauge-chart').myValid(validObj.gauge, {
-            url:'/api/charts',
+            url:'api/charts',
             contentType: "application/json; charset=utf-8",
             data: function(form){
                 //Include series with a point.  This frontend application only implements single series for gauge charts, thus calls series "dummy"
@@ -880,7 +880,7 @@ $(function(){
             }
         });
         $('#dialog-addPointCategory form').myValid(validObj.categoryPoint, {
-            url:function(){return '/api/chart/'+$(this).parent().data('id')},
+            url:function(){return 'api/chart/'+$(this).parent().data('id')},
             data: function(form) {
                 var data = new FormData(form);
                 var arr=[{name: 'pointId', value: data.get('pointId')}];
@@ -894,8 +894,8 @@ $(function(){
             //Will provide 0 for seriesPosition and dataName only
             url:function(){
                 var dialog=$(this).parent();
-                //return '/api/chart/'+dialog.data('id');
-                return '/api/chart/'+dialog.data('id')+'/series/0';
+                //return 'api/chart/'+dialog.data('id');
+                return 'api/chart/'+dialog.data('id')+'/series/0';
             },
             success:function (rsp){
                 $.unblockUI();
@@ -911,7 +911,7 @@ $(function(){
             }
         });
         $('#dialog-addTimeSeries form').myValid(validObj.timeSeries, {
-            url:function(){return '/api/chart/'+$(this).parent().data('id')+'/series'},
+            url:function(){return 'api/chart/'+$(this).parent().data('id')+'/series'},
             //data: function(form) {console.log(this, form)},
             success:function (rsp){
                 console.log(rsp, rsp.historyTimeUnit, rsp.aggrType)

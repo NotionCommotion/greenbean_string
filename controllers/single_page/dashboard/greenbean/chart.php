@@ -14,22 +14,15 @@ class Chart extends GreenbeanDashboardPageController
         ]);
         //$rs['chartTypes']=$this->gbHelper->sortChartTypes($rs['chartTypes']);
         if(!$rs['defaultValues']) $rs['defaultValues']=$this->gbHelper->getDefaultValues();
-        $this->setAssets();
-        $this->twig('dashboard/greenbean/chart.php', $rs);
-    }
-
-    protected function getAssets(array $assets=[])
-    {
-        //parent will add base assets required by all views
-        return array_merge(parent::getAssets($assets), [
-            ['javascript', 'handlebars', '//cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.11/handlebars.js', ['local'=>false]],
-            ['css', 'bootstrap-editable', '//cdnjs.cloudflare.com/ajax/libs/x-editable/1.5.1/bootstrap3-editable/css/bootstrap-editable.css', ['local'=>false]],
-            ['javascript', 'bootstrap-editable', '//cdnjs.cloudflare.com/ajax/libs/x-editable/1.5.1/bootstrap3-editable/js/bootstrap-editable.min.js', ['local'=>false]],
-            ['javascript', 'table-dragger', '//gitcdn.link/repo/sindu12jun/table-dragger/dev/dist/table-dragger.js', ['local'=>false]],
-            ['javascript', 'charts', 'js/charts.js'],
-            ['javascript', 'editableAutocomplete', 'js/jquery.editableAutocomplete.js'],
-            ['javascript', 'sortfixedtable', 'plugin/sortfixedtable/jquery.sortfixedtable.js'],
-            ['css', 'sortfixedtable', 'plugin/sortfixedtable/sortfixedtable.css'],
+        $this->addAssets([
+            ['javascript', 'handlebars'],
+            //['bootstrap-editable'],
+            ['javascript', 'bootstrap-editable'],
+            ['javascript', 'table-dragger'],
+            ['javascript', 'charts'],
+            ['javascript', 'editableAutocomplete'],
+            ['sortfixedtable']
         ]);
+        $this->twig('dashboard/greenbean/chart.php', $rs);
     }
 }

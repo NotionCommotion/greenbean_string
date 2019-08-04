@@ -33,7 +33,7 @@ $(function(){
         $.blockUI();
         $.ajax({
             type:'POST',
-            url:'/api/tags/lans',
+            url:'api/tags/lans',
             data:$(this).find(':input').serializeArray(),
             //dataType: 'json',
             success: function (rsp){
@@ -54,7 +54,7 @@ $(function(){
             var $row=$(this).closest('tr');
             $.ajax({
                 type:'DELETE',
-                url:'/api/tags/lans/'+$row.data('id'),
+                url:'api/tags/lans/'+$row.data('id'),
                 //dataType: 'json',
                 success: function (rsp){
                     $.unblockUI();
@@ -69,7 +69,7 @@ $(function(){
     });
 
     $('#virtual-lan-list .name').on('init', function(e, edt) {
-        edt.options.url = '/api/tags/lans/' +$(this).closest('tr').data('id');
+        edt.options.url = 'api/tags/lans/' +$(this).closest('tr').data('id');
     });
     $("#virtual-lan-list .name").editable({
         type: 'text',
@@ -81,13 +81,13 @@ $(function(){
         },
         ajaxOptions: {type: "PUT"},
         send: 'always',
-        //url: '/api/tags/lans/'+$(this).parent().data('id')
+        //url: 'api/tags/lans/'+$(this).parent().data('id')
     })
 
     $('ul.xeditable a:not(#timezone)').editable({
         send: 'always',
         ajaxOptions: {type: "PUT"},
-        url: '/api/account',
+        url: 'api/account',
         params: function(params) {
             var parts=params.name.split('.');
             var o={};
@@ -112,7 +112,7 @@ $(function(){
         },
         //params: {name: 'timezone'},
         title:'Timezone',
-        url: '/api/account',
+        url: 'api/account',
         autocomplete: {
             params:{
                 term:null,

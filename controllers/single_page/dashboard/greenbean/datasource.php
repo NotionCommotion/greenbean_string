@@ -16,17 +16,7 @@ class Datasource extends GreenbeanDashboardPageController
         $rs['sources']=$this->gbHelper->sortSources($rs['sources']);
         if(!$rs['defaultValues']) $rs['defaultValues']=$this->gbHelper->getDefaultValues();
         if(!$rs['virtualLans']) $rs['virtualLans']=['virtualLans'=>[], 'virtualLanId'=>null];
-        $this->setAssets();
+        $this->addAssets([['javascript', 'sources'],['sortfixedtable']]);
         $this->twig('dashboard/greenbean/datasource.php', $rs);
-    }
-
-    protected function getAssets(array $assets=[])
-    {
-        //parent will add base assets required by all views
-        return array_merge(parent::getAssets($assets), [
-            ['javascript', 'sources', 'js/sources.js'],
-            ['javascript', 'sortfixedtable', 'plugin/sortfixedtable/jquery.sortfixedtable.js'],
-            ['css', 'sortfixedtable', 'plugin/sortfixedtable/sortfixedtable.css'],
-        ]);
     }
 }
