@@ -5,8 +5,7 @@ class Source extends GreenbeanDashboardPageController
 {
     public function view($id=null)
     {
-        syslog(LOG_ERR, "id: $id");
-        return $id?$this->viewList():$this->viewItem($id);
+        return $id?$this->viewItem($id):$this->viewList();
     }
 
     private function viewList()

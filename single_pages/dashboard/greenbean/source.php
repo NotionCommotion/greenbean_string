@@ -22,7 +22,7 @@
         <tbody>
             {% for row in sources.bacnetGateways %}
             <tr data-id="{{ row.id }}">
-                <td class="sourceName link"><a href='{{ row.id }}'>{{ row.name }}</a></td>
+                <td class="sourceName link"><a href='source/{{ row.id }}'>{{ row.name }}</a></td>
                 <td>{{ row.virtualLanName }}</td>
                 <td>{{ row.status?'ONLINE':'OFFLINE' }}</td>
                 <td>{{ row.guid }}</td>
