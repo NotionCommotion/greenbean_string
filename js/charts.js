@@ -243,7 +243,9 @@ $(function(){
         time:Handlebars.compile($("#hb_time").html()),
         gauge:Handlebars.compile($("#hb_gauge").html())
     };
-    var dialogEditChart=$('#dialog-editChart').dialog({
+    var dialogEditChart=$('#dialog-editChart')
+    .on('click','a.clone-chart',function() {$("#dialog-cloneChart").dialog("open");});
+    dialogEditChart.dialog({
         autoOpen    : false,
         resizable   : true,
         height      : 'auto',
@@ -251,7 +253,6 @@ $(function(){
         width       : 1200,
         modal       : true
     });
-    dialogEditChart.on('click','a.clone-chart',function() {$("#dialog-cloneChart").dialog("open");});
 
     $("#dialog-cloneChart").dialog({
         autoOpen    : false,
@@ -303,7 +304,8 @@ $(function(){
         //console.log(nodes)
         $("#dialog-editChartOptions").data('optionsObj', json.optionsObj)
         var html=hb['prefix'](json);
-        var dialog=dialogEditChart.html(html+hb[json.type](json)).data('id',json.id).dialog('open');
+        var dialog=dialogEditChart.html(html+hb[json.type](json)).data('id',json.id);
+        dialogEditChart.dialog('open');
         for (var i = 0; i < nodes.length; i++) {
             var name=typeof nodes[i] === 'object'?nodes[i].name:nodes[i];
             switch(name) {

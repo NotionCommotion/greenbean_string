@@ -18,7 +18,7 @@ class Controller extends Package implements ProviderAggregateInterface
 {
 
     protected $appVersionRequired = '8.2';
-    protected $pkgVersion = '0.7';
+    protected $pkgVersion = '0.8';
     protected $pkgHandle = 'greenbean_data_integrator';
     protected $pkgName = 'Greenbean Data Integrator';
     protected $pkgDescription = 'Interface to the Greenbean data Api';
@@ -31,13 +31,11 @@ class Controller extends Package implements ProviderAggregateInterface
         '/dataReporter' => ['cName'=>'Data Reporter'],
         '/dashboard/greenbean' => ['cName'=>'Greenbean', 'cDescription'=>'Greenbean Energy and Environmmental Data Manager'],
         '/dashboard/greenbean/report' => ['cName'=>'Report Manager'],
-        '/dashboard/greenbean/report_detail' => ['exclude_nav'=>true],
         '/dashboard/greenbean/point' => ['cName'=>'Point Manager'],
         '/dashboard/greenbean/chart' => ['cName'=>'Chart Manager'],
-        '/dashboard/greenbean/datasource' => ['cName'=>'Data Source Manager'],
-        '/dashboard/greenbean/datasource_edit' => ['exclude_nav'=>true],
+        '/dashboard/greenbean/source' => ['cName'=>'Data Source Manager'],
         '/dashboard/greenbean/sandbox' => ['cName'=>'Sandbox'],
-        '/dashboard/greenbean/sandbox_edit' => ['exclude_nav'=>true],
+        '/dashboard/greenbean/sandbox/edit' => ['exclude_nav'=>true],
         '/dashboard/greenbean/settings' => ['cName'=>'Account Settings'],
         '/dashboard/greenbean/manual' => ['cName'=>'Users Manual'],
         '/dashboard/greenbean/helpdesk' => ['cName'=>'Help Desk'],
@@ -121,13 +119,13 @@ class Controller extends Package implements ProviderAggregateInterface
         bootstrap.  3.4.0?
         */
 
-        //['javascript', 'jquery', '//ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js', ['local'=>false, 'position' => Asset::ASSET_POSITION_HEADER]],   //, 'version' => '3.4.1']], //Default is v1.12.4?    //Not used?
+        ['javascript', 'jquery', '//ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js', ['local'=>false, 'position' => Asset::ASSET_POSITION_HEADER]],   //, 'version' => '3.4.1']], //Default is v1.12.4?    //Not used?
         //['javascript', 'jquery', '//ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js', ['local' => false]],   //, 'version' => '2.2']],
-        //['javascript', 'jquery/ui', '//ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js', ['local'=>false, 'position' => Asset::ASSET_POSITION_HEADER], 'jquery/ui'],    //Not used?
-        //['css', 'jquery/ui', '//ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css', ['local'=>false], 'jquery/ui'],    //Not used?
+        ['javascript', 'jquery/ui', '//ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js', ['local'=>false], 'jquery/ui'],    //Not used?         //, 'position' => Asset::ASSET_POSITION_HEADER
+        ['css', 'jquery/ui', '//ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css', ['local'=>false], 'jquery/ui'],    //Not used?
 
-        //['javascript', 'bootstrap', '//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js', ['local'=>false], 'bootstrap'],    //Not used?
-        //['css', 'bootstrap', '//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css', ['local'=>false], 'bootstrap'],    //Not used?
+        ['javascript', 'bootstrap', '//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js', ['local'=>false], 'bootstrap'],    //Not used?
+        ['css', 'bootstrap', '//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css', ['local'=>false], 'bootstrap'],    //Not used?
 
         //['css', 'bootstrap-editable', '//cdnjs.cloudflare.com/ajax/libs/x-editable/1.5.1/bootstrap3-editable/css/bootstrap-editable.css', ['local'=>false], 'bootstrap-editable'],
         //['javascript', 'bootstrap-editable', '//cdnjs.cloudflare.com/ajax/libs/x-editable/1.5.1/bootstrap3-editable/js/bootstrap-editable.min.js', ['local'=>false], 'bootstrap-editable'],
@@ -146,8 +144,8 @@ class Controller extends Package implements ProviderAggregateInterface
         ['javascript', 'sortfixedtable', 'plugin/sortfixedtable/jquery.sortfixedtable.js', [], 'sortfixedtable'],
         ['css', 'sortfixedtable', 'plugin/sortfixedtable/sortfixedtable.css', [], 'sortfixedtable'],
 
-        ['javascript', 'jstree', '//cdnjs.cloudflare.com/ajax/libs/jstree/3.3.6/jstree.min.js', ['local'=>false], 'jstree'],
-        ['css', 'jstree', '//cdnjs.cloudflare.com/ajax/libs/jstree/3.3.6/themes/default/style.min.css', ['local'=>false], 'jstree'],
+        ['javascript', 'jstree', '//cdnjs.cloudflare.com/ajax/libs/jstree/3.3.8/jstree.min.js', ['local'=>false], 'jstree'],
+        ['css', 'jstree', '//cdnjs.cloudflare.com/ajax/libs/jstree/3.3.8/themes/default/style.min.css', ['local'=>false], 'jstree'],
 
         ['javascript', 'toolTip', 'plugin/toolTip/jquery.toolTip.js', [], 'toolTip'],
         ['css', 'toolTip', 'plugin/toolTip/toolTip.css', [], 'toolTip'],
@@ -169,6 +167,7 @@ class Controller extends Package implements ProviderAggregateInterface
         ['javascript', 'moment',  '//cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.1/moment.min.js', ['local'=>false]],    //Not used?
         ['javascript', 'tinymce', '//cdnjs.cloudflare.com/ajax/libs/tinymce/4.7.9/tinymce.min.js', ['local'=>false]],
 
+        //Add last
         ['css', 'common', 'css/style.css', [], 'common'],
         ['javascript', 'common', 'js/common.js', [], 'common'],
         ['css', 'manual.css', 'css/manual.css', [],'manual'],
@@ -179,7 +178,7 @@ class Controller extends Package implements ProviderAggregateInterface
         ['javascript', 'charts', 'js/charts.js', []],
         ['javascript', 'configure', 'js/configure.js', []],
         ['javascript', 'sources', 'js/sources.js', []],
-        ['javascript', 'source_bacnet_gateway', 'js/source_bacnet_gateway.js', []],
+        ['javascript', 'source_bacnet', 'js/source_bacnet.js', []],
         ['javascript', 'helpdesk', 'js/helpdesk.js', []],
         ['javascript', 'points', 'js/points.js', []],
         ['javascript', 'reports', 'js/reports.js', []],
@@ -205,25 +204,7 @@ class Controller extends Package implements ProviderAggregateInterface
     {
         require_once $this->getPackagePath() . '/vendor/autoload.php';
 
-        $user = $this->app->make('session')->get('greenbeen-user');
-        $this->app->bind(ServerBridge::class, function(Application $app) use($user) {
-            $config = $this->getFileConfig()->get('server');
-            $headers=['X-GreenBean-Key' => $config['api']];
-            if($user) {
-                $headers['X-GreenBean-UserId'] = $user->id;
-            }
-            return new ServerBridge(
-                new \GuzzleHttp\Client(['base_uri' => 'https://'.$config['host'],'headers' => $headers]),
-                new \Greenbean\ServerBridge\SymfonyHttpClientHandler()
-            );
-        });
-
-        //Future - Change to use RouteList and RouteListInterface
-        $router=$this->app->make('router');
-        $this->addProxyRoutes($router, self::PRIVATE_ROUTES, $user, false);
-        $this->addProxyRoutes($router, self::PUBLIC_ROUTES, $user, true);
-
-         //Registrer assets
+        //Registrer assets
         $groups=[];
         $al = AssetList::getInstance();
         foreach(self::ASSETS as $asset) {
@@ -233,6 +214,24 @@ class Controller extends Package implements ProviderAggregateInterface
         }
         foreach($groups as $name => $assets) {
             $al->registerGroup($name, $assets);
+        }
+
+        $user = $this->app->make('session')->get('greenbeen-user');
+        //Future - Change to use RouteList and RouteListInterface
+        $router=$this->app->make('router');
+        $this->addProxyRoutes($router, self::PRIVATE_ROUTES, $user, false);
+        $this->addProxyRoutes($router, self::PUBLIC_ROUTES, $user, true);
+        if($config = $this->getFileConfig()->get('server')) {
+            $this->app->bind(ServerBridge::class, function(Application $app) use($user, $config) {
+                $headers=['X-GreenBean-Key' => $config['api']];
+                if($user) {
+                    $headers['X-GreenBean-UserId'] = $user->id;
+                }
+                return new ServerBridge(
+                    new \GuzzleHttp\Client(['base_uri' => 'https://'.$config['host'],'headers' => $headers]),
+                    new \Greenbean\ServerBridge\SymfonyHttpClientHandler()
+                );
+            });
         }
     }
 

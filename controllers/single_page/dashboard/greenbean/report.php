@@ -3,8 +3,15 @@ namespace Concrete\Package\GreenbeanDataIntegrator\Controller\SinglePage\Dashboa
 use Concrete\Package\GreenbeanDataIntegrator\Controller\SinglePage\dashboard\GreenbeanDashboardPageController;
 class Report extends GreenbeanDashboardPageController
 {
-    public function view()
+    public function view($id=null)
     {
+        if($id) {
+            $rs=$this->getServerBridge()->getPageContent(['report'=>"/reports/$id"]);
+            $rs=empty($rs['report'])?$this->gbHelper->getDefaultReportValues():$rs['report'];
+        }
+        else {
+            $rs=[];
+        }
         $this->addAssets([
             //['bootstrap-editable'],
             ['javascript', 'bootstrap-editable'],
@@ -13,6 +20,6 @@ class Report extends GreenbeanDashboardPageController
             ['javascript', 'reports'],
             //['javascript', 'moment'],
         ]);
-        $this->twig('dashboard/greenbean/report.php');
+        $this->twig('dashboard/greenbean/report.php', $rs);
     }
 }

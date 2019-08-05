@@ -22,13 +22,13 @@ abstract class GreenbeanDashboardPageController extends DashboardPageController
     /*
     public function on_start()
     {
-        //Events::addListener('on_start', function($event) {syslog(LOG_ERR, 'GreenbeanDashboardPageController::on_start: '.$this->getControllerActionPath());});
+    //Events::addListener('on_start', function($event) {syslog(LOG_ERR, 'GreenbeanDashboardPageController::on_start: '.$this->getControllerActionPath());});
     }
     */
 
     public function on_before_render() {
         //Doesn't work with on_start()?
-        if($this->getControllerActionPath()==='/dashboard/greenbean/configure' || $this->app->make('session')->has('greenbeen-user') || $this->validCredentials()) {
+        if($this->getControllerActionPath()==='/dashboard/greenbean/configure' || $this->validCredentials()) {
             parent::on_before_render();
         }
         else {
@@ -46,6 +46,8 @@ abstract class GreenbeanDashboardPageController extends DashboardPageController
                 //'strict_variables'=>true
             ]);
         }
+        $variables['base_url'] = Package::getByHandle(self::PKGHANDLE)->getRelativePath();
+        $variables['img_url'] = $variables['base_url'] . '/images';
         $html = $this->twig->render($template, $variables);
         if($render) {
             $this->set('html', $html);
@@ -56,6 +58,11 @@ abstract class GreenbeanDashboardPageController extends DashboardPageController
 
     protected function validCredentials(bool $confirm=true):bool
     {
+        if($this->app->make('session')->has('greenbeen-user') && Package::getByHandle(self::PKGHANDLE)->getFileConfig()->get('server')) {
+            //If user is logged on and package has applicable server credentials, don't worry about verifying server.
+            //If invalid server credentials, call will delete server credential file and cause re-entering this data.
+            return true;
+        }
         $sb = $this->getServerBridge();
         try {
             $u = new User();
@@ -79,11 +86,11 @@ abstract class GreenbeanDashboardPageController extends DashboardPageController
 
     protected function addAssets(array $assets=[])
     {
-        //Thise assets are required for all pages
-        $assets = array_merge($assets, [
+        //Thise assets are required for all pages, and will be loaded first.
+        $assets = array_merge([
             //['javascript', 'jquery'],
-            //['jquery/ui'],
-            //['bootstrap'],
+            ['jquery/ui'],  //force to be loaded before others.
+            ['bootstrap'],
             ['javascript', 'url-search-params'],
             ['javascript', 'throbber'],
             ['javascript', 'blockUI'],
@@ -91,7 +98,7 @@ abstract class GreenbeanDashboardPageController extends DashboardPageController
             ['javascript', 'printIt'], //must be located before common.js
             ['common'],
             ['manual'],
-        ]);
+            ], $assets);
         foreach($assets as $asset) {
             $this->requireAsset(...$asset);
         }

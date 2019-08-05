@@ -272,7 +272,9 @@ $(function(){
                 }
             });
         }
-    }).dialog({
+    });
+    //Concrete5 dialog is broken.  See https://github.com/concrete5/concrete5/issues/8042
+    dialogEditPoint.dialog({
         autoOpen    : false,
         resizable   : true,
         height      : 'auto',
@@ -293,7 +295,8 @@ $(function(){
     };
 
     function getEditDialog(type, pointId, json, nodes) {
-        var dialog=dialogEditPoint.html(hb[type](json)).data('id',json.id).dialog('open');
+        var dialog=dialogEditPoint.html(hb[type](json)).data('id',json.id);
+        dialog.dialog('open');
         var unitsTime=[];
         $('#timeUnit > option').each(function(i){
             unitsTime.push({value:this.value,text:this.text})

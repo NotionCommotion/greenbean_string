@@ -5,7 +5,7 @@
     {% if id %}
     <button type="button" class="btn btn-secondary update-report">Save Report Changes</button>
     <button type="button" class="btn btn-secondary schedule-report">Schedule Report</button>
-    <a href="/reports" class="btn btn-info" role="button">Create New</a>
+    <a href="reports" class="btn btn-info" role="button">Create New</a>
     {% else %}
     <button type="button" class="btn btn-secondary save-report">Save New Report</button>
     {% endif %}
@@ -88,7 +88,7 @@
             </tr>
             <tr id="clone-report">
                 <td><a></a></td>
-                <td><img alt="Delete Report" src="/packages/greenbean_data_integrator/images/delete.png" title="Delete Report" class="vtip delete" height="16" width="16"></td>
+                <td><img alt="Delete Report" src="{{ img_url }}/delete.png" title="Delete Report" class="vtip delete" height="16" width="16"></td>
             </tr>
         </thead>
         <tbody>

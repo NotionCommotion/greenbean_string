@@ -22,14 +22,14 @@
         <tbody>
             {% for row in sources.bacnetGateways %}
             <tr data-id="{{ row.id }}">
-                <td class="sourceName link"><a href='/sources/{{ row.id }}'>{{ row.name }}</a></td>
+                <td class="sourceName link"><a href='{{ row.id }}'>{{ row.name }}</a></td>
                 <td>{{ row.virtualLanName }}</td>
                 <td>{{ row.status?'ONLINE':'OFFLINE' }}</td>
                 <td>{{ row.guid }}</td>
                 <td>{{ row.device_id }}</td>
                 <td>{{ row.timeout }}</td>
                 <td>{{ row.discovery_timeout }}</td>
-                <td><img alt="Delete Source" src="/packages/greenbean_data_integrator/images/delete.png" title="Delete Source" class="vtip delete" height="16" width="16"></td>
+                <td><img alt="Delete Source" src="{{ img_url }}/delete.png" title="Delete Source" class="vtip delete" height="16" width="16"></td>
             </tr>
             {% endfor %}
         </tbody>
@@ -60,7 +60,7 @@
             <td>{{ row.url }}</td>
             <td>{{ row.port }}</td>
             <td>{{ row.encryptKey }}</td>
-            <td><img alt="Delete Source" src="/packages/greenbean_data_integrator/images/delete.png" title="Delete Source" class="vtip delete" height="16" width="16"></td>
+            <td><img alt="Delete Source" src="{{ img_url }}/delete.png" title="Delete Source" class="vtip delete" height="16" width="16"></td>
         </tr>
         {% endfor %}
     </tbody>
@@ -86,7 +86,7 @@
             <td>{{ row.url }}</td>
             <td>{{ row.port }}</td>
             <td>{{ row.encryptKey }}</td>
-            <td><img alt="Delete Source" src="/packages/greenbean_data_integrator/images/delete.png" title="Delete Source" class="vtip delete" height="16" width="16"></td>
+            <td><img alt="Delete Source" src="{{ img_url }}/delete.png" title="Delete Source" class="vtip delete" height="16" width="16"></td>
         </tr>
         {% endfor %}
     </tbody>

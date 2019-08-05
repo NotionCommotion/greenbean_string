@@ -18,7 +18,7 @@
     {% set virtualLansAvailable = virtualLansAvailable|merge([{value: row.id, text: row.name}]) %}
     <tr data-id="{{ row.id }}">
         <td><a href='javascript:void(0)' class='name'>{{ row.name }}</a>{{ row.id==defaultValues.base.virtualLanId?' (PRIMARY)' }}</td>
-        <td><img alt="Delete Virtual LAN" src="/packages/greenbean_data_integrator/images/delete.png" title="Delete Virtual LAN" class="vtip delete" height="16" width="16"></td>
+        <td><img alt="Delete Virtual LAN" src="{{ img_url }}/delete.png" title="Delete Virtual LAN" class="vtip delete" height="16" width="16"></td>
     </tr>
     {% endfor %}
 </tbody>

@@ -41,7 +41,7 @@
             <td>{{ row.device_id is defined ? row.device_id~"/"~row.object_id~"/"~row.object_type:'N/A' }}
             <td>{{ row.virtualLanName??'N/A' }}</td>
             <td>{{ row.sourceName??'N/A' }}</td>
-            <td><img alt="Delete Point" src="/packages/greenbean_data_integrator/images/delete.png" title="Delete Point" class="vtip delete" height="16" width="16"></td>
+            <td><img alt="Delete Point" src="{{ img_url }}/delete.png" title="Delete Point" class="vtip delete" height="16" width="16"></td>
         </tr>
         {% endfor %}
     </tbody>
@@ -335,7 +335,7 @@
     <tr id="clone-custom">
     <td><a href="javascript:void(0)" class="hb_subpoint"></a></td>
     <td><a href="javascript:void(0)" class="hb_additive"></a></td>
-    <td><img alt="Delete Point" src="/packages/greenbean_data_integrator/images/delete.png" title="Delete Point" class="vtip delete" height="16" width="16"></td>
+    <td><img alt="Delete Point" src="{{ img_url }}/delete.png" title="Delete Point" class="vtip delete" height="16" width="16"></td>
     </tr>
     </thead>
     <tbody>
@@ -343,7 +343,7 @@
     <tr data-id={{id}}>
     <td><a href="javascript:void(0)" class="hb_subpoint">{{name}}</a>
     <td><a href="javascript:void(0)" class="hb_additive" data-value="{{sign}}"></a></td>
-    <td><img alt="Delete Point" src="/packages/greenbean_data_integrator/images/delete.png" title="Delete Point" class="vtip delete" height="16" width="16"></td>
+    <td><img alt="Delete Point" src="{{ img_url }}/delete.png" title="Delete Point" class="vtip delete" height="16" width="16"></td>
     </tr>
     {{/each}}
     </tbody>

@@ -18,7 +18,7 @@
                 <img src="https://placehold.it/150x80?text=Chart Manager" class="img-responsive" style="width:100%" alt="Image">
             </div>
         </a>
-        <a href="greenbean/datasource">
+        <a href="greenbean/source">
             <div class="col-sm-3">
                 <p>Data Source Manager</p>
                 <img src="https://placehold.it/150x80?text=Data Source Manager" class="img-responsive" style="width:100%" alt="Image">
