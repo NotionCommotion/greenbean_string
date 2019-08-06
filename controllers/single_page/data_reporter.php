@@ -5,7 +5,7 @@ class DataReporter extends PageController
 {
     public function view()
     {
-        $this->addAssets();
-        $this->twig('datareporter.php', ['foo'=>123]);
+        //$this->addAssets();
+        //$this->twig('data_reporter.php', ['foo'=>123]);
     }
 }

@@ -84,7 +84,18 @@ list is an array containing names.
 {% endfor %}
 {% endmacro %}
 
-{% macro linklist(list,cid,controller,title) %}
+{% macro linklist(list, path) %}
+{#
+list is an array containing id and name.  Links are created.
+#}
+{% for item in list %}
+<li class="{{ cycle(['even', 'odd'], loop.index0) }}">
+    <a href="{{ path }}/{{ item.id }}">{{ item.name }}</a>
+</li>
+{% endfor %}
+{% endmacro %}
+
+{% macro linklistController(list,cid,controller,title) %}
 {#
 list is an array containing id and name.  Links are created.
 #}
@@ -94,6 +105,7 @@ list is an array containing id and name.  Links are created.
 </li>
 {% endfor %}
 {% endmacro %}
+
 
 {% macro select(options,selected) %}
 {# Creates a select menu based on given array (id/name pairs) (doesn't include <select> tags) #}

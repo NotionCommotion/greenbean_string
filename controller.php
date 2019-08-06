@@ -18,7 +18,7 @@ class Controller extends Package implements ProviderAggregateInterface
 {
 
     protected $appVersionRequired = '8.2';
-    protected $pkgVersion = '0.8';
+    protected $pkgVersion = '0.1';
     protected $pkgHandle = 'greenbean_data_integrator';
     protected $pkgName = 'Greenbean Data Integrator';
     protected $pkgDescription = 'Interface to the Greenbean data Api';
@@ -28,7 +28,7 @@ class Controller extends Package implements ProviderAggregateInterface
     //route with array with optional elements for page properties, future blocks (maybe), exclude_nav, and maybe more.
     //Confirm sympony router cannot do like twig router such as {id:[0-9]+}.
     private const  SINGLE_PAGES = [
-        '/dataReporter' => ['cName'=>'Data Reporter'],
+        '/data_reporter' => ['cName'=>'Data Reporter'],
         '/dashboard/greenbean' => ['cName'=>'Greenbean', 'cDescription'=>'Greenbean Energy and Environmmental Data Manager'],
         '/dashboard/greenbean/report' => ['cName'=>'Report Manager'],
         '/dashboard/greenbean/point' => ['cName'=>'Point Manager'],
@@ -221,11 +221,11 @@ class Controller extends Package implements ProviderAggregateInterface
         $router=$this->app->make('router');
         $this->addProxyRoutes($router, self::PRIVATE_ROUTES, $user, false);
         $this->addProxyRoutes($router, self::PUBLIC_ROUTES, $user, true);
-        if($config = $this->getFileConfig()->get('server')) {
+        if($user && $config = $this->getFileConfig()->get('server')) {
             $this->app->bind(ServerBridge::class, function(Application $app) use($user, $config) {
                 $headers=['X-GreenBean-Key' => $config['api']];
                 if($user) {
-                    $headers['X-GreenBean-UserId'] = $user->id;
+                    $headers['X-GreenBean-UserId'] = $user['id'];
                 }
                 return new ServerBridge(
                     new \GuzzleHttp\Client(['base_uri' => 'https://'.$config['host'],'headers' => $headers]),
