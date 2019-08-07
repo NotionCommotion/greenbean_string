@@ -1,10 +1,16 @@
 <?php
 namespace Concrete\Package\GreenbeanDataIntegrator\Controller\SinglePage\Dashboard\Greenbean;
 use Concrete\Package\GreenbeanDataIntegrator\Controller\SinglePage\dashboard\GreenbeanDashboardPageController;
-class SandboxEdit extends GreenbeanDashboardPageController
+use Doctrine\ORM\EntityManager;
+use Greenbean\Concrete5\GreenbeanDataIntegrator\Entity\SandboxPage;
+use Symfony\Component\HttpFoundation\JsonResponse;
+use Concrete\Core\Error\ErrorList\ErrorList;
+
+class Edit extends GreenbeanDashboardPageController
 {
-    public function view($page)
+    public function view($id)
     {
+        syslog(LOG_ERR, 'xxxxxxxxxxxx');
         $rs=$this->getServerBridge()->getPageContent([
             'pointList'=>['/points'],
             'chartList'=>['/charts'],

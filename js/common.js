@@ -297,6 +297,7 @@ $(function(){
                     success: function (rsp){
                         //Instead of reloading page, do dynamicly
                         $.unblockUI();
+                        console.log(rsp)
                         alert('record submitted')
                         element.closest("div.ui-dialog-content").dialog("close");
                         location.reload();

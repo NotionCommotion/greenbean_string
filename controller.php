@@ -1,24 +1,27 @@
 <?php
 namespace Concrete\Package\GreenbeanDataIntegrator;
 
-use Concrete\Core\Database\EntityManager\Provider\ProviderAggregateInterface;
-use Concrete\Core\Database\EntityManager\Provider\StandardPackageProvider;
 use Concrete\Core\Package\Package as Package;
 use Concrete\Core\Page\Single as SinglePage;
-use Greenbean\Concrete5\GreenbeanDataIntegrator\RouteList;
 use Greenbean\ServerBridge\ServerBridge;
 use Concrete\Core\Application\Application;
 use Concrete\Core\Support\Facade\Events;
 use Concrete\Core\Asset\AssetList;
 use Concrete\Core\Asset\Asset;
+use Concrete\Package\GreenbeanDataIntegrator\Controller\SinglePage\Dashboard\Greenbean\Sandbox;
+use Greenbean\Concrete5\GreenbeanDataIntegrator\RouteList;
+//use Concrete\Core\Database\EntityManager\Provider\ProviderAggregateInterface;
+//use Concrete\Core\Database\EntityManager\Provider\StandardPackageProvider;
+use Doctrine\ORM\EntityManager;
+use Greenbean\Concrete5\GreenbeanDataIntegrator\Entity\SandboxPage;
 
 defined('C5_EXECUTE') OR die("Access Denied.");
 
-class Controller extends Package implements ProviderAggregateInterface
+class Controller extends Package    // implements ProviderAggregateInterface
 {
 
     protected $appVersionRequired = '8.2';
-    protected $pkgVersion = '0.1';
+    protected $pkgVersion = '0.6';
     protected $pkgHandle = 'greenbean_data_integrator';
     protected $pkgName = 'Greenbean Data Integrator';
     protected $pkgDescription = 'Interface to the Greenbean data Api';
@@ -150,7 +153,7 @@ class Controller extends Package implements ProviderAggregateInterface
         ['javascript', 'toolTip', 'plugin/toolTip/jquery.toolTip.js', [], 'toolTip'],
         ['css', 'toolTip', 'plugin/toolTip/toolTip.css', [], 'toolTip'],
 
-        ['javascript', 'dynamic_update', '//cdn.greenbeantech.net/libraries/greenbean-public/1.0/dynamic_update.js', ['local'=>false], 'dynamic_update'],
+        ['javascript', 'dynamic_update', '//cdn.greenbeantech.net/libraries/greenbean-public/1.0/dynamic_update_c5.js', ['local'=>false], 'dynamic_update'],
         ['css', 'dynamic_update', '//cdn.greenbeantech.net/libraries/greenbean-public/1.0/dynamic_update.css', ['local'=>false], 'dynamic_update'],
 
         ['javascript', 'upload', 'plugin/upload/upload.js', [], 'upload'],
@@ -175,8 +178,9 @@ class Controller extends Package implements ProviderAggregateInterface
         ['javascript', 'sandbox_edit', 'js/sandbox_edit.js', [], 'sandbox_edit'],
         ['css', 'sandbox_edit', 'css/sandbox_edit.css', [], 'sandbox_edit'],
 
+        ['javascript', 'sandbox', 'js/sandbox.js', []],
         ['javascript', 'charts', 'js/charts.js', []],
-        ['javascript', 'configure', 'js/configure.js', []],
+        //['javascript', 'configure', 'js/configure.js', []],
         ['javascript', 'sources', 'js/sources.js', []],
         ['javascript', 'source_bacnet', 'js/source_bacnet.js', []],
         ['javascript', 'helpdesk', 'js/helpdesk.js', []],
@@ -190,6 +194,7 @@ class Controller extends Package implements ProviderAggregateInterface
         $pkg = parent::install();
         //BlockType::installBlockTypeFromPackage('event_calendar', $pkg);
         $this->installSinglePages($pkg);
+        $this->addInitialSandboxPages();
     }
 
     public function upgrade()
@@ -198,8 +203,17 @@ class Controller extends Package implements ProviderAggregateInterface
         $pkg = Package::getByHandle('greenbean_data_integrator');
         //if (!is_object(BlockType::getByHandle('greenbean_data_integrator'))) { BlockType::installBlockTypeFromPackage('greenbean_data_integrator', $this);}
         $this->installSinglePages($pkg);
+        $this->addInitialSandboxPages();
     }
 
+    /*
+    public function uninstall()
+    {
+        parent::uninstall();
+        $db = \Database::connection();
+        $db->query('DROP TABLE IF EXISTS SandboxPages');
+    }
+    */
     public function on_start()
     {
         require_once $this->getPackagePath() . '/vendor/autoload.php';
@@ -217,11 +231,15 @@ class Controller extends Package implements ProviderAggregateInterface
         }
 
         $user = $this->app->make('session')->get('greenbeen-user');
-        //Future - Change to use RouteList and RouteListInterface
+
         $router=$this->app->make('router');
+        $list = new RouteList();
+        $list->loadRoutes($router);
+        //Future - Change to use RouteList and RouteListInterface
         $this->addProxyRoutes($router, self::PRIVATE_ROUTES, $user, false);
         $this->addProxyRoutes($router, self::PUBLIC_ROUTES, $user, true);
-        if($user && $config = $this->getFileConfig()->get('server')) {
+
+        if(/* $user && */$config = $this->getFileConfig()->get('server')) {
             $this->app->bind(ServerBridge::class, function(Application $app) use($user, $config) {
                 $headers=['X-GreenBean-Key' => $config['api']];
                 if($user) {
@@ -259,18 +277,9 @@ class Controller extends Package implements ProviderAggregateInterface
         }
     }
 
-    public function getEntityManagerProvider()
-    {
-        $provider = new StandardPackageProvider($this->app, $this, [
-            'src/Entity' => 'Concrete\Package\GreenbeanDataIntegrator\Entity\UserAgent',
-            //'src/Testing/Entity' => 'PortlandLabs\Testing\Entity'
-        ]);
-        return $provider;
-    }
-
     private function installSinglePages($pkg)
     {
-        //??? Loader::model('single_page');
+        //Change to use installXml.  See example at https://github.com/mlocati/my_boats
         foreach(self::SINGLE_PAGES as $route=>$properties) {
             $sp = SinglePage::add($route, $pkg);    //returns \Concrete\Core\Page\Page
             if($spProps=array_intersect_key($properties, self::PAGE_PROPERTIES)) {
@@ -282,6 +291,21 @@ class Controller extends Package implements ProviderAggregateInterface
             if(!empty($properties['exclude_nav'])) {
                 $sp->setAttribute('exclude_nav', true);    //Will not put in menu.  Returns Concrete\Core\Entity\Attribute\Value\PageValue
             }
+        }
+    }
+
+    private function addInitialSandboxPages()
+    {
+        $em = $this->app->make(EntityManager::class);
+        $repo = $em->getRepository(SandboxPage::class);
+        $r = $repo->createQueryBuilder('s')->select('s.id')->setMaxResults(1)->getQuery()->execute();
+        if (empty($r)) {
+            foreach ([
+                SandboxPage::create('Sample page'),
+                ] as $page) {
+                $em->persist($page);
+            }
+            $em->flush();
         }
     }
 }

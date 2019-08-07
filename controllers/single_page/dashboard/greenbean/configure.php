@@ -12,7 +12,7 @@ class Configure extends GreenbeanDashboardPageController
     private function _view(array $errors=[])
     {
         syslog(LOG_INFO, 'errors: '.json_encode($errors));
-        $this->addAssets([['javascript', 'configure']]);
+        //$this->addAssets([['javascript', 'configure']]);
         $this->twig('dashboard/greenbean/configure.php', ['action'=>$this->action('submit'), 'errors'=>$errors]);
     }
 
@@ -20,12 +20,12 @@ class Configure extends GreenbeanDashboardPageController
     {
         //What is the correct way to do this?  Use validation helper, not directly POST, etc.
         $errors=[];
-        if($missing=array_diff_key(array_flip(['host','api']), array_filter($_POST))) {
+        if($missing=array_diff_key(array_flip(['host','api','displayUnit']), array_filter($this->post()))) {
             $errors[]=implode(', ', array_keys($missing)).' must be provided';
         }
         else {
-            if(!filter_var($_POST['host'], FILTER_VALIDATE_DOMAIN)) $errors[]='Host name is not valid';
-            if(!preg_match("/^(\{)?[a-f\d]{8}(-[a-f\d]{4}){4}[a-f\d]{8}(?(1)\})$/i", $_POST['api'])) $errors[]='API key is not valid';
+            if(!filter_var($this->post('host'), FILTER_VALIDATE_DOMAIN)) $errors[]='Host name is not valid';
+            if(!preg_match("/^(\{)?[a-f\d]{8}(-[a-f\d]{4}){4}[a-f\d]{8}(?(1)\})$/i", $this->post('api'))) $errors[]='API key is not valid';
         }
         if(!$errors) {
             syslog(LOG_ERR, 'check server');
@@ -35,8 +35,9 @@ class Configure extends GreenbeanDashboardPageController
         }
         else {
             $fc = Package::getByHandle(self::PKGHANDLE)->getFileConfig();
-            $fc->save('server.host', $_POST['host']);
-            $fc->save('server.api', $_POST['api']);
+            $fc->save('server.host', $this->post('host'));
+            $fc->save('server.api', $this->post('api'));
+            $fc->save('settings.displayUnit', (int)$this->post('displayUnit'));
             $this->redirect('/dashboard/greenbean');
         }
     }

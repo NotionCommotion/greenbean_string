@@ -3,7 +3,7 @@ namespace Concrete\Package\GreenbeanDataIntegrator\Controller\SinglePage\Dashboa
 use Concrete\Package\GreenbeanDataIntegrator\Controller\SinglePage\dashboard\GreenbeanDashboardPageController;
 class SandboxEdit extends GreenbeanDashboardPageController
 {
-    public function view($page)
+    public function view($page=1)
     {
         $rs=$this->getServerBridge()->getPageContent([
             'pointList'=>['/points'],

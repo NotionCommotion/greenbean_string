@@ -11,5 +11,10 @@
         <label>API Key</label>
         <input type="text" name="api" class="form-control" placeholder="12345678-abcd-1234-abcd-123412341234">
     </div>
+    <div class="checkbox">
+        <label>
+            <input type="checkbox" name="displayUnit" checked value="1"> Display Units
+        </label>
+    </div>
     <button type="submit" class="btn btn-default">Submit</button>
 </form>

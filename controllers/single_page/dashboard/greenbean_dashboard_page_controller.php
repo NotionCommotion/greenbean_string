@@ -5,7 +5,6 @@ use Concrete\Core\User\User;
 use Concrete\Core\User\UserInfo;
 use Concrete\Core\Support\Facade\Events;
 use Greenbean\Concrete5\GreenbeanDataIntegrator\GbHelper;
-use Package;
 
 abstract class GreenbeanDashboardPageController extends DashboardPageController
 {
@@ -46,7 +45,7 @@ abstract class GreenbeanDashboardPageController extends DashboardPageController
                 //'strict_variables'=>true
             ]);
         }
-        $variables['base_url'] = Package::getByHandle(self::PKGHANDLE)->getRelativePath();
+        $variables['base_url'] = \Package::getByHandle(self::PKGHANDLE)->getRelativePath();
         $variables['img_url'] = $variables['base_url'] . '/images';
         $html = $this->twig->render($template, $variables);
         if($render) {
@@ -58,7 +57,7 @@ abstract class GreenbeanDashboardPageController extends DashboardPageController
 
     protected function validCredentials(bool $confirm=true):bool
     {
-        if($this->app->make('session')->has('greenbeen-user') && Package::getByHandle(self::PKGHANDLE)->getFileConfig()->get('server')) {
+        if($this->app->make('session')->has('greenbeen-user') && \Package::getByHandle(self::PKGHANDLE)->getFileConfig()->get('server')) {
             //If user is logged on and package has applicable server credentials, don't worry about verifying server.
             //If invalid server credentials, call will delete server credential file and cause re-entering this data.
             return true;
