@@ -12,14 +12,22 @@ class Configure extends GreenbeanDashboardPageController
     private function _view(array $errors=[])
     {
         syslog(LOG_INFO, 'errors: '.json_encode($errors));
+        $fc = Package::getByHandle(self::PKGHANDLE)->getFileConfig();
+        $data=array_merge(
+            ['displayUnit'=>true, 'host'=>'api.greenbeantech.net', 'api'=>null, 'action'=>$this->action('submit'), 'errors'=>$errors],
+            $fc->get('server'),
+            $fc->get('settings')
+        );
+        $data['api_sample']=$data['api']??'12345678-abcd-1234-abcd-123412341234';
         //$this->addAssets([['javascript', 'configure']]);
-        $this->twig('dashboard/greenbean/configure.php', ['action'=>$this->action('submit'), 'errors'=>$errors]);
+        $this->twig('dashboard/greenbean/configure.php', $data);
     }
 
     public function submit()
     {
         //What is the correct way to do this?  Use validation helper, not directly POST, etc.
         $errors=[];
+        syslog(LOG_INFO, json_encode($this->post()));
         if($missing=array_diff_key(array_flip(['host','api','displayUnit']), array_filter($this->post()))) {
             $errors[]=implode(', ', array_keys($missing)).' must be provided';
         }

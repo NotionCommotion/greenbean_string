@@ -21,7 +21,7 @@ class Controller extends Package    // implements ProviderAggregateInterface
 {
 
     protected $appVersionRequired = '8.2';
-    protected $pkgVersion = '0.6';
+    protected $pkgVersion = '0.7';
     protected $pkgHandle = 'greenbean_data_integrator';
     protected $pkgName = 'Greenbean Data Integrator';
     protected $pkgDescription = 'Interface to the Greenbean data Api';
@@ -42,7 +42,7 @@ class Controller extends Package    // implements ProviderAggregateInterface
         '/dashboard/greenbean/settings' => ['cName'=>'Account Settings'],
         '/dashboard/greenbean/manual' => ['cName'=>'Users Manual'],
         '/dashboard/greenbean/helpdesk' => ['cName'=>'Help Desk'],
-        '/dashboard/greenbean/configure' => ['exclude_nav'=>true],
+        '/dashboard/greenbean/configure' => ['cName'=>'Configure'],
     ];
 
     private const  PAGE_PROPERTIES = ['cName'=>null, 'cCacheFullPageContent'=>null, 'cCacheFullPageContentLifetimeCustom'=>null, 'cCacheFullPageContentOverrideLifetime'=>null, 'cDescription'=>null, 'cDatePublic'=>null, 'uID'=>null, 'pTemplateID'=>null, 'ptID'=>null, 'cHandle'=>null, 'cFilename'=>null];

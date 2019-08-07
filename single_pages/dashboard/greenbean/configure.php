@@ -5,15 +5,15 @@
 <form action="{{ action }}" method="post">
     <div class="form-group">
         <label>Host Name</label>
-        <input type="text" name="host" class="form-control" value="api.greenbeantech.net">
+        <input type="text" name="host" class="form-control" value="{{ host }}">
     </div>
     <div class="form-group">
         <label>API Key</label>
-        <input type="text" name="api" class="form-control" placeholder="12345678-abcd-1234-abcd-123412341234">
+        <input type="text" name="api" class="form-control" value="{{ api }}"  placeholder="{{ api_sample }}">
     </div>
     <div class="checkbox">
         <label>
-            <input type="checkbox" name="displayUnit" checked value="1"> Display Units
+            <input type="checkbox" name="displayUnit" checked value="{{ displayUnit }}"> Display Units
         </label>
     </div>
     <button type="submit" class="btn btn-default">Submit</button>
