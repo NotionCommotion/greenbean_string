@@ -10,16 +10,21 @@ class Helpdesk extends GreenbeanDashboardPageController
             'tickets'=>['/helpdesk', $params],
             'message_types'=>'/helpdesk/topics',
         ]);
-        if(!empty($params['statusId'])) $rs['statusId']=$params['statusId'];
-        $this->addAssets([
-            ['javascript', 'handlebars'],
-            //['bootstrap-editable'],
-            ['javascript', 'bootstrap-editable'],
-            ['javascript', 'helpdesk'],
-            ['javascript', 'editableAutocomplete'],
-            ['sortfixedtable']
-        ]);
-        $this->twig('dashboard/greenbean/helpdesk.php', $rs);
+        if(empty($rs['errors'])) {
+            if(!empty($params['statusId'])) $rs['statusId']=$params['statusId'];
+            $this->addAssets([
+                ['javascript', 'handlebars'],
+                //['bootstrap-editable'],
+                ['javascript', 'bootstrap-editable'],
+                ['javascript', 'helpdesk'],
+                ['javascript', 'editableAutocomplete'],
+                ['sortfixedtable']
+            ]);
+            $this->twig('dashboard/greenbean/helpdesk.php', $rs);
+        }
+        else {
+            $this->twig('dashboard/greenbean/error.php', $rs);
+        }
     }
 
 }

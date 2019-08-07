@@ -158,3 +158,11 @@ list is an array containing id and name.  Links are created.
 </div>
 {% endfor %}
 {% endmacro %}
+
+{% macro displayErrorsWithKeys(errors) %}
+{% for name, error in errors %}
+<div class="alert alert-danger">
+    {{name~': '~error}}
+</div>
+{% endfor %}
+{% endmacro %}

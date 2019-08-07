@@ -13,17 +13,21 @@ class Point extends GreenbeanDashboardPageController
             'defaultValues'=>'/account',
             'points'=>['/points', array_merge($this->getParameters(), ['verbose'=>true])],
         ]);
-        syslog(LOG_ERR, 'test: '.json_encode($rs));
-        $rs['defaultValues']['virtualLanId']=$rs['defaultValues']['base']['virtualLanId'];
-        $this->addAssets([
-            ['javascript', 'handlebars'],
-            //['bootstrap-editable'],
-            ['javascript', 'bootstrap-editable'],
-            ['javascript', 'points'],
-            ['javascript', 'editableAutocomplete'],
-            ['sortfixedtable']
-            ]
-        );
-        $this->twig('dashboard/greenbean/point.php', $rs);
+        if(empty($rs['errors'])) {
+            $rs['defaultValues']['virtualLanId']=$rs['defaultValues']['base']['virtualLanId'];
+            $this->addAssets([
+                ['javascript', 'handlebars'],
+                //['bootstrap-editable'],
+                ['javascript', 'bootstrap-editable'],
+                ['javascript', 'points'],
+                ['javascript', 'editableAutocomplete'],
+                ['sortfixedtable']
+                ]
+            );
+            $this->twig('dashboard/greenbean/point.php', $rs);
+        }
+        else {
+            $this->twig('dashboard/greenbean/error.php', $rs);
+        }
     }
 }

@@ -5,6 +5,7 @@ class Settings extends GreenbeanDashboardPageController
 {
     public function view()
     {
+        if(empty($rs['errors'])) {
         $rs=$this->getServerBridge()->getPageContent([
             'defaultValues'=>'/account',
             'virtualLans'=>'/tags/lans'

@@ -12,17 +12,22 @@ class Chart extends GreenbeanDashboardPageController
             'chartTypes'=>'/charts/themes',
             'defaultValues'=>'/account',
         ]);
-        //$rs['chartTypes']=$this->gbHelper->sortChartTypes($rs['chartTypes']);
-        if(!$rs['defaultValues']) $rs['defaultValues']=$this->gbHelper->getDefaultValues();
-        $this->addAssets([
-            ['javascript', 'handlebars'],
-            //['bootstrap-editable'],
-            ['javascript', 'bootstrap-editable'],
-            ['javascript', 'table-dragger'],
-            ['javascript', 'charts'],
-            ['javascript', 'editableAutocomplete'],
-            ['sortfixedtable']
-        ]);
-        $this->twig('dashboard/greenbean/chart.php', $rs);
+        if(empty($rs['errors'])) {
+            //$rs['chartTypes']=$this->gbHelper->sortChartTypes($rs['chartTypes']);
+            if(!$rs['defaultValues']) $rs['defaultValues']=$this->gbHelper->getDefaultValues();
+            $this->addAssets([
+                ['javascript', 'handlebars'],
+                //['bootstrap-editable'],
+                ['javascript', 'bootstrap-editable'],
+                ['javascript', 'table-dragger'],
+                ['javascript', 'charts'],
+                ['javascript', 'editableAutocomplete'],
+                ['sortfixedtable']
+            ]);
+            $this->twig('dashboard/greenbean/chart.php', $rs);
+        }
+        else {
+            $this->twig('dashboard/greenbean/error.php', $rs);
+        }
     }
 }

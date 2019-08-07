@@ -15,11 +15,16 @@ class Edit extends GreenbeanDashboardPageController
             'pointList'=>['/points'],
             'chartList'=>['/charts'],
         ]);
-        $rs['page']=$args['page'];
-        $rs['html']=$this->gbHelper->getHtml($page);
-        $rs['js']=[];
-        $rs['css']=[];
-        $this->addAssets([['javascript', 'tinymce'], ['sandbox_edit']]);
-        $this->twig('dashboard/greenbean/sandboxEdit.php', $rs);
+        if(empty($rs['errors'])) {
+            $rs['page']=$args['page'];
+            $rs['html']=$this->gbHelper->getHtml($page);
+            $rs['js']=[];
+            $rs['css']=[];
+            $this->addAssets([['javascript', 'tinymce'], ['sandbox_edit']]);
+            $this->twig('dashboard/greenbean/sandboxEdit.php', $rs);
+        }
+        else {
+            $this->twig('dashboard/greenbean/error.php', $rs);
+        }
     }
 }
