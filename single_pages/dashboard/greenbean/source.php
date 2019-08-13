@@ -1,4 +1,5 @@
 {% import "forms.html" as forms %}
+{% include 'dashboard/menu.html' %}
 <div id="list-header">
     <button class="btn btn-primary" id='addBacnetGateway'>Add New</button>
     <h1>Data Sources - BACnet Gateway</h1>

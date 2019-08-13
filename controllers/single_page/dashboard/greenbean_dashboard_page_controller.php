@@ -15,6 +15,7 @@ abstract class GreenbeanDashboardPageController extends DashboardPageController
     public function __construct(...$args)
     {
         $this->gbHelper=new GbHelper(); //How should this be injected?
+        syslog(LOG_INFO, json_encode($args));
         parent::__construct(...$args);
     }
 
@@ -81,6 +82,22 @@ abstract class GreenbeanDashboardPageController extends DashboardPageController
     {
         if(!$this->serverBridge) $this->serverBridge = $this->app->make('\Greenbean\ServerBridge\ServerBridge');
         return $this->serverBridge;
+    }
+
+   protected function getMenu($active=null) {
+        return [
+            'active'=>$active,
+            'links'=>[
+                ['name'=>'Reports','path'=>'/dashboard/greenbean/report'], //class=>'bla'
+                ['name'=>'Points','path'=>'/dashboard/greenbean/point'],
+                ['name'=>'Charts','path'=>'/dashboard/greenbean/chart'],
+                ['name'=>'Data Sources','path'=>'/dashboard/greenbean/source'],
+                ['name'=>'Sandbox','path'=>'/dashboard/greenbean/sandbox'],
+                ['name'=>'Account Settings','path'=>'/dashboard/greenbean/settings'],
+                ['name'=>'Users Manual','path'=>'/dashboard/greenbean/manual'],
+                ['name'=>'Help Desk','path'=>'/dashboard/greenbean/helpdesk'],
+            ]
+        ];
     }
 
     protected function addAssets(array $assets=[])

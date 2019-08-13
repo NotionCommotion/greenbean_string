@@ -1,4 +1,5 @@
 {% import "forms.html" as forms %}
+{% include 'dashboard/menu.html' %}
 {{ forms.displayErrors(errors??[]) }}
 <div id="list-header">
     <div class="btn-group float-right">

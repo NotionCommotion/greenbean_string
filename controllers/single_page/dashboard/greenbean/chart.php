@@ -12,6 +12,7 @@ class Chart extends GreenbeanDashboardPageController
             'chartTypes'=>'/charts/themes',
             'defaultValues'=>'/account',
         ]);
+        $rs['menu']=$this->getMenu('/dashboard/greenbean/chart');
         if(empty($rs['errors'])) {
             //$rs['chartTypes']=$this->gbHelper->sortChartTypes($rs['chartTypes']);
             if(!$rs['defaultValues']) $rs['defaultValues']=$this->gbHelper->getDefaultValues();

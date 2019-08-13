@@ -8,6 +8,7 @@ use Concrete\Core\Application\Application;
 use Concrete\Core\Support\Facade\Events;
 use Concrete\Core\Asset\AssetList;
 use Concrete\Core\Asset\Asset;
+use Concrete\Core\Backup\ContentImporter;
 use Concrete\Package\GreenbeanDataIntegrator\Controller\SinglePage\Dashboard\Greenbean\Sandbox;
 use Greenbean\Concrete5\GreenbeanDataIntegrator\RouteList;
 //use Concrete\Core\Database\EntityManager\Provider\ProviderAggregateInterface;
@@ -21,95 +22,12 @@ class Controller extends Package    // implements ProviderAggregateInterface
 {
 
     protected $appVersionRequired = '8.2';
-    protected $pkgVersion = '0.7';
+    protected $pkgVersion = '0.4';
     protected $pkgHandle = 'greenbean_data_integrator';
     protected $pkgName = 'Greenbean Data Integrator';
     protected $pkgDescription = 'Interface to the Greenbean data Api';
     protected $pkgAutoloaderRegistries = [
         'src/' => 'Greenbean\\Concrete5\\GreenbeanDataIntegrator'
-    ];
-    //route with array with optional elements for page properties, future blocks (maybe), exclude_nav, and maybe more.
-    //Confirm sympony router cannot do like twig router such as {id:[0-9]+}.
-    private const  SINGLE_PAGES = [
-        '/data_reporter' => ['cName'=>'Data Reporter'],
-        '/dashboard/greenbean' => ['cName'=>'Greenbean', 'cDescription'=>'Greenbean Energy and Environmmental Data Manager'],
-        '/dashboard/greenbean/report' => ['cName'=>'Report Manager'],
-        '/dashboard/greenbean/point' => ['cName'=>'Point Manager'],
-        '/dashboard/greenbean/chart' => ['cName'=>'Chart Manager'],
-        '/dashboard/greenbean/source' => ['cName'=>'Data Source Manager'],
-        '/dashboard/greenbean/sandbox' => ['cName'=>'Sandbox'],
-        '/dashboard/greenbean/sandbox/edit' => ['exclude_nav'=>true],
-        '/dashboard/greenbean/settings' => ['cName'=>'Account Settings'],
-        '/dashboard/greenbean/manual' => ['cName'=>'Users Manual'],
-        '/dashboard/greenbean/helpdesk' => ['cName'=>'Help Desk'],
-        '/dashboard/greenbean/configure' => ['cName'=>'Configure'],
-    ];
-
-    private const  PAGE_PROPERTIES = ['cName'=>null, 'cCacheFullPageContent'=>null, 'cCacheFullPageContentLifetimeCustom'=>null, 'cCacheFullPageContentOverrideLifetime'=>null, 'cDescription'=>null, 'cDatePublic'=>null, 'uID'=>null, 'pTemplateID'=>null, 'ptID'=>null, 'cHandle'=>null, 'cFilename'=>null];
-
-    //path, array of methods, optional array of regex validation.  Sequential arrays are integers, associate arrays are name=>regex
-    private const  PRIVATE_ROUTES =[
-        ['/account', ['put']],
-        ['/account/timezones', ['get']],
-        ['/units/time', ['get']],
-        ['/tags/lans', ['get','post']],
-        ['/tags/lans/{id}', ['delete','put'], ['id']],
-        ['/sources/{id}', ['delete','get','put'], ['id']],  //GET currently not used since rendered in page
-        ['/sources/{id}/points', ['get'], ['id']],
-        ['/sources/{id}/gateway', ['post'], ['id']],   //methods supported in POST: restartService|restartNetwork|rebootDevice
-        ['/sources', ['post']],
-        ['/sources/{id}/discovery/{deviceId}', ['post'], ['id', 'deviceId']],
-        ['/sources/{id}/discoveryDevicesOnline', ['get'], ['id']],//Might not be implemented if JavaScript is used to individual query each request.
-        ['/points', ['post', 'get']],  //GET used for searching points
-        ['/points/validation', ['get']],   // Do before /api/points/{id}.  Used for validation
-        ['/points/{id}', ['get','put','delete'], ['id']],
-        ['/points/{id}/custom', ['get','post'], ['id']],
-        ['/points/{id}/custom/{pointsIdSub}', ['delete','put'], ['id','pointsIdSub']],
-
-        ['/bacnet/devices', ['get']], //All bacnet devices for all sources
-        ['/bacnet/objects', ['get']], //All bacnet objects for all sources
-        ['/sources/{protocol}/defaults', ['get']], //get default values for a new bacnet source.  Currently only bacnet
-        ['/sources/{id}/bacnet/devices', ['get'], ['id']], //All bacnet devices for given id
-        ['/sources/{id}/bacnet/deviceobjects', ['get'], ['id']], //All bacnet devices with objects for given id
-        ['/sources/{id}/bacnet/devices/{deviceId}', ['get'], ['id','deviceId']],
-        ['/sources/{id}/bacnet/devices/{deviceId}/objects', ['get'], ['id','deviceId']],
-        ['/sources/{id}/bacnet/devices/{deviceId}/objects/{objectId}/{typeId}', ['get'], ['id','deviceId','objectId','typeId']],
-
-        ['/charts', ['get', 'post']],//GET used for searching charts
-        ['/charts/validation', ['get']],
-        ['/chart/{id}/options', ['get','put'], ['id']],   //get or update entire Highchart option object
-        ['/chart/{id}/options/{params}', ['put'], ['id', 'params'=>'.*']],   //Update single property in the Highchart option object.  Future add GET.
-        ['/chart/{id}/series', ['post'], ['id']],//POST is currently only used to allow time chart to ADD a series.  Maybe make endpoint as /chart/{id} and use for other charts as well by including the parameter description (i.e. addSeries, addPoint, etc)to add?
-        ['/chart/{id}/category', ['post'], ['id']],//Not currently implemented by API.
-        ['/chart/{id}', ['delete','get','post','put'], ['id']], //POST used to add point item based on given series and category for category charts and just the points ID and legend for pie chart and time chart.
-        ['/chart/clone/{id}', ['post'], ['id']],
-        ['/chart/{id}/series/{seriesOffset}', ['delete','post','put'], ['id','seriesOffset']],  //Only used to allow pie chart to add a category
-        ['/chart/{id}/category/{categoryOffset}', ['delete','put'], ['id','categoryOffset']],  //Only used by category charts.
-        ['/chart/{id}/series/{seriesOffset}/data/{dataOffset}', ['delete','put'], ['id','seriesOffset','dataOffset']], // Old approach was to use POST used to update point value and send NULL to delete point.  Only used with category chart.
-        ['/charts/themes', ['get']],    //Not currently used to proxy since charts display uses this endpoint directly.
-        ['/reports', ['get','post']],
-        ['/reports/{id}', ['delete','get', 'put'], ['id']], //POST removed.  GET not used as /reports and /reports/{id} will directly get this data serverside
-        ['/reports/validation', ['get']],  //Not used?
-        ['/manual', ['get']],
-        ['/manual/{id}', ['get'], ['id']],
-        ['/helpdesk', ['get','post']],  //GET Not used, and performed directy in HelpDesk class
-        ['/helpdesk/topics', ['get']], //Not used, and performed directy in HelpDesk class
-        ['/helpdesk/search', ['get']], //Not yet implemented
-        ['/helpdesk/validation', ['get']],
-        ['/helpdesk/{id}', ['delete','get','post','put'], ['id']],
-        ['/points/custom/report', ['get']],
-        ['/tools/import/validate', ['post']], //Will include files
-        ['/tools/import/update', ['post']],   //Will include files
-    ];
-
-    private const  PUBLIC_ROUTES=[
-        ['/query/initialize', ['get']],           //Used for initial page set up and will return all point and widget values/previousValue/units and chart option json.  ?p=1.2.3&c=1.2.3&w=1.2.3
-        ['/query', ['get']],                      //Returns point and widget values without units.  p=1.2.3&w=1.2.3
-        ['/query/custom', ['get']],               //params includes p (points ID array), range (3d, etc), offset (1y, etc), boundary (true/false whether to be fixed on the range units)
-        ['/query/timeline', ['get']],             //Returns next timechart value
-        ['/query/point/{id}', ['get'], ['id']],    //returns single point value
-        ['/query/chart/{id}', ['get'], ['id']],    //returns single chart option
-        ['/query/trend', ['get']],                //Returns trend data, and based on Accept parameter, will be csv, json, or highchart json
     ];
 
     //Forth element is an optional group name
@@ -192,26 +110,23 @@ class Controller extends Package    // implements ProviderAggregateInterface
     public function install()
     {
         $pkg = parent::install();
-        //BlockType::installBlockTypeFromPackage('event_calendar', $pkg);
-        $this->installSinglePages($pkg);
+        $this->installSinglePages();
         $this->addInitialSandboxPages();
     }
 
     public function upgrade()
     {
         parent::upgrade();
-        $pkg = Package::getByHandle('greenbean_data_integrator');
-        //if (!is_object(BlockType::getByHandle('greenbean_data_integrator'))) { BlockType::installBlockTypeFromPackage('greenbean_data_integrator', $this);}
-        $this->installSinglePages($pkg);
+        $this->installSinglePages();
         $this->addInitialSandboxPages();
     }
 
     /*
     public function uninstall()
     {
-        parent::uninstall();
-        $db = \Database::connection();
-        $db->query('DROP TABLE IF EXISTS SandboxPages');
+    parent::uninstall();
+    $db = \Database::connection();
+    $db->query('DROP TABLE IF EXISTS SandboxPages');
     }
     */
     public function on_start()
@@ -230,20 +145,15 @@ class Controller extends Package    // implements ProviderAggregateInterface
             $al->registerGroup($name, $assets);
         }
 
-        $user = $this->app->make('session')->get('greenbeen-user');
+        $gbUser = $this->app->make('session')->get('greenbeen-user');
 
-        $router=$this->app->make('router');
-        $list = new RouteList();
-        $list->loadRoutes($router);
-        //Future - Change to use RouteList and RouteListInterface
-        $this->addProxyRoutes($router, self::PRIVATE_ROUTES, $user, false);
-        $this->addProxyRoutes($router, self::PUBLIC_ROUTES, $user, true);
+        $this->app->when('Greenbean\Concrete5\GreenbeanDataIntegrator\RouteController')->needs('$gbUser')->give($gbUser);
 
-        if(/* $user && */$config = $this->getFileConfig()->get('server')) {
-            $this->app->bind(ServerBridge::class, function(Application $app) use($user, $config) {
+        if($config = $this->getFileConfig()->get('server')) {
+            $this->app->bind(ServerBridge::class, function(Application $app) use($gbUser, $config) {
                 $headers=['X-GreenBean-Key' => $config['api']];
-                if($user) {
-                    $headers['X-GreenBean-UserId'] = $user['id'];
+                if($gbUser) {
+                    $headers['X-GreenBean-UserId'] = $gbUser['id'];
                 }
                 return new ServerBridge(
                     new \GuzzleHttp\Client(['base_uri' => 'https://'.$config['host'],'headers' => $headers]),
@@ -251,47 +161,16 @@ class Controller extends Package    // implements ProviderAggregateInterface
                 );
             });
         }
+
+        $router=$this->app->make('router');
+        $list = new RouteList();
+        $list->loadRoutes($router);
     }
 
-    private function addProxyRoutes($router, array $routes, $user, $public)
+    private function installSinglePages()
     {
-        //['/path/{id}', ['post','put'], ['id']],
-        foreach ($routes as $route) {
-            foreach ($route[1] as $method) {
-                $r=$router->$method('/dashboard/greenbean/api'.$route[0], function() use($user, $public){
-                    if($user || $public) {
-                        $request = \Concrete\Core\Http\Request::createFromGlobals();
-                        $response=null; //new \Symfony\Component\HttpFoundation\JsonResponse(); //Include array arguement for content
-                        return $this->app->make('\Greenbean\ServerBridge\ServerBridge')->proxy($request, $response, function($path){
-                            return substr($path, 25);       //Remove "/dashboard/greenbean/api/" from uri
-                        });
-                    }
-                });
-                if(isset($route[2])) {
-                    foreach($route[2] as $key=>$value) {
-                        $r->setRequirements(is_int($key)?[$value=>'[0-9]+']:[$key => $value]);
-
-                    }
-                }
-            }
-        }
-    }
-
-    private function installSinglePages($pkg)
-    {
-        //Change to use installXml.  See example at https://github.com/mlocati/my_boats
-        foreach(self::SINGLE_PAGES as $route=>$properties) {
-            $sp = SinglePage::add($route, $pkg);    //returns \Concrete\Core\Page\Page
-            if($spProps=array_intersect_key($properties, self::PAGE_PROPERTIES)) {
-                if(isset($spProps['cName'])) {
-                    $spProps['cName']=t($spProps['cName']);
-                }
-                $sp->update($spProps);    //Returns null
-            }
-            if(!empty($properties['exclude_nav'])) {
-                $sp->setAttribute('exclude_nav', true);    //Will not put in menu.  Returns Concrete\Core\Entity\Attribute\Value\PageValue
-            }
-        }
+        $contentImporter = $this->app->make(ContentImporter::class);
+        $contentImporter->importContentFile($this->getPackagePath() . '/install.xml');
     }
 
     private function addInitialSandboxPages()

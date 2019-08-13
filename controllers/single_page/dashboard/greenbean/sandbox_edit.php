@@ -5,6 +5,7 @@ class SandboxEdit extends GreenbeanDashboardPageController
 {
     public function view($page=1)
     {
+        $rs['menu']=$this->getMenu('/dashboard/greenbean/sandbox');
         if(empty($rs['errors'])) {
             $rs=$this->getServerBridge()->getPageContent([
                 'pointList'=>['/points'],

@@ -10,7 +10,6 @@ class Sandbox extends GreenbeanDashboardPageController
 {
     public function view($id=null)
     {
-        syslog(LOG_ERR, 'xxxx');
         $errors = new ErrorList;
         syslog(LOG_ERR, json_encode(get_class_methods($errors)));
         if($id) {
@@ -18,7 +17,7 @@ class Sandbox extends GreenbeanDashboardPageController
             $repo = $em->getRepository(SandboxPage::class);
             if($page=$repo->find($id)) {
                 $this->addAssets([['highcharts'],['dynamic_update']]);
-                $rs=array_merge($page->asArray(), /*$this->gbHelper->getResourceFiles($page), */ ['displayUnit'=>\Package::getByHandle(self::PKGHANDLE)->getFileConfig()->get('settings.displayUnit')]);
+                $rs=array_merge($page->asArray(), /*$this->gbHelper->getResourceFiles($page), */ ['menu'=>$this->getMenu('/dashboard/greenbean/sandbox'), 'displayUnit'=>\Package::getByHandle(self::PKGHANDLE)->getFileConfig()->get('settings.displayUnit')]);
                 $this->twig('dashboard/greenbean/sandbox/detail.php', $rs );
             }
             else {
@@ -32,7 +31,7 @@ class Sandbox extends GreenbeanDashboardPageController
             $em = $this->app->make(EntityManager::class);
             $repo = $em->getRepository(SandboxPage::class);
             $pages = $repo->createQueryBuilder('s')->select('s.id','s.name')->getQuery()->execute();
-            $this->twig('dashboard/greenbean/sandbox/index.php', ['pages'=>$pages]);
+            $this->twig('dashboard/greenbean/sandbox/index.php', ['pages'=>$pages, 'menu'=>$this->getMenu('/dashboard/greenbean/sandbox')]);
         }
     }
 

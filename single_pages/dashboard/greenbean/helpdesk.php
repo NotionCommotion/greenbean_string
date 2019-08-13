@@ -1,4 +1,5 @@
 {% import "forms.html" as forms %}
+{% include 'dashboard/menu.html' %}
 <h2>Help Desk</h2>
 {{ forms.displayErrors(errors??null) }}
 

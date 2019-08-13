@@ -1,4 +1,5 @@
 {% import "forms.html" as forms %}
+{% include 'dashboard/menu.html' %}
 <div class="header">
     <img src="{{ img_url }}/arrow-left-nav.png" class="back" alt="back" height="32" width="32">
     <img src="{{ img_url }}/arrow-right-nav.png" class="forward" alt="forward" height="32" width="32">

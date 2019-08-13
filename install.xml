@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+<concrete5-cif version="1.0">
+
+    <singlepages>
+        <page package="greenbean_data_integrator" name="Greenbean" description="Greenbean Energy and Environmmental Data Manager" pagetype="" path="/dashboard/greenbean" filename="/dashboard/greenbean.php" />
+        <page package="greenbean_data_integrator" name="Greenbean" description="Greenbean Energy and Environmmental Data App" pagetype="" path="/greenbean" filename="/greenbean.php" />
+        <page package="greenbean_data_integrator" name="Greenbean Configure" description="" pagetype="" path="/dashboard/greenbean/configure" filename="/dashboard/greenbean/configure.php">
+            <attributes><attributekey handle="exclude_nav"><value>1</value></attributekey></attributes>
+        </page>
+        <page package="greenbean_data_integrator" name="Report Manager" description="" pagetype="" path="/dashboard/greenbean/report" filename="/dashboard/greenbean/report.php">
+            <attributes><attributekey handle="exclude_nav"><value>1</value></attributekey></attributes>
+        </page>
+        <page package="greenbean_data_integrator" name="Point Manager" description="" pagetype="" path="/dashboard/greenbean/point" filename="/dashboard/greenbean/point.php">
+            <attributes><attributekey handle="exclude_nav"><value>1</value></attributekey></attributes>
+        </page>
+        <page package="greenbean_data_integrator" name="Chart Manager" description="" pagetype="" path="/dashboard/greenbean/chart" filename="/dashboard/greenbean/chart.php">
+            <attributes><attributekey handle="exclude_nav"><value>1</value></attributekey></attributes>
+        </page>
+        <page package="greenbean_data_integrator" name="Data Source Manager" description="" pagetype="" path="/dashboard/greenbean/source" filename="/dashboard/greenbean/source.php">
+            <attributes><attributekey handle="exclude_nav"><value>1</value></attributekey></attributes>
+        </page>
+        <page package="greenbean_data_integrator" name="Sandbox" description="" pagetype="" path="/dashboard/greenbean/sandbox" filename="/dashboard/greenbean/sandbox.php">
+            <attributes><attributekey handle="exclude_nav"><value>1</value></attributekey></attributes>
+        </page>
+        <page package="greenbean_data_integrator" name="Sandbox" description="" pagetype="" path="/dashboard/greenbean/sandbox/{id}" filename="/dashboard/greenbean/sandbox_detail.php">
+            <attributes><attributekey handle="exclude_nav"><value>1</value></attributekey></attributes>
+        </page>
+        <page package="greenbean_data_integrator" name="Sandbox" description="" pagetype="" path="/dashboard/greenbean/sandbox/edit" filename="/dashboard/greenbean/sandbox_edit.php">
+            <attributes><attributekey handle="exclude_nav"><value>1</value></attributekey></attributes>
+        </page>
+        <page package="greenbean_data_integrator" name="Account Settings" description="" pagetype="" path="/dashboard/greenbean/settings" filename="/dashboard/greenbean/settings.php">
+            <attributes><attributekey handle="exclude_nav"><value>1</value></attributekey></attributes>
+        </page>
+        <page package="greenbean_data_integrator" name="Users Manual" description="" pagetype="" path="/dashboard/greenbean/manual" filename="/dashboard/greenbean/manual.php">
+            <attributes><attributekey handle="exclude_nav"><value>1</value></attributekey></attributes>
+        </page>
+        <page package="greenbean_data_integrator" name="Help Desk" description="" pagetype="" path="/dashboard/greenbean/helpdesk" filename="/dashboard/greenbean/helpdesk.php">
+            <attributes><attributekey handle="exclude_nav"><value>1</value></attributekey></attributes>
+        </page>
+    </singlepages>
+
+</concrete5-cif>

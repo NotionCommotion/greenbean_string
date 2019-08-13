@@ -1,3 +1,4 @@
+{% include 'dashboard/menu.html' %}
 <h1>{{ name }}</h1><hr>
 <div id="frontContent" onclick="location.href='edit/{{page}}'" data-displayunit="{{ displayUnit }}">
     {{ html|raw }}

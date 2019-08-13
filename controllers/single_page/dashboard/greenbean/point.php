@@ -13,6 +13,7 @@ class Point extends GreenbeanDashboardPageController
             'defaultValues'=>'/account',
             'points'=>['/points', array_merge($this->getParameters(), ['verbose'=>true])],
         ]);
+        $rs['menu']=$this->getMenu('/dashboard/greenbean/point');
         if(empty($rs['errors'])) {
             $rs['defaultValues']['virtualLanId']=$rs['defaultValues']['base']['virtualLanId'];
             $this->addAssets([

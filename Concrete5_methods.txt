@@ -53,6 +53,96 @@ main App
     __get
     __set
 
+Concrete\Core\Controller\Controller
+    __construct
+    activate
+    twig
+    setViewObject
+    setTheme
+    getTheme
+    setThemeViewTemplate
+    getThemeViewTemplate
+    getControllerActionPath
+    flash
+    getViewObject
+    action
+    getRequest
+    setRequest
+    requireAsset
+    addHeaderItem
+    addFooterItem
+    set
+    getSets
+    shouldRunControllerTask
+    getHelperObjects
+    get
+    getTask
+    getAction
+    getParameters
+    on_start
+    on_before_render
+    isPost
+    post
+    redirect
+    runTask
+    runAction
+    request
+    setApplication
+
+
+Concrete\Core\Page\Controller\PageController
+    __construct
+    activate
+    twig
+    supportsPageCache
+    replace
+    setCustomRequestPath
+    getCustomRequestPath
+    isReplaced
+    getReplacement
+    getSets
+    render
+    getPageObject
+    getTheme
+    getRequestAction
+    getRequestActionParameters
+    getControllerActionPath
+    setupRequestActionAndParameters
+    isValidControllerTask
+    setPassThruBlockController
+    getPassThruBlockController
+    validateRequest
+    useUserLocale
+    getSearchableContent
+    setViewObject
+    setTheme
+    setThemeViewTemplate
+    getThemeViewTemplate
+    flash
+    getViewObject
+    action
+    getRequest
+    setRequest
+    requireAsset
+    addHeaderItem
+    addFooterItem
+    set
+    shouldRunControllerTask
+    getHelperObjects
+    get
+    getTask
+    getAction
+    getParameters
+    on_start
+    on_before_render
+    isPost
+    post
+    redirect
+    runTask
+    runAction
+    request
+    setApplication
+
 Concrete\Core\Page\Controller\DashboardPageController
     view
     getAssets
@@ -110,6 +200,19 @@ Concrete\Core\Page\Controller\DashboardPageController
     setApplication
     twig
     setAssets
+
+Factory
+    __construct
+    create
+    json
+    notFound
+    error
+    forbidden
+    redirect
+    view
+    controller
+    collection
+    setApplication
 
 Concrete\Core\Package\Package
     install

@@ -1,8 +1,9 @@
 {# Similar to front end but also allows the ability to save/modify/delete a report template. #}
 {% import "forms.html" as forms %}
+{% include 'dashboard/menu.html' %}
 <div id="list-header">
     <button type="button" class="btn btn-primary download-data">Download Data</button>
-    {% if id %}
+    {% if id is defined %}
     <button type="button" class="btn btn-secondary update-report">Save Report Changes</button>
     <button type="button" class="btn btn-secondary schedule-report">Schedule Report</button>
     <a href="reports" class="btn btn-info" role="button">Create New</a>

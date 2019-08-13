@@ -5,12 +5,12 @@ class Settings extends GreenbeanDashboardPageController
 {
     public function view()
     {
-        if(empty($rs['errors'])) {
         $rs=$this->getServerBridge()->getPageContent([
             'defaultValues'=>'/account',
             'virtualLans'=>'/tags/lans'
         ]);
         $rs['datalogger']=['ip'=>$this->getServerBridge()->getHost(),'key'=>$this->getServerBridge()->getConfigParam(['headers','X-GreenBean-Key'])];
+        $rs['menu']=$this->getMenu('/dashboard/greenbean/settings');
         if(!$rs['defaultValues']) {
             syslog(LOG_ERR, 'Account is missing default data');
             $rs['defaultValues']=$this->gbHelper->getDefaultValues();

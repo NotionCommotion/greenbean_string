@@ -6,6 +6,7 @@ class Manual extends GreenbeanDashboardPageController
     public function view($id=1)
     {
         $rs=$this->getServerBridge()->callApi('get', 'manual/'.$id);
+        $rs['menu']=$this->getMenu('/dashboard/greenbean/manual');
         if(empty($rs['errors'])) {
             $this->addAssets([['manual']]);
 

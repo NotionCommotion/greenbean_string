@@ -1,4 +1,5 @@
 {% import "forms.html" as forms %}
+{% include 'dashboard/menu.html' %}
 <h2>Settings</h2>
 {{ forms.displayErrors(errors??null) }}
 <h3>Virtual Lans</h3>

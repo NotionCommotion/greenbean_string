@@ -1,4 +1,5 @@
 {% import "forms.html" as forms %}
+{% include 'dashboard/menu.html' %}
 <h1>Web Service</h1>
 <h1>NOT COMPLETE</h1>
 <table class="table">

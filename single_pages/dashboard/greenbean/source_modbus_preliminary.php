@@ -1,4 +1,5 @@
 {% import "forms.html" as forms %}
+{% include 'dashboard/menu.html' %}
 <h1>Modbus Gateway</h1>
 <h1>Not Complete</h1>
 <table class="table">

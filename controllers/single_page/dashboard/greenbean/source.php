@@ -15,6 +15,7 @@ class Source extends GreenbeanDashboardPageController
             'virtualLans'=>'/tags/lans',
             'defaultValues'=>'/account',
         ]);
+        $rs['menu']=$this->getMenu('/dashboard/greenbean/source');
         syslog(LOG_INFO, json_encode($rs));
         if(empty($rs['errors'])) {
             //Remove next two lines after account settings is fixed on server.
@@ -38,6 +39,7 @@ class Source extends GreenbeanDashboardPageController
             'source'=>"/sources/$id",
             'virtualLans'=>'/tags/lans'
         ]);
+        $rs['menu']=$this->getMenu('/dashboard/greenbean/source');
         if(empty($rs['errors'])) {
             if(!$rs['virtualLans']) $rs['virtualLans']=['virtualLans'=>[], 'virtualLanId'=>null];
             $this->addAssets([

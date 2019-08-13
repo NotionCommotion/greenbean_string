@@ -61,10 +61,10 @@ table.point-dialog td:first-child {
 
 .instructions { font-size:12px; }
 
-#main-menu li.active a {
+#sub-menu li.active a {
     font-weight: bold;
 }
-#main-menu a, #main-menu a:visited, #main-menu a:hover, #main-menu a:active {
+#sub-menu a, #sub-menu a:visited, #sub-menu a:hover, #sub-menu a:active {
     color: inherit;
 }
 

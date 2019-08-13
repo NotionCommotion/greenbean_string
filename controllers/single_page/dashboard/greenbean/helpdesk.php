@@ -10,6 +10,7 @@ class Helpdesk extends GreenbeanDashboardPageController
             'tickets'=>['/helpdesk', $params],
             'message_types'=>'/helpdesk/topics',
         ]);
+        $rs['menu']=$this->getMenu('/dashboard/greenbean/helpdesk');
         if(empty($rs['errors'])) {
             if(!empty($params['statusId'])) $rs['statusId']=$params['statusId'];
             $this->addAssets([
