@@ -89,7 +89,7 @@
             </tr>
             <tr id="clone-report">
                 <td><a></a></td>
-                <td><img alt="Delete Report" src="{{ img_url }}/delete.png" title="Delete Report" class="vtip delete" height="16" width="16"></td>
+                <td><img alt="Delete Report" src="{{ gb_img_base }}/delete.png" title="Delete Report" class="vtip delete" height="16" width="16"></td>
             </tr>
         </thead>
         <tbody>

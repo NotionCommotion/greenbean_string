@@ -46,8 +46,8 @@ abstract class GreenbeanDashboardPageController extends DashboardPageController
                 //'strict_variables'=>true
             ]);
         }
-        $variables['base_url'] = \Package::getByHandle(self::PKGHANDLE)->getRelativePath();
-        $variables['img_url'] = $variables['base_url'] . '/images';
+        $variables['gb_root_base'] = \Package::getByHandle(self::PKGHANDLE)->getRelativePath();
+        $variables['gb_img_base'] = $variables['gb_root_base'] . '/images';
         $html = $this->twig->render($template, $variables);
         if($render) {
             $this->set('html', $html);

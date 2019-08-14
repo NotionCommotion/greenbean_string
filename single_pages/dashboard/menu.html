@@ -1,5 +1,6 @@
 {% import "forms.html" as forms %}
-<div class="masthead">
+<input type='hidden' id='gb_img_base' value='{{ gb_img_base }}'>
+<div class="masthead" data-gb_img_base='{{ gb_img_base }}'>
     <nav id="sub-menu" class="navbar navbar-default">
         <ul class="nav nav-justified">
             {{ forms.menu(menu.links, menu.active) }}

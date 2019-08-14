@@ -18,12 +18,12 @@ $(function(){
         setup : function(ed) {
             ed.addButton('addPoint', {
                 title : 'Add Point',
-                image : gb_img_base+'insert.png',
+                image : gb_img_base+'/insert.png',
                 onclick : function() {$("#dialog-addPoint").dialog("open");}
             });
             ed.addButton('addChart', {
                 title : 'Add Chart',
-                image : gb_img_base+'insert.png',
+                image : gb_img_base+'/insert.png',
                 onclick : function() {$("#dialog-addChart").dialog("open");}
             });
         },
@@ -53,7 +53,7 @@ $(function(){
         var $t=$(this),
         ed=tinymce.get('frontContent');
         ed.focus();
-        ed.selection.setContent('<img class="GB_point" data-id="'+$t.data('id')+'" src=gb_img_base+"point.png" alt="'+$t.text()+'" title="'+$t.text()+'">');
+        ed.selection.setContent('<img class="GB_point" data-id="'+$t.data('id')+'" src=gb_img_base+"/point.png" alt="'+$t.text()+'" title="'+$t.text()+'">');
         $t.closest('div.dialog').dialog("close");
     });
     var addChartDialog = $("#dialog-addChart");
@@ -70,7 +70,7 @@ $(function(){
         var $t=$(this),
         ed=tinymce.get('frontContent');
         ed.focus();
-        ed.selection.setContent('<img class="GB_chart" data-id="'+$t.data('id')+'" src=gb_img_base+"chart.png" alt="'+$t.text()+'" title="'+$t.text()+'">');
+        ed.selection.setContent('<img class="GB_chart" data-id="'+$t.data('id')+'" src=gb_img_base+"/chart.png" alt="'+$t.text()+'" title="'+$t.text()+'">');
         $t.closest('div.dialog').dialog("close");
     });
 

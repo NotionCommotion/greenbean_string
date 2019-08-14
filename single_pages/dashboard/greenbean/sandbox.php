@@ -20,7 +20,7 @@
         {% for page in pages %}
         <tr data-id="{{ page.id }}">
             <td><a href="sandbox/{{ page.id }}">{{ page.name }}</a></td>
-            <td><img alt="Delete Sandbox Page" src="{{ img_url }}/delete.png" title="Delete Sandbox Page" class="vtip delete" height="16" width="16"></td>
+            <td><img alt="Delete Sandbox Page" src="{{ gb_img_base }}/delete.png" title="Delete Sandbox Page" class="vtip delete" height="16" width="16"></td>
         </tr>
         {% endfor %}
     </tbody>

@@ -24,7 +24,7 @@
             <td class="chName link">{{ row.name }}</td>
             <td>{{ row.id }}</td>
             <td>{{ row.type }}</td>
-            <td><img alt="Delete Chart" src="{{ img_url }}/delete.png" title="Delete Chart" class="vtip delete" height="16" width="16"></td>
+            <td><img alt="Delete Chart" src="{{ gb_img_base }}/delete.png" title="Delete Chart" class="vtip delete" height="16" width="16"></td>
         </tr>
         {% endfor %}
     </tbody>
@@ -217,14 +217,14 @@
     <tr>
     <th></th>
     {{#each categories}}
-    <th><a href="javascript:void(0)" class="hb_category">{{this.name}}</a><img alt="Delete Category" src="{{ img_url }}/delete.png" title="Delete Category" class="vtip deleteCategory" height="16" width="16"></th>
+    <th><a href="javascript:void(0)" class="hb_category">{{this.name}}</a><img alt="Delete Category" src="{{ gb_img_base }}/delete.png" title="Delete Category" class="vtip deleteCategory" height="16" width="16"></th>
     {{/each}}
             </tr>
             </thead>
             <tbody>
             {{#each series}}
         <tr>
-        <td><a href="javascript:void(0)" class="hb_series">{{this.name}}</a><img alt="Delete Series" src="{{ img_url }}/delete.png" title="Delete Series" class="vtip deleteSeries" height="16" width="16"></td>
+        <td><a href="javascript:void(0)" class="hb_series">{{this.name}}</a><img alt="Delete Series" src="{{ gb_img_base }}/delete.png" title="Delete Series" class="vtip deleteSeries" height="16" width="16"></td>
     {{#each this.points}}
     <td><a href="javascript:void(0)" class="hb_point" data-id="{{this.id}}">{{this.name}}</a></td>
     {{/each}}
@@ -257,7 +257,7 @@
     <tr id="clone-pie">
     <td><a href="javascript:void(0)" class="hb_category"></a></td>
     <td><a href="javascript:void(0)" class="hb_point"></a></td>
-    <td><img alt="Delete Point" src="{{ img_url }}/delete.png" title="Delete Point" class="vtip deleteData" height="16" width="16"></td>
+    <td><img alt="Delete Point" src="{{ gb_img_base }}/delete.png" title="Delete Point" class="vtip deleteData" height="16" width="16"></td>
     </tr>
     </thead>
     <tbody>
@@ -265,7 +265,7 @@
     <tr>
     <td><a href="javascript:void(0)" class="hb_category">{{this.name}}</a></td>
     <td><a href="javascript:void(0)" class="hb_point" data-id="{{this.point.id}}">{{this.point.name}}</a></td>
-    <td><img alt="Delete Point" src="{{ img_url }}/delete.png" title="Delete Point" class="vtip deleteData" height="16" width="16"></td>
+    <td><img alt="Delete Point" src="{{ gb_img_base }}/delete.png" title="Delete Point" class="vtip deleteData" height="16" width="16"></td>
     </tr>
     {{/each}}
     </tbody>
@@ -296,7 +296,7 @@
     <td><a href="javascript:void(0)" class="hb_point"></a></td>
     <td class="timeOffset"><a href="javascript:void(0)" class="hb_historyTimeValue"></a> <a href="javascript:void(0)" class="hb_historyTimeUnit"></a></td>
     <td><a href="javascript:void(0)" class="hb_aggrType"></a></a></td>
-    <td><img alt="Delete Point" src="{{ img_url }}/delete.png" title="Delete Series" class="vtip deleteTimeSeries" height="16" width="16"></td></tr>
+    <td><img alt="Delete Point" src="{{ gb_img_base }}/delete.png" title="Delete Series" class="vtip deleteTimeSeries" height="16" width="16"></td></tr>
     </tr>
     </thead>
     <tbody>
@@ -306,7 +306,7 @@
     <td><a href="javascript:void(0)" class="hb_point" data-id="{{this.point.id}}">{{this.point.name}}</a></td>
     <td class="timeOffset"><a href="javascript:void(0)" class="hb_historyTimeValue">{{this.historyTimeValue}}</a> <a href="javascript:void(0)" class="hb_historyTimeUnit" data-value="{{this.historyTimeUnit}}"></a></td>
     <td><a href="javascript:void(0)" class="hb_aggrType" data-value='{{this.aggrType}}'></a></a></td>
-    <td><img alt="Delete Point" src="{{ img_url }}/delete.png" title="Delete Series" class="vtip deleteTimeSeries" height="16" width="16"></td></tr>
+    <td><img alt="Delete Point" src="{{ gb_img_base }}/delete.png" title="Delete Series" class="vtip deleteTimeSeries" height="16" width="16"></td></tr>
     {{/each}}
     </tbody>
     </table>

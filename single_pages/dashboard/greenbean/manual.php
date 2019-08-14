@@ -1,10 +1,10 @@
 {% import "forms.html" as forms %}
 {% include 'dashboard/menu.html' %}
 <div class="header">
-    <img src="{{ img_url }}/arrow-left-nav.png" class="back" alt="back" height="32" width="32">
-    <img src="{{ img_url }}/arrow-right-nav.png" class="forward" alt="forward" height="32" width="32">
-    <img src="{{ img_url }}/home.png" class="home" alt="home" height="32" width="32">
-    <img src="{{ img_url }}/printer.png" class="print" alt="print" height="32" width="32">
+    <img src="{{ gb_img_base }}/arrow-left-nav.png" class="back" alt="back" height="32" width="32">
+    <img src="{{ gb_img_base }}/arrow-right-nav.png" class="forward" alt="forward" height="32" width="32">
+    <img src="{{ gb_img_base }}/home.png" class="home" alt="home" height="32" width="32">
+    <img src="{{ gb_img_base }}/printer.png" class="print" alt="print" height="32" width="32">
     <input class="searchHelp default-value" type="text" name="search" value="Search Help" />
 </div>
 <div class="main">
@@ -18,6 +18,6 @@
             <a href="/dashboard/greenbean/manual/{{ item.id }}">{{ item.name }}</a>
         </li>
         {% endfor %}
-        {# {{ forms.linklist(topics, {{ base_url }}'/manual') }} #}
+        {# {{ forms.linklist(topics, {{ gb_root_base }}'/manual') }} #}
     </ul>
 </div>

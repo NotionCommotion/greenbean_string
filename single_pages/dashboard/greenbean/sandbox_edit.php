@@ -39,7 +39,7 @@
                 <td></td>
                 <td></td>
                 <td></td>
-                <td><img alt="Delete Resource" src="/packages/greenbean_data_integrator/images/delete.png" title="Delete Resource" class="vtip delete" height="16" width="16"></td>
+                <td><img alt="Delete Resource" src="{{ gb_img_base }}/delete.png" title="Delete Resource" class="vtip delete" height="16" width="16"></td>
             </tr>
         </thead>
         <tbody></tbody>

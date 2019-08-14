@@ -46,8 +46,8 @@ class SandboxRouteController
                 //'strict_variables'=>true
             ]);
         }
-        $variables['base_url'] = \Package::getByHandle(self::PKGHANDLE)->getRelativePath();
-        $variables['img_url'] = $variables['base_url'] . '/images';
+        $variables['gb_root_base'] = \Package::getByHandle(self::PKGHANDLE)->getRelativePath();
+        $variables['gb_img_base'] = $variables['gb_root_base'] . '/images';
         syslog(LOG_INFO, '$variables: '.json_encode($variables));
         $html = $this->twig->render($template, $variables);
         //syslog(LOG_INFO, '$html: '.json_encode($html));

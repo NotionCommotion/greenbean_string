@@ -30,7 +30,7 @@
                 <td>{{ row.device_id }}</td>
                 <td>{{ row.timeout }}</td>
                 <td>{{ row.discovery_timeout }}</td>
-                <td><img alt="Delete Source" src="{{ img_url }}/delete.png" title="Delete Source" class="vtip delete" height="16" width="16"></td>
+                <td><img alt="Delete Source" src="{{ gb_img_base }}/delete.png" title="Delete Source" class="vtip delete" height="16" width="16"></td>
             </tr>
             {% endfor %}
         </tbody>
@@ -61,7 +61,7 @@
             <td>{{ row.url }}</td>
             <td>{{ row.port }}</td>
             <td>{{ row.encryptKey }}</td>
-            <td><img alt="Delete Source" src="{{ img_url }}/delete.png" title="Delete Source" class="vtip delete" height="16" width="16"></td>
+            <td><img alt="Delete Source" src="{{ gb_img_base }}/delete.png" title="Delete Source" class="vtip delete" height="16" width="16"></td>
         </tr>
         {% endfor %}
     </tbody>
@@ -87,7 +87,7 @@
             <td>{{ row.url }}</td>
             <td>{{ row.port }}</td>
             <td>{{ row.encryptKey }}</td>
-            <td><img alt="Delete Source" src="{{ img_url }}/delete.png" title="Delete Source" class="vtip delete" height="16" width="16"></td>
+            <td><img alt="Delete Source" src="{{ gb_img_base }}/delete.png" title="Delete Source" class="vtip delete" height="16" width="16"></td>
         </tr>
         {% endfor %}
     </tbody>

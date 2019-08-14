@@ -8,9 +8,9 @@
     <tbody>
         {% for row in files %}
         {% if row.path is defined %}
-        <tr{{ (row.id is defined?' data-id="'~row.id~'"')|raw }}><td><a href="{{ row.path }}" target="_blank">{{ row.name }}</a></td><td>{{ row.size }}</td><td>{{ row.date }}</td><td><img alt="Delete File" title="Delete File" src="images/icon_16/delete.png" class="vtip delete" height="16" width="16"></td></tr>
+        <tr{{ (row.id is defined?' data-id="'~row.id~'"')|raw }}><td><a href="{{ row.path }}" target="_blank">{{ row.name }}</a></td><td>{{ row.size }}</td><td>{{ row.date }}</td><td><img alt="Delete File" title="Delete File" src="{{ gb_img_base }}/delete.png" class="vtip delete" height="16" width="16"></td></tr>
         {% else %}
-        <tr{{ (row.id is defined?' data-id="'~row.id~'"')|raw }}><td>{{ row.name }}</td><td>{{ row.size }}</td><td>{{ row.date }}</td><td><img alt="Delete File" title="Delete File" src="images/icon_16/delete.png" class="vtip delete" height="16" width="16"></td></tr>
+        <tr{{ (row.id is defined?' data-id="'~row.id~'"')|raw }}><td>{{ row.name }}</td><td>{{ row.size }}</td><td>{{ row.date }}</td><td><img alt="Delete File" title="Delete File" src="{{ gb_img_base }}/delete.png" class="vtip delete" height="16" width="16"></td></tr>
         {% endif %}
         {% endfor %}
     </tbody>
@@ -148,7 +148,7 @@ list is an array containing id and name.  Links are created.
     <label class="checkbox-inline"><input type="checkbox" value='{{ function }}'{{ function in functions?' checked':'' }}>{{ function|capitalize }}</label>
     {% endfor %}
 </td>
-<td><img alt="Delete Point" src="images/icon_16/delete.png" title="Delete Point" class="vtip delete" height="16" width="16"></td>
+<td><img alt="Delete Point" src="{{ gb_img_base }}/delete.png" title="Delete Point" class="vtip delete" height="16" width="16"></td>
 {% endmacro %}
 
 {% macro displayErrors(errors) %}
