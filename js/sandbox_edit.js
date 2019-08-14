@@ -30,7 +30,7 @@ $(function(){
         save_onsavecallback: function () {
             $.ajax({
                 type:'PUT',
-                url:'../save/'+$('#page').val(),
+                url:gb_api_base+'/sandbox/save/'+$('#page').val(),
                 data: tinyMCE.activeEditor.getContent(),
                 success: function (rsp){
                     window.location = "../"+$('#page').val();
@@ -102,7 +102,7 @@ $(function(){
         $.ajax({
             type: "POST",
             enctype: 'multipart/form-data',
-            url: "/resources/"+$("#page").val(),
+            url: gb_api_base+"/resources/"+$("#page").val(),
             data: data,
             processData: false,
             contentType: false,
@@ -140,7 +140,7 @@ $(function(){
         if(confirm("Are you sure you wish to delete this file?")) {
             $.ajax({
                 type:'DELETE',
-                url: "/resources/"+row.data('id'),
+                url: gb_api_base+"/resources/"+row.data('id'),
                 //dataType: 'json',
                 success: function (rsp){
                     row.remove();
@@ -158,7 +158,7 @@ $(function(){
         var linked=input.prop("checked");
         $.ajax({
             type:'PUT',
-            url: "/resources/"+$("#page").val()+"/"+row.data('id'),
+            url: gb_api_base+"/resources/"+$("#page").val()+"/"+row.data('id'),
             data: {linked: linked?1:0},
             //dataType: 'json',
             error: function (xhr) {

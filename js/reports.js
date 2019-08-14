@@ -222,7 +222,7 @@ $(function(){
                 $.ajax({
                     type:'GET',
                     //dataType: "json",
-                    url: 'api/query/trend',
+                    url: gb_api_base+'/query/trend',
                     data: params,
                     success: function(data){
                         console.log('chart', data)
@@ -251,7 +251,7 @@ $(function(){
 
     var reportId=$('#id').val();
     //console.log(reportId)
-    $('#name').editable({title:'Report Name', placement: 'right', ajaxOptions: {type: "PUT"}, url: 'api/reports/'+reportId, send: 'always'}).toggle(reportId!=0);
+    $('#name').editable({title:'Report Name', placement: 'right', ajaxOptions: {type: "PUT"}, url: gb_api_base+'/reports/'+reportId, send: 'always'}).toggle(reportId!=0);
 
     var points={};
     $('#points-table tbody tr.point-row').each(function(){
@@ -352,7 +352,7 @@ $(function(){
         $('.absolute-date, .relative-time').toggle();
     });
 
-    $('#content').on('click', '.open-point', function() {
+    $('#open-point').click(function() {
         $('#add-point').show().focus().blur(function(){
             $(this).hide();
         });
@@ -362,7 +362,7 @@ $(function(){
     $('#list-header').on('click', '.download-data', function() {
         var params=uxState.getValue('dataRequestDownload');
         params.Accept='csv';
-        window.location.assign("/api/query/trend?" + $.param(params));
+        window.location.assign(gb_api_base+"/query/trend?" + $.param(params));
         //$("#dialog-download-data").Dialog("open");}
     });
     $("#dialog-download-data").Dialog({
@@ -376,8 +376,8 @@ $(function(){
                     //console.log(params,cb)
                     params.Accept=cb.val();
                     if(cb.closest('div').find('input[type=checkbox]').prop('checked')) params.includeCharts=true;
-                    window.location.assign("/api/query/trend?" + $.param(params));
-                    //window.location.href = "/api/query/trend?" + $.param(params);
+                    window.location.assign(gb_api_base+"/query/trend?" + $.param(params));
+                    //window.location.href = gb_api_base+"/query/trend?" + $.param(params);
                 }
             },
             {
@@ -401,7 +401,7 @@ $(function(){
         height      : 500,
         open        : function(){
             $.blockUI();
-            $.getJSON( 'api/reports', function(reports) {
+            $.getJSON( gb_api_base+'/reports', function(reports) {
                 var clone=$('#clone-report');
                 var tbody=clone.closest('table').find('tbody').empty();
                 $.each(reports, function(i,report){
@@ -419,7 +419,7 @@ $(function(){
             var $row=$(this).closest('tr');
             $.ajax({
                 type:'DELETE',
-                url:'api/reports/'+$row.data('id'),
+                url:gb_api_base+'/reports/'+$row.data('id'),
                 //dataType: 'json',
                 success: function (rsp){
                     $.unblockUI();
@@ -438,7 +438,7 @@ $(function(){
         data.name=$('#name').text();
         $.ajax({
             type:'PUT',
-            url:'api/reports/'+reportId,
+            url:gb_api_base+'/reports/'+reportId,
             data:data,
             //dataType: 'json',
             success: function(rsp) {
@@ -471,7 +471,7 @@ $(function(){
                     var dialog=$(this)
                     $.ajax({
                         type:'POST',
-                        url:'api/reports',
+                        url:gb_api_base+'/reports',
                         data:data,
                         //dataType: 'json',
                         success: function (rsp){
@@ -493,7 +493,7 @@ $(function(){
 
     /*
     var validator=false;
-    $.getJSON( 'api/reports/validation', function(validObj) {
+    $.getJSON( gb_api_base+'/reports/validation', function(validObj) {
     console.log(validObj);
     validator = $( "#dialog-trend-report form" ).validate({rules: validObj.rules,messages: validObj.messages});
     });
@@ -503,7 +503,7 @@ $(function(){
         source: function( request, response ) {
             $.ajax( {
                 type:'GET',
-                url: "/api/points",
+                url: gb_api_base+"/points",
                 //dataType: "json",
                 data: {
                     term:request.term,

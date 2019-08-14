@@ -26,7 +26,7 @@ $(function(){
         ]
     });
 
-    $('#dialog-addSandboxPage form').myValid({"rules":{"message":"required"}}, {url:'sandbox/create'});
+    $('#dialog-addSandboxPage form').myValid({"rules":{"message":"required"}}, {url:gb_api_base+'/sandbox/create'});
 
     $("#sandbox-page-list .delete").click(function(){
         if (confirm("Are you sure?")) {
@@ -34,7 +34,7 @@ $(function(){
             var $row=$(this).closest('tr');
             $.ajax({
                 type:'delete',
-                url:'sandbox/delete/'+$row.data('id'),
+                url:gb_api_base+'/sandbox/delete/'+$row.data('id'),
                 //dataType: 'json',
                 success: function (rsp){
                     $.unblockUI();

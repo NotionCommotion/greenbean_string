@@ -33,7 +33,7 @@ $(function(){
         $.blockUI();
         $.ajax({
             type:'POST',
-            url:'api/tags/lans',
+            url:gb_api_base+'/tags/lans',
             data:$(this).find(':input').serializeArray(),
             //dataType: 'json',
             success: function (rsp){
@@ -54,7 +54,7 @@ $(function(){
             var $row=$(this).closest('tr');
             $.ajax({
                 type:'DELETE',
-                url:'api/tags/lans/'+$row.data('id'),
+                url:gb_api_base+'/tags/lans/'+$row.data('id'),
                 //dataType: 'json',
                 success: function (rsp){
                     $.unblockUI();
@@ -69,7 +69,7 @@ $(function(){
     });
 
     $('#virtual-lan-list .name').on('init', function(e, edt) {
-        edt.options.url = 'api/tags/lans/' +$(this).closest('tr').data('id');
+        edt.options.url = gb_api_base+'/tags/lans/' +$(this).closest('tr').data('id');
     });
     $("#virtual-lan-list .name").editable({
         type: 'text',
@@ -81,13 +81,13 @@ $(function(){
         },
         ajaxOptions: {type: "PUT"},
         send: 'always',
-        //url: 'api/tags/lans/'+$(this).parent().data('id')
+        //url: gb_api_base+'/tags/lans/'+$(this).parent().data('id')
     })
 
     $('ul.xeditable a:not(#timezone)').editable({
         send: 'always',
         ajaxOptions: {type: "PUT"},
-        url: 'api/account',
+        url: gb_api_base+'/account',
         params: function(params) {
             var parts=params.name.split('.');
             var o={};
@@ -112,13 +112,13 @@ $(function(){
         },
         //params: {name: 'timezone'},
         title:'Timezone',
-        url: 'api/account',
+        url: gb_api_base+'/account',
         autocomplete: {
             params:{
                 term:null,
                 //fields:['id','name']  //id and name are returned by default.
             },
-            url: "/api/account/timezones"
+            url: gb_api_base+"/account/timezones"
         }
     });
 
@@ -148,7 +148,7 @@ $(function(){
         event.preventDefault();
         var upload = new Upload(document.getElementById("importFile"));
         // maby check size or type here with upload.getSize() and upload.getType()
-        upload.start("/api/tools/import/update", function (data) {
+        upload.start(gb_api_base+"/tools/import/update", function (data) {
             console.log(data)
             alert('hello');
             }
@@ -159,7 +159,7 @@ $(function(){
     $("#importFile").on("change", function (e) {
         var upload = new Upload(this);
         // maby check size or type here with upload.getSize() and upload.getType()
-        upload.start("/api/tools/import/validate", function (data) {
+        upload.start(gb_api_base+"/tools/import/validate", function (data) {
             upload.hideProgressBar();
             $("#validate-import").hide();
             $('#update-import').show();

@@ -11,12 +11,12 @@ $(function(){
             ajaxOptions: {type: method},
             send: 'always',
             name: name,
-            url: 'api/points/'+pk
+            url: gb_api_base+'/points/'+pk
             }, options);
         if(type=='autocomplete') {
             //editable.params callback set in editableAutocomplete (or callback in these scripts)
             options.type='text';
-            var defaults={params:{term:null, type:['real','custom']/* , fields:['id','name'] */}, url: "/api/points"};
+            var defaults={params:{term:null, type:['real','custom']/* , fields:['id','name'] */}, url: gb_api_base+"/points"};
             options.autocomplete=optionsAutocomplete?Object.assign(defaults, optionsAutocomplete):defaults;
             this.editableAutocomplete(options);
         }
@@ -31,7 +31,7 @@ $(function(){
                 return this.myEdit('select',null,'sign',{title:'Addition or Subtractive', source: [{value:1,text:'Positive'},{value:0,text:'Negative'}], validate: function(){
                     //kludge workaround
                     var $this=$(this);
-                    $this.editable('option', 'url', 'api/points/'+pointId+'/custom/'+$this.closest('tr').data('id'));
+                    $this.editable('option', 'url', gb_api_base+'/points/'+pointId+'/custom/'+$this.closest('tr').data('id'));
                 }});
                 break;
             case 'custom.subpoint':
@@ -48,7 +48,7 @@ $(function(){
                             var editable=$this.data("editable");    //How to do this without using jQuery data()?
                             $this.blur().parent().next().find('button.editable-submit').css('opacity', 1).off('click.prevent');
                             editable.option('params', function() {return {pointId: ui.item.id};});
-                            editable.option('url', 'api/points/'+pointId+'/custom/'+$this.closest('tr').data('id'));
+                            editable.option('url', gb_api_base+'/points/'+pointId+'/custom/'+$this.closest('tr').data('id'));
                         }
                 });
                 break;
@@ -104,7 +104,7 @@ $(function(){
                 });
                 $("#bacnetPoint" ).val('').autocomplete({
                     source: function( request, response ) { //Get existing bacnet objects
-                        $.getJSON( "/api/sources/"+sources_id+"/bacnet/deviceobjects", {term:request.term}, function(json) {
+                        $.getJSON( gb_api_base+"/sources/"+sources_id+"/bacnet/deviceobjects", {term:request.term}, function(json) {
                             var data=[];
                             for (var i = 0; i < json.length; i++) {
                                 data.push({obj:$.jfUtils.stipObj(json[i],['objectId','objectType','deviceId','unit']),label:json[i].deviceName+':'+json[i].objectName});
@@ -130,16 +130,16 @@ $(function(){
         }
     });
 
-    $.getJSON( 'api/points/validation', function(validObj) {
+    $.getJSON( gb_api_base+'/points/validation', function(validObj) {
 
-        $('#addPointBacnet').myValid(validObj.bacnet, {url:'api/points'});
-        $('#addPointCust').myValid(validObj.custom, {url:'api/points'});
-        $('#addPointAggr').myValid(validObj.aggregate, {url:'api/points'});
-        $('#addPointDelta').myValid(validObj.delta, {url:'api/points'});
-        $('#addPointHistoric').myValid(validObj.historic, {url:'api/points'});
+        $('#addPointBacnet').myValid(validObj.bacnet, {url:gb_api_base+'/points'});
+        $('#addPointCust').myValid(validObj.custom, {url:gb_api_base+'/points'});
+        $('#addPointAggr').myValid(validObj.aggregate, {url:gb_api_base+'/points'});
+        $('#addPointDelta').myValid(validObj.delta, {url:gb_api_base+'/points'});
+        $('#addPointHistoric').myValid(validObj.historic, {url:gb_api_base+'/points'});
         $('#dialog-addPointCust form').myValid(validObj.custom_add, {
             url: function(){
-                return 'api/points/'+$(this).data('id')+'/custom';
+                return gb_api_base+'/points/'+$(this).data('id')+'/custom';
             }, success: function(rsp){
                 $.unblockUI();
                 var clone=$('#clone-custom');
@@ -198,7 +198,7 @@ $(function(){
             source: function( request, response ) {
                 var o={term:request.term, type:value[1], fields:['id','name'] };
                 if(value[2]) o.trend=1;
-                $.getJSON( "/api/points", o, function(json) {
+                $.getJSON( gb_api_base+"/points", o, function(json) {
                     var data=[];
                     for (var i = 0; i < json.length; i++) {
                         data.push({id:json[i].id,label:json[i].name});
@@ -215,7 +215,7 @@ $(function(){
     $("#dialog-addPointCust #customPointName" ).autocomplete({
         source: function( request, response ) {
             var pointId=$("#dialog-addPointCust" ).find('form').data('id');
-            $.getJSON( "/api/points/"+pointId+'/custom', {term:request.term}, function(json) {
+            $.getJSON( gb_api_base+"/points/"+pointId+'/custom', {term:request.term}, function(json) {
                 var data=[];
                 for (var i = 0; i < json.length; i++) {
                     data.push({id:json[i].id,label:json[i].name});
@@ -235,7 +235,7 @@ $(function(){
             var $row=$(this).closest('tr');
             $.ajax({
                 type:'DELETE',
-                url:'api/points/'+$row.data('id'),
+                url:gb_api_base+'/points/'+$row.data('id'),
                 //dataType: 'json',
                 //data: {force:true}, //force will delete point even if datalogger is not available
                 success: function (rsp){
@@ -260,7 +260,7 @@ $(function(){
             row=$this.closest('tr');
             $.ajax({
                 type:'DELETE',
-                url:'api/points/'+$this.closest('table').data('id')+'/custom/'+row.data('id'),
+                url:gb_api_base+'/points/'+$this.closest('table').data('id')+'/custom/'+row.data('id'),
                 //dataType: 'json',
                 success: function (rsp){
                     $.unblockUI();
@@ -319,9 +319,9 @@ $(function(){
                 case 'pollrate': dialog.find('a.hb_pollrate').myEdit('text',pointId,'pollrate',{title:'BACnet Point Pollrate'});break;
                 case 'covLifetime': dialog.find('a.hb_covLifetime').myEdit('text',pointId,'covLifetime',{title:'BACnet Point COV Lifetime'});break;
                 case 'bacnetPoint':
-                    dialog.find('a.hb_bacnet').myEdit('autocomplete',pointId,'pointId',{title:'Point Name', placement: 'bottom'}, { //, url: 'api/points/'+pointId
+                    dialog.find('a.hb_bacnet').myEdit('autocomplete',pointId,'pointId',{title:'Point Name', placement: 'bottom'}, { //, url: gb_api_base+'/points/'+pointId
                         source: function( request, response ) { //Get existing bacnet objects
-                            $.getJSON( "/api/sources/"+json.source.id+"/bacnet/deviceobjects", {term:request.term}, function(json) {
+                            $.getJSON( gb_api_base+"/sources/"+json.source.id+"/bacnet/deviceobjects", {term:request.term}, function(json) {
                                 var data=[];
                                 for (var i = 0; i < json.length; i++) {
                                     data.push({obj:$.jfUtils.stipObj(json[i],['objectId','objectType','deviceId','unit']),label:json[i].deviceName+':'+json[i].objectName});
@@ -337,7 +337,7 @@ $(function(){
                             console.log(editable)
                             $this.blur().parent().next().find('button.editable-submit').css('opacity', 1).off('click.prevent');
                             editable.option('params', {bacnetObject: params});
-                            editable.option('url', 'api/points/'+pointId);
+                            editable.option('url', gb_api_base+'/points/'+pointId);
                         }
                     });
                     break;
@@ -358,7 +358,7 @@ $(function(){
 
     $("#point-list td.ptName").click(function(e){
         var pointId=$(this).parent().data('id');
-        $.getJSON( 'api/points/'+pointId, function(json) {
+        $.getJSON( gb_api_base+'/points/'+pointId, function(json) {
             //console.log(json)
             //console.log(JSON.stringify(json))
             var nodes=['name', 'unit', 'slope', 'intercept'];
@@ -420,7 +420,7 @@ $(function(){
             var parent = document.getElementById("parentDiv");
             $('#custom-report-select').show();
             $('#custom-report-display').hide();
-            $.getJSON( "/api/points", {type:['custom']/* , fields:['id','name'] */}, function(json) {
+            $.getJSON( gb_api_base+"/points", {type:['custom']/* , fields:['id','name'] */}, function(json) {
                 var list = document.getElementById("custom-point-reports");
                 while (list.firstChild) {
                     list.removeChild(list.firstChild);
@@ -440,7 +440,7 @@ $(function(){
     });
     $( "#dialog-customPointReport form" ).submit(function( event ) {
         event.preventDefault();
-        $.getJSON( "/api/points/custom/report", $( this ).serializeArray(), function(json) {
+        $.getJSON( gb_api_base+"/points/custom/report", $( this ).serializeArray(), function(json) {
             console.log(json)
             $('#custom-report-select').hide();
             $('#custom-report-display').show().html(hb['custom_report']({custompoints:json}));

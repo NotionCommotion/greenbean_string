@@ -1,5 +1,6 @@
 {% import "forms.html" as forms %}
 {% include 'dashboard/menu.html' %}
+
 <div id="list-header">
     <button class="btn btn-primary add">Add New</button>
     <h1>Charts</h1>

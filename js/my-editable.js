@@ -62,7 +62,7 @@ jQuery.fn.extend({
             type: 'text',
             placement: 'right',
             title: 'Edit Detail',
-            url: 'component/controller/saveEditable',
+            url: '/',
             pk: function(){return $('#id').val();},
             error: function (response, newValue) {
                 //Unlike other validation, save function to return non 200 header.

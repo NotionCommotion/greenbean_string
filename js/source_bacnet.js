@@ -13,7 +13,7 @@ $(function(){
             ajaxOptions: {type: method},
             send: 'always',
             name: name,
-            url: '../api/sources/'+pk
+            url: gb_api_base+'/sources/'+pk
             }, options);
         this.editable(options);
         return this;
@@ -33,7 +33,7 @@ $(function(){
         data.method=$button.attr('class');
         $.ajax({
             type: "POST",
-            url: '../api/sources/'+sourceId+'/gateway',
+            url: gb_api_base+'/sources/'+sourceId+'/gateway',
             dataType: 'json',
             data: data,
             success: function(response){
@@ -97,7 +97,7 @@ $(function(){
                     };
                     $.ajax({
                         type: "GET",
-                        url: '../api/sources/'+sourceId+'/discoveryDevicesOnline',
+                        url: gb_api_base+'/sources/'+sourceId+'/discoveryDevicesOnline',
                         data: data,
                         success: function(response){
                             discoverThrobber.stop();
@@ -200,7 +200,7 @@ $(function(){
         tds.eq(3).children('span').removeClass('glyphicon-time').addClass('glyphicon-refresh');
         $.ajax({
             type: "POST",
-            url: '../api/sources/'+sourceId+'/discovery/'+input.val(),
+            url: gb_api_base+'/sources/'+sourceId+'/discovery/'+input.val(),
             timeout: 240000,
             //async: false,
             success: function(response){
@@ -237,7 +237,7 @@ $(function(){
             var t=$(this);
             $.ajax({
                 type: "GET",
-                url: '../api/sources/'+sourceId+'/points',
+                url: gb_api_base+'/sources/'+sourceId+'/points',
                 success: function(points){
                     var tbody=$('#dialog-point-browser tbody').empty();
                     var clone=$('#dialog-point-browser tr.point-clone');
@@ -283,22 +283,22 @@ $(function(){
             switch(node.parents.length) {
                 case 0:
                     //Initial load.  Get devices
-                    var url='../api/sources/'+sourceId+'/bacnet/devices';
+                    var url=gb_api_base+'/sources/'+sourceId+'/bacnet/devices';
                     data={lowDeviceId: lowDeviceId, highDeviceId:highDeviceId};
                     break;
                 case 1:
                     //Get device
-                    var url='../api/sources/'+sourceId+'/bacnet/devices/'+node.id;
+                    var url=gb_api_base+'/sources/'+sourceId+'/bacnet/devices/'+node.id;
                     break;
                 case 2:
                     //get objects in device
                     //bacnet/{sourceId:[0-9]+}/devices/{deviceId:[0-9]+}/objects/{typeId:[0-9]+}/{objectId:[0-9]+}
-                    var url='../api/sources/'+sourceId+'/bacnet/devices/'+node.parent+'/objects';
+                    var url=gb_api_base+'/sources/'+sourceId+'/bacnet/devices/'+node.parent+'/objects';
                     break;
                 case 3:
                     //get specific object in device
                     var arr=node.id.split('.');
-                    var url='../api/sources/'+sourceId+'/bacnet/devices/'+node.parents[1]+'/objects/'+arr[0]+'/'+arr[1];
+                    var url=gb_api_base+'/sources/'+sourceId+'/bacnet/devices/'+node.parents[1]+'/objects/'+arr[0]+'/'+arr[1];
                     break;
                 default:
                     throw 'Node depth of '+node.parents.length+' is not supported';
@@ -339,7 +339,7 @@ $(function(){
         $(this).editable({
             pk: 1,
             value: '',
-            url: '../api/points',
+            url: gb_api_base+'/points',
             params: function(params) {
                 //originally params contain pk, name and value
                 var object=$(this).closest('li:has(ul)');

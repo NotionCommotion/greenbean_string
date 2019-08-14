@@ -25,7 +25,7 @@ $(function() {
         helpHistory.updateHelp(1);
     });
     $("#dialog-help img.print").printIt({elems:'#dialog-help'});
-    $("#dialog-help input.searchHelp").autocomplete({source: "/api/manual", minLength: 3,select: function(event, ui){
+    $("#dialog-help input.searchHelp").autocomplete({source: gb_api_base+"/manual", minLength: 3,select: function(event, ui){
         $(this).val('').blur();
         helpHistory.updateHelp(ui.item.id);
         return false;   //Important!
@@ -82,7 +82,7 @@ $(function() {
             content=dialog.find('div.content').empty(),
             list=dialog.find('ul.list').empty(),
             tree=dialog.find('p.tree').empty();
-            $.getJSON('api/manual/'+id, function (data){
+            $.getJSON(gb_api_base+'/manual/'+id, function (data){
                 console.log(data);
                 name.text(data.name);
                 content.html(data.content);

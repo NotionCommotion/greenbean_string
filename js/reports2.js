@@ -12,7 +12,7 @@ $(function(){
     });
 
     var validator=false;
-    $.getJSON( 'api/reports/validation', function(validObj) {
+    $.getJSON( gb_api_base+'/reports/validation', function(validObj) {
         console.log(validObj);
         validator = $( "#dialog-trend-report form" ).validate({rules: validObj.rules,messages: validObj.messages});
     });
@@ -60,7 +60,7 @@ $(function(){
                                 return false;
                             }
                         });
-                        window.location.href = "/api/reports/custom?data=" + $form.serialize();
+                        window.location.href = gb_api_base+"/reports/custom?data=" + $form.serialize();
                     }
                 }
             },
@@ -87,7 +87,7 @@ $(function(){
                         $.blockUI();
                         $.ajax({
                             type:'POST',
-                            url:'api/reports',
+                            url:gb_api_base+'/reports',
                             data:$form.serializeArray(),
                             //dataType: 'json',
                             success: function (rsp){
@@ -141,7 +141,7 @@ $(function(){
     $( "#add-point" ).autocomplete({
         source: function( request, response ) {
             $.ajax( {
-                url: "/api/points",
+                url: gb_api_base+"/points",
                 //dataType: "json",
                 data: {
                     term:request.term,
@@ -191,7 +191,7 @@ $(function(){
     var editTemplate=Handlebars.compile($("#hb_reports").html());
     $(".table.existing-reports tbody td.link").click(function(e){
         var reportsId=$(this).parent().data('id');
-        $.getJSON( 'api/reports/'+reportsId, function(json) {
+        $.getJSON( gb_api_base+'/reports/'+reportsId, function(json) {
             var dialog=$('#dialog-editReport').html(editTemplate).data('id',json.id).dialog('open');
         });
     });

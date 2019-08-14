@@ -48,6 +48,7 @@ abstract class GreenbeanDashboardPageController extends DashboardPageController
         }
         $variables['gb_root_base'] = \Package::getByHandle(self::PKGHANDLE)->getRelativePath();
         $variables['gb_img_base'] = $variables['gb_root_base'] . '/images';
+        $variables['gb_api_base'] = '/dashboard/greenbean/api';
         $html = $this->twig->render($template, $variables);
         if($render) {
             $this->set('html', $html);

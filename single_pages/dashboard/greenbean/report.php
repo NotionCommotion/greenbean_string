@@ -59,7 +59,7 @@
         </div>
     </div>
     <div class="row">
-        <div class='col-md-2'><a class="open-point" href="javascript:void(0)" data-toggle="tooltip" title="Add point to report"><span class="glyphicon glyphicon-plus"></span>Add Point</a></div>
+        <div class='col-md-2'><a id="open-point" href="javascript:void(0)" data-toggle="tooltip" title="Add point to report"><span class="glyphicon glyphicon-plus"></span>Add Point</a></div>
         <div class='col-md-4'>
             <input type='text' id="add-point" class="form-control" />
         </div>
@@ -67,11 +67,11 @@
 </div>
 <table id="points-table" class="table">
     <thead>
-        <tr id="clone-point" class="point-row">{{ forms.getPoints('',['mean']) }}</tr>
+        <tr id="clone-point" class="point-row">{{ forms.getPoints('',['mean'],gb_img_base) }}</tr>
     </thead>
     <tbody>
         {% for point in points %}
-        <tr data-id="{{ point.id }}" class="point-row">{{ forms.getPoints(point.name,point.aggrTypes) }}</tr>
+        <tr data-id="{{ point.id }}" class="point-row">{{ forms.getPoints(point.name,point.aggrTypes,gb_img_base) }}</tr>
         {% endfor %}
     </tbody>
 </table>

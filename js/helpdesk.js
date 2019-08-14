@@ -1,8 +1,8 @@
 $(function() {
 
-    $.getJSON( 'api/helpdesk/validation', function(validObj) {
-        $('#dialog-new-ticket form').myValid(validObj.newTicket, {url:'api/helpdesk'});
-        $('#dialog-view-ticket form').myValid(validObj.updateTicket, {type:'put', url:function(){return 'api/helpdesk/'+$(this).data('ticketId');}});
+    $.getJSON( gb_api_base+'/helpdesk/validation', function(validObj) {
+        $('#dialog-new-ticket form').myValid(validObj.newTicket, {url:gb_api_base+'/helpdesk'});
+        $('#dialog-view-ticket form').myValid(validObj.updateTicket, {type:'put', url:function(){return gb_api_base+'/helpdesk/'+$(this).data('ticketId');}});
     });
 
     //$("#ticket-list").advancedtable({searchField: "#search-window-filter", loadElement: "#loader", searchCaseSensitive: false, ascImage: gb_img_base+"/up.png", descImage: gb_img_base+"/down.png"});
@@ -45,7 +45,7 @@ $(function() {
             clone.find('.msg-header').text('['+(i===0?'Created: ':'Updated: ')+data.threads[i].date+' by '+data.threads[i].name+']');
             $('#message-list').append(clone);
         }
-        $('#statusId').editable('setValue',data.statusId).editable('option','url','api/helpdesk/'+data.ticketId);
+        $('#statusId').editable('setValue',data.statusId).editable('option','url',gb_api_base+'/helpdesk/'+data.ticketId);
         $("#dialog-view-ticket").dialog("open");
     });
     $('#statusId').editable({
