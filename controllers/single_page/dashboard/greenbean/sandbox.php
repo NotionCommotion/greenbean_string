@@ -18,7 +18,7 @@ class Sandbox extends GreenbeanDashboardPageController
             if($page=$repo->find($id)) {
                 $this->addAssets([['highcharts'],['dynamic_update']]);
                 $rs=array_merge($page->asArray(), /*$this->gbHelper->getResourceFiles($page), */ ['menu'=>$this->getMenu('/dashboard/greenbean/sandbox'), 'displayUnit'=>\Package::getByHandle(self::PKGHANDLE)->getFileConfig()->get('settings.displayUnit')]);
-                $this->twig('dashboard/greenbean/sandbox/detail.php', $rs );
+                $this->twig('dashboard/greenbean/sandbox_detail.php', $rs );
             }
             else {
                 $errors = new ErrorList;
@@ -27,11 +27,11 @@ class Sandbox extends GreenbeanDashboardPageController
             }
         }
         else {
-            $this->addAssets();
+            $this->addAssets([['javascript', 'sandbox']]);
             $em = $this->app->make(EntityManager::class);
             $repo = $em->getRepository(SandboxPage::class);
             $pages = $repo->createQueryBuilder('s')->select('s.id','s.name')->getQuery()->execute();
-            $this->twig('dashboard/greenbean/sandbox/index.php', ['pages'=>$pages, 'menu'=>$this->getMenu('/dashboard/greenbean/sandbox')]);
+            $this->twig('dashboard/greenbean/sandbox.php', ['pages'=>$pages, 'menu'=>$this->getMenu('/dashboard/greenbean/sandbox')]);
         }
     }
 
@@ -46,6 +46,12 @@ class Sandbox extends GreenbeanDashboardPageController
 
     public function delete($id)
     {
+        $request=$this->getRequest();
+        if(!$request->isMethod('delete')) {
+            $errors = new ErrorList;
+            $errors->add("Invalid request");
+            return $errors->createResponse(400);
+        }
         $em = $this->app->make(EntityManager::class);
         $repo = $em->getRepository(SandboxPage::class);
         if($page=$repo->find($id)) {
@@ -60,23 +66,62 @@ class Sandbox extends GreenbeanDashboardPageController
         }
     }
 
-    public function edit($page)
+    //Display the edit page
+    public function edit($id=null)
     {
-        syslog(LOG_ERR, 'xxxxxxxxxxxx');
-        if(empty($rs['errors'])) {
+        $em = $this->app->make(EntityManager::class);
+        $repo = $em->getRepository(SandboxPage::class);
+        if($page=$repo->find($id)) {
             $rs=$this->getServerBridge()->getPageContent([
                 'pointList'=>['/points'],
                 'chartList'=>['/charts'],
             ]);
-            $rs['page']=$args['page'];
-            $rs['html']=$this->gbHelper->getHtml($page);
-            $rs['js']=[];
-            $rs['css']=[];
-            $this->addAssets([['javascript', 'tinymce'], ['sandbox_edit']]);
-            $this->twig('dashboard/greenbean/sandboxEdit.php', $rs);
+            $rs['menu']=$this->getMenu('/dashboard/greenbean/sandbox');
+            if(empty($rs['errors'])) {
+                //syslog(LOG_ERR, json_encode($page->asArray()));
+                $rs['page']=$id;
+                $rs['html']=$page->getHtml();
+                $rs['js']=[];
+                $rs['css']=[];
+                $this->addAssets([['javascript', 'tinymce'], ['sandbox_edit']]);
+                $this->twig('dashboard/greenbean/sandbox_edit.php', $rs);
+            }
+            else {
+                $this->twig('dashboard/greenbean/error.php', $rs);
+            }
         }
         else {
+            $errors = new ErrorList;
+            $errors->add("Page $id does not exist");
+            $this->redirect('/dashboard/sandbox');
+            /*
+            $rs['menu']=$this->getMenu('/dashboard/greenbean/sandbox');
             $this->twig('dashboard/greenbean/error.php', $rs);
+            */
+        }
+    }
+
+    public function save($id)
+    {
+        //What is the correct way to do this?
+        $request=$this->getRequest();
+        if(!$request->isMethod('put')) {
+            $errors = new ErrorList;
+            $errors->add("Invalid request");
+            return $errors->createResponse(400);
+        }
+        $em = $this->app->make(EntityManager::class);
+        $repo = $em->getRepository(SandboxPage::class);
+        if($page=$repo->find($id)) {
+            $page->setHtml(urldecode($request->getContent()));
+            $em->persist($page);
+            $em->flush();
+            return new JsonResponse($page, 200);
+        }
+        else {
+            $errors = new ErrorList;
+            $errors->add("Page $id does not exist");
+            return $errors->createResponse(400);
         }
     }
 }

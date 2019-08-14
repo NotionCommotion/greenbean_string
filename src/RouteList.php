@@ -76,20 +76,9 @@ class RouteList implements RouteListInterface
         $this->addProxyRoutes($router, self::PUBLIC_ROUTES, 'publicProxy');
 
         /*
-        $router->delete('/dashboard/greenbean/api/sandbox/{page}', 'Greenbean\Concrete5\GreenbeanDataIntegrator\Test::fuckyou'); //->setRequirements(['page' => '[0-9]+']);
-        $router->delete('/dxxashboard/greenbean/api/sandbox/{page}', '\Concrete\Package\GreenbeanDataIntegrator\Controller\SinglePage\Dashboard\Greenbean\Sandbox::delete')->setRequirements(['page' => '[0-9]+']);
-        $router->delete('/dashboard/greenbean/api/sandbox/{page}', 'Application\Api\Controller\Test::delete')->setRequirements(['page' => '[0-9]+']);
-        $router->get('/dashboard/greenbean/xxx/{page}', '\Concrete\Package\GreenbeanDataIntegrator\Controller\SinglePage\Dashboard\Greenbean\Test::fuckyou');
-
-        $router->delete('/dashboard/greenbean/api/sandbox/{page}', '\Concrete\Package\GreenbeanDataIntegrator\Controller\SinglePage\Dashboard\Greenbean\test::delete');
+        Ideally, I would use the router for all endpoints including view.  Can't get view working.
+        $router->delete('/dashboard/greenbean/api/sandbox/{page}', 'Greenbean\Concrete5\GreenbeanDataIntegrator\Controller\SandboxRouteController::delete'); //->setRequirements(['page' => '[0-9]+']);
         */
-
-        $router->delete('/dashboard/greenbean/api/sandbox/test/{page}', function($page){
-            return "page $page";
-        })->setRequirements(['page' => '[0-9]+']);
-
-        //['/points/{id}', ['get','put','delete'], ['id']],
-        //$router->get('/dashboard/greenbean/api/points/{id}', 'Greenbean\Concrete5\GreenbeanDataIntegrator\Api\Controller\BaseController::serverBridge');
     }
 
     private function addProxyRoutes($router, array $routes, string $proxyType)
@@ -99,7 +88,7 @@ class RouteList implements RouteListInterface
         //Figure out how middleware should be used instead of using my checks.
         foreach ($routes as $route) {
             foreach ($route[1] as $method) {
-                $r=$router->$method('/dashboard/greenbean/api'.$route[0], 'Greenbean\Concrete5\GreenbeanDataIntegrator\RouteController::'.$proxyType);
+                $r=$router->$method('/dashboard/greenbean/api'.$route[0], 'Greenbean\Concrete5\GreenbeanDataIntegrator\Controller\ProxyRouteController::'.$proxyType);
                 if(isset($route[2])) {
                     foreach($route[2] as $key=>$value) {
                         $r->setRequirements(is_int($key)?[$value=>'[0-9]+']:[$key => $value]);

@@ -1,3 +1,5 @@
+{% import "forms.html" as forms %}
+{% include 'dashboard/menu.html' %}
 <input type="hidden" value="{{page}}" id="page" />
 <a href="javascript:void(0)" id="addResources">Add Resources</a>
 <div id="frontContent" class="frontContentEdit">

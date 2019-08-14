@@ -1,36 +1,29 @@
 <?php
-namespace Greenbean\Concrete5\GreenbeanDataIntegrator;
-use Symfony\HttpFoundation\JsonResponse;
+namespace Greenbean\Concrete5\GreenbeanDataIntegrator\Controller;
 use Greenbean\Concrete5\GreenbeanDataIntegrator\GbHelper;
-use Greenbean\ServerBridge\ServerBridge;
-class RouteController
+use Doctrine\ORM\EntityManager;
+use Greenbean\Concrete5\GreenbeanDataIntegrator\Entity\SandboxPage;
+class SandboxRouteController
 {
-
-    protected $serverBridge, $gbHelper, $gbUser;
-    public function __construct(ServerBridge $serverBridge, GbHelper $gbHelper, $gbUser)
+    public function delete($id)
     {
-        $this->serverBridge = $serverBridge;
-        $this->gbHelper = $gbHelper;
-        $this->gbUser = $gbUser;
+        $em = $this->app->make(EntityManager::class);
+        $repo = $em->getRepository(SandboxPage::class);
+        if($page=$repo->find($id)) {
+            $em->remove($page);
+            $em->flush();
+            return new JsonResponse(null, 204);
+        }
+        else {
+            $errors = new ErrorList;
+            $errors->add("Page $id does not exist");
+            return $errors->createResponse(400);
+        }
     }
 
-    public function privateProxy()
-    {
-        if($this->gbUser) return $this->publicProxy();   //Change to use middleware
-        else syslog(LOG_ERR, 'Invalid request to proxy');
-    }
-
-    public function publicProxy()
-    {
-        $request = \Concrete\Core\Http\Request::createFromGlobals();
-        $response=null; //new \Symfony\Component\HttpFoundation\JsonResponse(); //Include array arguement for content
-        return $this->serverBridge->proxy($request, $response, function($path){
-            return substr($path, 25);       //Remove "/dashboard/greenbean/api/" from uri
-        });
-    }
 
     /**
-    * Used to replace single pages with router.
+    * Used to replace single pages with router so logic is in one location.
     * Documentation at https://documentation.concrete5.org/developers/routing/views is incorrect.
     * Not yet working.
     *

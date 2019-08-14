@@ -4,7 +4,7 @@ $(function(){
         autoOpen    : false,
         resizable   : false,
         height      : 240,
-        width       : 600,
+        width       : 'auto',
         modal       : true,
         open        : function() {
             $(this).find('form')[0].reset();

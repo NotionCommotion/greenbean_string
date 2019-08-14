@@ -68,6 +68,8 @@ table.point-dialog td:first-child {
     color: inherit;
 }
 
+#edit-sandbox { float: right;}
+
 a.clone-chart {float: right;}
 #clone-report, #clone-custom, #clone-category, #clone-pie, #clone-time, #clone-point, #resource-clone, #syn-bn-clone {display:none;}
 

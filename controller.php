@@ -121,14 +121,14 @@ class Controller extends Package    // implements ProviderAggregateInterface
         $this->addInitialSandboxPages();
     }
 
-    /*
     public function uninstall()
     {
-    parent::uninstall();
-    $db = \Database::connection();
-    $db->query('DROP TABLE IF EXISTS SandboxPages');
+        syslog(LOG_ERR, 'Consider not deleting database upon removing Greenbean Data Integrator');
+        parent::uninstall();
+        $db = \Database::connection();
+        $db->query('DROP TABLE IF EXISTS SandboxPages');
     }
-    */
+
     public function on_start()
     {
         require_once $this->getPackagePath() . '/vendor/autoload.php';
@@ -147,7 +147,7 @@ class Controller extends Package    // implements ProviderAggregateInterface
 
         $gbUser = $this->app->make('session')->get('greenbeen-user');
 
-        $this->app->when('Greenbean\Concrete5\GreenbeanDataIntegrator\RouteController')->needs('$gbUser')->give($gbUser);
+        $this->app->when('Greenbean\Concrete5\GreenbeanDataIntegrator\Controller\ProxyRouteController')->needs('$gbUser')->give($gbUser);
 
         if($config = $this->getFileConfig()->get('server')) {
             $this->app->bind(ServerBridge::class, function(Application $app) use($gbUser, $config) {
@@ -180,7 +180,7 @@ class Controller extends Package    // implements ProviderAggregateInterface
         $r = $repo->createQueryBuilder('s')->select('s.id')->setMaxResults(1)->getQuery()->execute();
         if (empty($r)) {
             foreach ([
-                SandboxPage::create('Sample page'),
+                SandboxPage::create('Sample page', '<p>First use the Point Manager and Chart Manager to create data objects, and then use the insert icon to add them to this page.</p>'),
                 ] as $page) {
                 $em->persist($page);
             }

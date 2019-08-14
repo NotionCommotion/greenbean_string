@@ -97,9 +97,9 @@ class SandboxPage implements \JsonSerializable
     /**
     * The sandbox page html content.
     *
-    * @\Doctrine\ORM\Mapping\Column(type="string", options={"comment": "Sandbox page HTML content"})
+    * @\Doctrine\ORM\Mapping\Column(type="text", options={"comment": "Sandbox page HTML content"})
     *
-    * @var int|null
+    * @var string
     */
     protected $html;
 

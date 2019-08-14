@@ -18,28 +18,29 @@ $(function(){
         setup : function(ed) {
             ed.addButton('addPoint', {
                 title : 'Add Point',
-                image : '/lib/gb/stdimages/insert.png',
+                image : gb_img_base+'insert.png',
                 onclick : function() {$("#dialog-addPoint").dialog("open");}
             });
             ed.addButton('addChart', {
                 title : 'Add Chart',
-                image : '/lib/gb/stdimages/insert.png',
+                image : gb_img_base+'insert.png',
                 onclick : function() {$("#dialog-addChart").dialog("open");}
             });
         },
         save_onsavecallback: function () {
             $.ajax({
                 type:'PUT',
-                url:'preview/edit/'+$('#page').val(),
-                data:{content: tinyMCE.activeEditor.getContent()},
+                url:'../save/'+$('#page').val(),
+                data: tinyMCE.activeEditor.getContent(),
                 success: function (rsp){
-                    window.location = "/preview/"+$('#page').val();
+                    window.location = "../"+$('#page').val();
                 }
             });
         }
     });
 
-    $("#dialog-addPoint").dialog({
+    var addPointDialog = $("#dialog-addPoint");
+    addPointDialog.dialog({
         autoOpen    :false,
         resizable   :false,
         height      :'auto',
@@ -47,14 +48,16 @@ $(function(){
         width       :'auto',
         maxWidth   : 300,
         modal       :true
-    }).find('li').click(function(){
+    });
+    addPointDialog.find('li').click(function(){
         var $t=$(this),
         ed=tinymce.get('frontContent');
         ed.focus();
-        ed.selection.setContent('<img class="GB_point" data-id="'+$t.data('id')+'" src="/lib/gb/stdimages/point.png" alt="'+$t.text()+'" title="'+$t.text()+'">');
+        ed.selection.setContent('<img class="GB_point" data-id="'+$t.data('id')+'" src=gb_img_base+"point.png" alt="'+$t.text()+'" title="'+$t.text()+'">');
         $t.closest('div.dialog').dialog("close");
     });
-    $("#dialog-addChart").dialog({
+    var addChartDialog = $("#dialog-addChart");
+    addChartDialog.dialog({
         autoOpen    :false,
         resizable   :false,
         height      :'auto',
@@ -62,11 +65,12 @@ $(function(){
         width       :'auto',
         maxWidth   : 300,
         modal       :true
-    }).find('li').click(function(){
+    });
+    addChartDialog.find('li').click(function(){
         var $t=$(this),
         ed=tinymce.get('frontContent');
         ed.focus();
-        ed.selection.setContent('<img class="GB_chart" data-id="'+$t.data('id')+'" src="/lib/gb/stdimages/chart.png" alt="'+$t.text()+'" title="'+$t.text()+'">');
+        ed.selection.setContent('<img class="GB_chart" data-id="'+$t.data('id')+'" src=gb_img_base+"chart.png" alt="'+$t.text()+'" title="'+$t.text()+'">');
         $t.closest('div.dialog').dialog("close");
     });
 

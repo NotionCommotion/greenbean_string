@@ -14,6 +14,7 @@ window.onerror = function(msg, url, line, col, error) {
     return suppressErrorAlert;
 };
 
+var gb_img_base='/packages/greenbean_data_integrator/images/';
 (function (global) {
     'use strict';
 
@@ -81,7 +82,7 @@ $.jfUtils = (function (my) {
             strokewidth: 1.8,
             //alpha: 0.4, // this will also be applied to the gif
             color: 'black',
-            fallback: '/lib/gb/stdimages/throbber.gif',
+            fallback: gb_img_base+'throbber.gif',
             //padding: 30
         }).appendTo( throbber );
     }

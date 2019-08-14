@@ -5,7 +5,7 @@ $(function() {
         $('#dialog-view-ticket form').myValid(validObj.updateTicket, {type:'put', url:function(){return 'api/helpdesk/'+$(this).data('ticketId');}});
     });
 
-    //$("#ticket-list").advancedtable({searchField: "#search-window-filter", loadElement: "#loader", searchCaseSensitive: false, ascImage: "/lib/stdimages/up.png", descImage: "/lib/stdimages/down.png"});
+    //$("#ticket-list").advancedtable({searchField: "#search-window-filter", loadElement: "#loader", searchCaseSensitive: false, ascImage: gb_img_base+"up.png", descImage: gb_img_base+"down.png"});
 
     $(".open-new-ticket").click(function() {$("#dialog-new-ticket").dialog("open");});
     $("#dialog-new-ticket").dialog({

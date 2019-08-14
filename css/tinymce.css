@@ -1,11 +1,12 @@
+/* Not used? */
 div.chart {
-    background-image: url("/lib/gb/stdimages/chart.png");
+    background-image: url("../images/chart.png");
     background-repeat:no-repeat;
     width: 300px;
     height: 180px;
 }
 span.point {
-    background-image: url("/lib/gb/stdimages/point.png");
+    background-image: url("../images/point.png");
     background-repeat:no-repeat;
     width: 120px;
     height: 28px;
