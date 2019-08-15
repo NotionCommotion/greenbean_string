@@ -2,6 +2,8 @@
 namespace Greenbean\Concrete5\GreenbeanDataIntegrator;
 use Concrete\Core\Routing\RouteListInterface;
 use Concrete\Core\Routing\Router;
+use Greenbean\Concrete5\GreenbeanDataIntegrator\ValidGbUserMiddleware;
+use Concrete\Core\Http\Middleware\OAuthAuthenticationMiddleware;
 class RouteList implements RouteListInterface
 {
     //path, array of methods, optional array of regex validation.  Sequential arrays are integers, associate arrays are name=>regex
@@ -73,23 +75,25 @@ class RouteList implements RouteListInterface
     public function loadRoutes($router)
     {
         //Ideally, I would use the router for all endpoints including view.  Can't get view working.
-        $this->addProxyRoutes($router, self::PRIVATE_ROUTES, 'privateProxy');
-        $this->addProxyRoutes($router, self::PUBLIC_ROUTES, 'publicProxy');
 
-        $router->post('/dashboard/greenbean/api/sandbox', 'Concrete\Package\GreenbeanDataIntegrator\Controller\Api\SandboxRouteController::create');
-        $router->delete('/dashboard/greenbean/api/sandbox/{id}', 'Concrete\Package\GreenbeanDataIntegrator\Controller\Api\SandboxRouteController::delete')->setRequirements(['id' => '[0-9]+']);
-        $router->put('/dashboard/greenbean/api/sandbox/{page}', 'Concrete\Package\GreenbeanDataIntegrator\Controller\Api\SandboxRouteController::save')->setRequirements(['page' => '[0-9]+']);
-        //->addMiddleware(OAuthAuthenticationMiddleware::class);
+        $this->addProxyRoutes($router, self::PUBLIC_ROUTES);
+
+        $router->buildGroup()
+        ->addMiddleware(ValidGbUserMiddleware::class)
+        ->routes(function($groupRouter) {
+            $this->addProxyRoutes($groupRouter, self::PRIVATE_ROUTES);
+            $groupRouter->post('/dashboard/greenbean/api/sandbox', 'Concrete\Package\GreenbeanDataIntegrator\Controller\Api\SandboxRouteController::create');
+            $groupRouter->delete('/dashboard/greenbean/api/sandbox/{id}', 'Concrete\Package\GreenbeanDataIntegrator\Controller\Api\SandboxRouteController::delete');//->setRequirements(['id' => '[0-9]+']);
+            $groupRouter->put('/dashboard/greenbean/api/sandbox/{page}', 'Concrete\Package\GreenbeanDataIntegrator\Controller\Api\SandboxRouteController::save')->setRequirements(['page' => '[0-9]+']);
+        });
     }
 
-    private function addProxyRoutes($router, array $routes, string $proxyType)
+    private function addProxyRoutes($router, array $routes)
     {
         //$routes is something like: [['/path/{id}', ['post','put'], ['id']]],
-        //$proxyType must either by privateProxy or publicProxy!
-        //Figure out how middleware should be used instead of using my checks.
         foreach ($routes as $route) {
             foreach ($route[1] as $method) {
-                $r=$router->$method('/dashboard/greenbean/api'.$route[0], 'Concrete\Package\GreenbeanDataIntegrator\Controller\Api\ProxyRouteController::'.$proxyType);
+                $r=$router->$method('/dashboard/greenbean/api'.$route[0], 'Concrete\Package\GreenbeanDataIntegrator\Controller\Api\ProxyRouteController::proxyRoute');
                 if(isset($route[2])) {
                     foreach($route[2] as $key=>$value) {
                         $r->setRequirements(is_int($key)?[$value=>'[0-9]+']:[$key => $value]);

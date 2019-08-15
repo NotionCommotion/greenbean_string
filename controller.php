@@ -147,7 +147,7 @@ class Controller extends Package    // implements ProviderAggregateInterface
 
         $gbUser = $this->app->make('session')->get('greenbeen-user');
 
-        $this->app->when('Concrete\Package\GreenbeanDataIntegrator\Controller\Api\ProxyRouteController')->needs('$gbUser')->give($gbUser);
+        $this->app->when('Greenbean\Concrete5\GreenbeanDataIntegrator\ValidGbUserMiddleware')->needs('$gbUser')->give($gbUser);
 
         if($config = $this->getFileConfig()->get('server')) {
             $this->app->bind(ServerBridge::class, function(Application $app) use($gbUser, $config) {
