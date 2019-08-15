@@ -27,7 +27,6 @@ class Configure extends GreenbeanDashboardPageController
     {
         //What is the correct way to do this?  Use validation helper, not directly POST, etc.
         $errors=[];
-        syslog(LOG_INFO, json_encode($this->post()));
         if($missing=array_diff_key(array_flip(['host','api','displayUnit']), array_filter($this->post()))) {
             $errors[]=implode(', ', array_keys($missing)).' must be provided';
         }

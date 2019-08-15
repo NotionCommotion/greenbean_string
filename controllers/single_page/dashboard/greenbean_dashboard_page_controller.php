@@ -15,7 +15,6 @@ abstract class GreenbeanDashboardPageController extends DashboardPageController
     public function __construct(...$args)
     {
         $this->gbHelper=new GbHelper(); //How should this be injected?
-        syslog(LOG_INFO, json_encode($args));
         parent::__construct(...$args);
     }
 

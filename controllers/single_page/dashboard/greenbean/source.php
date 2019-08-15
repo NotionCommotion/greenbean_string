@@ -16,7 +16,6 @@ class Source extends GreenbeanDashboardPageController
             'defaultValues'=>'/account',
         ]);
         $rs['menu']=$this->getMenu('/dashboard/greenbean/source');
-        syslog(LOG_INFO, json_encode($rs));
         if(empty($rs['errors'])) {
             //Remove next two lines after account settings is fixed on server.
             $rs['defaultValues']['gateway']=$rs['defaultValues']['client'];

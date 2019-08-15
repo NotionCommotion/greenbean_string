@@ -3,7 +3,6 @@ namespace Concrete\Package\GreenbeanDataIntegrator\Controller\SinglePage\Dashboa
 use Concrete\Package\GreenbeanDataIntegrator\Controller\SinglePage\dashboard\GreenbeanDashboardPageController;
 use Doctrine\ORM\EntityManager;
 use Greenbean\Concrete5\GreenbeanDataIntegrator\Entity\SandboxPage;
-use Symfony\Component\HttpFoundation\JsonResponse;
 use Concrete\Core\Error\ErrorList\ErrorList;
 
 class Sandbox extends GreenbeanDashboardPageController
@@ -11,7 +10,6 @@ class Sandbox extends GreenbeanDashboardPageController
     public function view($id=null)
     {
         $errors = new ErrorList;
-        syslog(LOG_ERR, json_encode(get_class_methods($errors)));
         if($id) {
             $em = $this->app->make(EntityManager::class);
             $repo = $em->getRepository(SandboxPage::class);
@@ -35,37 +33,6 @@ class Sandbox extends GreenbeanDashboardPageController
         }
     }
 
-    public function create()
-    {
-        $em = $this->app->make(EntityManager::class);
-        $page=SandboxPage::create($this->post('name'));
-        $em->persist($page);
-        $em->flush();
-        return new JsonResponse($page, 200);
-    }
-
-    public function delete($id)
-    {
-        $request=$this->getRequest();
-        if(!$request->isMethod('delete')) {
-            $errors = new ErrorList;
-            $errors->add("Invalid request");
-            return $errors->createResponse(400);
-        }
-        $em = $this->app->make(EntityManager::class);
-        $repo = $em->getRepository(SandboxPage::class);
-        if($page=$repo->find($id)) {
-            $em->remove($page);
-            $em->flush();
-            return new JsonResponse(null, 204);
-        }
-        else {
-            $errors = new ErrorList;
-            $errors->add("Page $id does not exist");
-            return $errors->createResponse(400);
-        }
-    }
-
     //Display the edit page
     public function edit($id=null)
     {
@@ -78,7 +45,6 @@ class Sandbox extends GreenbeanDashboardPageController
             ]);
             $rs['menu']=$this->getMenu('/dashboard/greenbean/sandbox');
             if(empty($rs['errors'])) {
-                //syslog(LOG_ERR, json_encode($page->asArray()));
                 $rs['page']=$id;
                 $rs['html']=$page->getHtml();
                 $rs['js']=[];
@@ -98,30 +64,6 @@ class Sandbox extends GreenbeanDashboardPageController
             $rs['menu']=$this->getMenu('/dashboard/greenbean/sandbox');
             $this->twig('dashboard/greenbean/error.php', $rs);
             */
-        }
-    }
-
-    public function save($id)
-    {
-        //What is the correct way to do this?
-        $request=$this->getRequest();
-        if(!$request->isMethod('put')) {
-            $errors = new ErrorList;
-            $errors->add("Invalid request");
-            return $errors->createResponse(400);
-        }
-        $em = $this->app->make(EntityManager::class);
-        $repo = $em->getRepository(SandboxPage::class);
-        if($page=$repo->find($id)) {
-            $page->setHtml(urldecode($request->getContent()));
-            $em->persist($page);
-            $em->flush();
-            return new JsonResponse($page, 200);
-        }
-        else {
-            $errors = new ErrorList;
-            $errors->add("Page $id does not exist");
-            return $errors->createResponse(400);
         }
     }
 }

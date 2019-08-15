@@ -30,8 +30,11 @@ $(function(){
         save_onsavecallback: function () {
             $.ajax({
                 type:'PUT',
-                url:gb_api_base+'/sandbox/save/'+$('#page').val(),
-                data: tinyMCE.activeEditor.getContent(),
+                url:gb_api_base+'/sandbox/'+$('#page').val(),
+                //Can post either json or form
+                data: {html: tinyMCE.activeEditor.getContent()},
+                //data: JSON.stringify({html: tinyMCE.activeEditor.getContent()}),
+                //contentType: "application/json",
                 success: function (rsp){
                     window.location = "../"+$('#page').val();
                 }

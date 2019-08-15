@@ -72,13 +72,14 @@ class RouteList implements RouteListInterface
 
     public function loadRoutes($router)
     {
+        //Ideally, I would use the router for all endpoints including view.  Can't get view working.
         $this->addProxyRoutes($router, self::PRIVATE_ROUTES, 'privateProxy');
         $this->addProxyRoutes($router, self::PUBLIC_ROUTES, 'publicProxy');
 
-        /*
-        Ideally, I would use the router for all endpoints including view.  Can't get view working.
-        $router->delete('/dashboard/greenbean/api/sandbox/{page}', 'Greenbean\Concrete5\GreenbeanDataIntegrator\Controller\SandboxRouteController::delete'); //->setRequirements(['page' => '[0-9]+']);
-        */
+        $router->post('/dashboard/greenbean/api/sandbox', 'Greenbean\Concrete5\GreenbeanDataIntegrator\Controller\SandboxRouteController::create');
+        $router->delete('/dashboard/greenbean/api/sandbox/{id}', 'Greenbean\Concrete5\GreenbeanDataIntegrator\Controller\SandboxRouteController::delete')->setRequirements(['id' => '[0-9]+']);
+        $router->put('/dashboard/greenbean/api/sandbox/{page}', 'Greenbean\Concrete5\GreenbeanDataIntegrator\Controller\SandboxRouteController::save')->setRequirements(['page' => '[0-9]+']);
+        //->addMiddleware(OAuthAuthenticationMiddleware::class);
     }
 
     private function addProxyRoutes($router, array $routes, string $proxyType)
