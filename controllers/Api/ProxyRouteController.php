@@ -1,5 +1,5 @@
 <?php
-namespace Greenbean\Concrete5\GreenbeanDataIntegrator\Controller;
+namespace Concrete\Package\GreenbeanDataIntegrator\Controller\Api;
 use Symfony\HttpFoundation\JsonResponse;
 use Greenbean\Concrete5\GreenbeanDataIntegrator\GbHelper;
 use Greenbean\ServerBridge\ServerBridge;

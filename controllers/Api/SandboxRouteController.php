@@ -1,5 +1,5 @@
 <?php
-namespace Greenbean\Concrete5\GreenbeanDataIntegrator\Controller;
+namespace Concrete\Package\GreenbeanDataIntegrator\Controller\Api;
 use Greenbean\Concrete5\GreenbeanDataIntegrator\GbHelper;
 use Doctrine\ORM\EntityManager;
 use Greenbean\Concrete5\GreenbeanDataIntegrator\Entity\SandboxPage;

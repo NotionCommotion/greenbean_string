@@ -76,9 +76,9 @@ class RouteList implements RouteListInterface
         $this->addProxyRoutes($router, self::PRIVATE_ROUTES, 'privateProxy');
         $this->addProxyRoutes($router, self::PUBLIC_ROUTES, 'publicProxy');
 
-        $router->post('/dashboard/greenbean/api/sandbox', 'Greenbean\Concrete5\GreenbeanDataIntegrator\Controller\SandboxRouteController::create');
-        $router->delete('/dashboard/greenbean/api/sandbox/{id}', 'Greenbean\Concrete5\GreenbeanDataIntegrator\Controller\SandboxRouteController::delete')->setRequirements(['id' => '[0-9]+']);
-        $router->put('/dashboard/greenbean/api/sandbox/{page}', 'Greenbean\Concrete5\GreenbeanDataIntegrator\Controller\SandboxRouteController::save')->setRequirements(['page' => '[0-9]+']);
+        $router->post('/dashboard/greenbean/api/sandbox', 'Concrete\Package\GreenbeanDataIntegrator\Controller\Api\SandboxRouteController::create');
+        $router->delete('/dashboard/greenbean/api/sandbox/{id}', 'Concrete\Package\GreenbeanDataIntegrator\Controller\Api\SandboxRouteController::delete')->setRequirements(['id' => '[0-9]+']);
+        $router->put('/dashboard/greenbean/api/sandbox/{page}', 'Concrete\Package\GreenbeanDataIntegrator\Controller\Api\SandboxRouteController::save')->setRequirements(['page' => '[0-9]+']);
         //->addMiddleware(OAuthAuthenticationMiddleware::class);
     }
 
@@ -89,7 +89,7 @@ class RouteList implements RouteListInterface
         //Figure out how middleware should be used instead of using my checks.
         foreach ($routes as $route) {
             foreach ($route[1] as $method) {
-                $r=$router->$method('/dashboard/greenbean/api'.$route[0], 'Greenbean\Concrete5\GreenbeanDataIntegrator\Controller\ProxyRouteController::'.$proxyType);
+                $r=$router->$method('/dashboard/greenbean/api'.$route[0], 'Concrete\Package\GreenbeanDataIntegrator\Controller\Api\ProxyRouteController::'.$proxyType);
                 if(isset($route[2])) {
                     foreach($route[2] as $key=>$value) {
                         $r->setRequirements(is_int($key)?[$value=>'[0-9]+']:[$key => $value]);
