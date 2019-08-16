@@ -40,10 +40,13 @@ class Controller extends Package    // implements ProviderAggregateInterface
         bootstrap.  3.4.0?
         */
 
-        ['javascript', 'jquery', '//ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js', ['local'=>false, 'position' => Asset::ASSET_POSITION_HEADER]],   //, 'version' => '3.4.1']], //Default is v1.12.4?    //Not used?
-        //['javascript', 'jquery', '//ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js', ['local' => false]],   //, 'version' => '2.2']],
-        ['javascript', 'jquery/ui', '//ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js', ['local'=>false], 'jquery/ui'],    //Not used?         //, 'position' => Asset::ASSET_POSITION_HEADER
-        ['css', 'jquery/ui', '//ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css', ['local'=>false], 'jquery/ui'],    //Not used?
+        //Use old shipped jquery and jqueryUi versions
+        //['javascript', 'jquery', '//ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js', ['local'=>false, 'position' => Asset::ASSET_POSITION_HEADER]],   //, 'version' => '3.4.1']], //Default is v1.12.4?    //Not used?
+        //['javascript', 'jquery/ui', '//ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js', ['local'=>false], 'jquery/ui'],    //Not used?         //, 'position' => Asset::ASSET_POSITION_HEADER
+        //['css', 'jquery/ui', '//ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css', ['local'=>false], 'jquery/ui'],    //Not used?
+
+        //Only needed if shipped old jquery-ui is used!
+        ['javascript', 'jquery-ui-autocomplete', 'js/jquery-ui-autocomplete.js', []],
 
         ['javascript', 'bootstrap', '//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js', ['local'=>false], 'bootstrap'],    //Not used?
         ['css', 'bootstrap', '//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css', ['local'=>false], 'bootstrap'],    //Not used?

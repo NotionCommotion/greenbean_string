@@ -84,7 +84,7 @@ abstract class GreenbeanDashboardPageController extends DashboardPageController
         return $this->serverBridge;
     }
 
-   protected function getMenu($active=null) {
+    protected function getMenu($active=null) {
         return [
             'active'=>$active,
             'links'=>[
@@ -106,6 +106,7 @@ abstract class GreenbeanDashboardPageController extends DashboardPageController
         $assets = array_merge([
             //['javascript', 'jquery'],
             ['jquery/ui'],  //force to be loaded before others.
+            ['javascript', 'jquery-ui-autocomplete'],
             ['bootstrap'],
             ['javascript', 'url-search-params'],
             ['javascript', 'throbber'],
