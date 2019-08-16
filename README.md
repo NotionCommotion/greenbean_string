@@ -12,7 +12,7 @@ Add to github and then packaglist.
 
 
 Create single pages for frontend: Reports
-Create single pages for backend: GB Data Integrator, and sub-pages Points, Charts, Data Sources, Settings, Manual, Help Desk.
+Create single pages for backend: GB Data Integrator, and sub-pages Points, Charts, Data Sources, Settings, Help Desk.
 Create routes to API for both front and back end.
 
 

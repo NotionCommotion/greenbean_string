@@ -88,13 +88,13 @@ abstract class GreenbeanDashboardPageController extends DashboardPageController
         return [
             'active'=>$active,
             'links'=>[
-                ['name'=>'Reports','path'=>'/dashboard/greenbean/report'], //class=>'bla'
+                ['name'=>'Reports','path'=>'/dashboard/greenbean/report'],
                 ['name'=>'Points','path'=>'/dashboard/greenbean/point'],
                 ['name'=>'Charts','path'=>'/dashboard/greenbean/chart'],
                 ['name'=>'Data Sources','path'=>'/dashboard/greenbean/source'],
                 ['name'=>'Sandbox','path'=>'/dashboard/greenbean/sandbox'],
                 ['name'=>'Account Settings','path'=>'/dashboard/greenbean/settings'],
-                ['name'=>'Users Manual','path'=>'/dashboard/greenbean/manual'],
+                ['name'=>'Users Manual','class'=>'manual'],
                 ['name'=>'Help Desk','path'=>'/dashboard/greenbean/helpdesk'],
             ]
         ];

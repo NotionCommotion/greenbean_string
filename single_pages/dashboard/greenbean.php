@@ -39,7 +39,7 @@
                 <img src="https://placehold.it/150x80?text=Account Settings" class="img-responsive" style="width:100%" alt="Image">
             </div>
         </a>
-        <a href="greenbean/manual">
+        <a class="manual" href="javascript:void(0)">
             <div class="col-sm-3">
                 <p>Users Manual</p>
                 <img src="https://placehold.it/150x80?text=Users Manual" class="img-responsive" style="width:100%" alt="Image">
@@ -53,3 +53,6 @@
         </a>
     </div>
 </div>
+<input type='hidden' id='gb_img_base' value='{{ gb_img_base }}'>
+<input type='hidden' id='gb_api_base' value='{{ gb_api_base }}'>
+{% include 'dashboard/manual.html' %}
