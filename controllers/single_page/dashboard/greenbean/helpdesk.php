@@ -16,7 +16,7 @@ class Helpdesk extends GreenbeanDashboardPageController
             $this->addAssets([
                 ['javascript', 'handlebars'],
                 //['bootstrap-editable'],
-                ['javascript', 'bootstrap-editable'],
+                //['javascript', 'bootstrap-editable'],
                 ['javascript', 'helpdesk'],
                 ['javascript', 'editableAutocomplete'],
                 ['sortfixedtable']

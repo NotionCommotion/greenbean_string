@@ -22,7 +22,7 @@ class Settings extends GreenbeanDashboardPageController
         $this->addAssets([
             ['javascript', 'handlebars'],
             //['bootstrap-editable'],
-            ['javascript', 'bootstrap-editable'],
+            //['javascript', 'bootstrap-editable'],
             ['javascript', 'settings'],
             ['javascript', 'editableAutocomplete'],
             ['upload'],

@@ -19,7 +19,7 @@ class Point extends GreenbeanDashboardPageController
             $this->addAssets([
                 ['javascript', 'handlebars'],
                 //['bootstrap-editable'],
-                ['javascript', 'bootstrap-editable'],
+                //['javascript', 'bootstrap-editable'],
                 ['javascript', 'points'],
                 ['javascript', 'editableAutocomplete'],
                 ['sortfixedtable']

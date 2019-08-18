@@ -106,8 +106,13 @@ abstract class GreenbeanDashboardPageController extends DashboardPageController
         $assets = array_merge([
             //['javascript', 'jquery'],
             ['jquery/ui'],  //force to be loaded before others.
-            ['javascript', 'jquery-ui-autocomplete'],
-            ['bootstrap'],
+            ['javascript', 'jquery-ui-autocomplete'],   //Only required if using C5's old version of ui
+            //['bootstrap'],  //Use new version.
+            //['javascript', 'bootstrap/*'],  //Won't work because loads them after bootstrap-editable
+            //If using just C5's bootstrap javascript.
+            ['javascript', 'bootstrap/tooltip'],
+            ['javascript', 'bootstrap/popover'],
+            ['javascript', 'bootstrap-editable'],
             ['javascript', 'url-search-params'],
             ['javascript', 'throbber'],
             ['javascript', 'blockUI'],
@@ -117,6 +122,7 @@ abstract class GreenbeanDashboardPageController extends DashboardPageController
             ['manual'],
             ], $assets);
         foreach($assets as $asset) {
+            syslog(LOG_INFO, 'add asset: '.implode(' ',$asset));
             $this->requireAsset(...$asset);
         }
     }

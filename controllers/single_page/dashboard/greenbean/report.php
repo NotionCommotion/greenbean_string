@@ -15,7 +15,7 @@ class Report extends GreenbeanDashboardPageController
         $rs['menu']=$this->getMenu('/dashboard/greenbean/report');
         $this->addAssets([
             //['bootstrap-editable'],
-            ['javascript', 'bootstrap-editable'],
+            //['javascript', 'bootstrap-editable'],
             ['javascript', 'bootstrap-datepicker'],
             ['highcharts'],
             ['javascript', 'reports'],

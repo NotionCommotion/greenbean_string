@@ -19,7 +19,7 @@ class Chart extends GreenbeanDashboardPageController
             $this->addAssets([
                 ['javascript', 'handlebars'],
                 //['bootstrap-editable'],
-                ['javascript', 'bootstrap-editable'],
+                //['javascript', 'bootstrap-editable'],
                 ['javascript', 'table-dragger'],
                 ['javascript', 'charts'],
                 ['javascript', 'editableAutocomplete'],

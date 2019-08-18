@@ -45,7 +45,7 @@ class Source extends GreenbeanDashboardPageController
                 ['javascript', 'jquery.initialize'],
                 ['jstree'],
                 //['bootstrap-editable'],
-                ['javascript', 'bootstrap-editable'],
+                //['javascript', 'bootstrap-editable'],
                 ['javascript', 'source_bacnet'],
                 ['javascript', 'editableAutocomplete'],
                 ['toolTip']
