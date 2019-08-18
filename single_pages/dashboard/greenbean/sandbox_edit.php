@@ -39,7 +39,7 @@
                 <td></td>
                 <td></td>
                 <td></td>
-                <td><img alt="Delete Resource" src="{{ gb_img_base }}/delete.png" title="Delete Resource" class="vtip delete" height="16" width="16"></td>
+                <td><span class="delete glyphicon glyphicon-trash" data-toggle="tooltip" data-placement="top" title="Delete Resource"></span></td>
             </tr>
         </thead>
         <tbody></tbody>

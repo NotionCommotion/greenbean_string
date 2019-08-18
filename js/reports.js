@@ -406,7 +406,7 @@ $(function(){
                 var tbody=clone.closest('table').find('tbody').empty();
                 $.each(reports, function(i,report){
                     var row=clone.clone(true).removeAttr('id').data('id',report.id);
-                    row.find('a').text(report.name).attr('href',report.id);
+                    row.find('a').text(report.name).attr('href','report/'+report.id);
                     tbody.append(row);
                 });
                 $.unblockUI();

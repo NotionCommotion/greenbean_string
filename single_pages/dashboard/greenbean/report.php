@@ -67,11 +67,11 @@
 </div>
 <table id="points-table" class="table">
     <thead>
-        <tr id="clone-point" class="point-row">{{ forms.getPoints('',['mean'],gb_img_base) }}</tr>
+        <tr id="clone-point" class="point-row">{{ forms.getPoints('',['mean']) }}</tr>
     </thead>
     <tbody>
         {% for point in points %}
-        <tr data-id="{{ point.id }}" class="point-row">{{ forms.getPoints(point.name,point.aggrTypes,gb_img_base) }}</tr>
+        <tr data-id="{{ point.id }}" class="point-row">{{ forms.getPoints(point.name,point.aggrTypes) }}</tr>
         {% endfor %}
     </tbody>
 </table>
@@ -89,7 +89,7 @@
             </tr>
             <tr id="clone-report">
                 <td><a></a></td>
-                <td><img alt="Delete Report" src="{{ gb_img_base }}/delete.png" title="Delete Report" class="vtip delete" height="16" width="16"></td>
+                <td><span class="delete glyphicon glyphicon-trash" data-toggle="tooltip" data-placement="top" title="Delete Report"></span></td>
             </tr>
         </thead>
         <tbody>

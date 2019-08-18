@@ -351,6 +351,9 @@ $(function(){
         modal       : true,
     });
 
+    $('[data-toggle="tooltip"]').tooltip();
+
+
 });
 
 $.extend($.ui.dialog.prototype.options, {
