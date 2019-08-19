@@ -27,7 +27,7 @@ class Source extends GreenbeanDashboardPageController
             $this->twig('dashboard/greenbean/source.php', $rs);
         }
         else {
-            $this->twig('dashboard/greenbean/error.php', $rs);
+            $this->displayError($rs['errors'], '/dashboard/greenbean/source');
         }
     }
 
@@ -53,7 +53,7 @@ class Source extends GreenbeanDashboardPageController
             $this->twig('dashboard/greenbean/source_bacnet.php', $rs);
         }
         else {
-            $this->twig('dashboard/greenbean/error.php', $rs);
+            $this->displayError($rs['errors'], '/dashboard/greenbean/source');
         }
     }
 }

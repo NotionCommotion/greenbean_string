@@ -47,7 +47,8 @@ abstract class GreenbeanDashboardPageController extends DashboardPageController
         }
         $variables['gb_root_base'] = \Package::getByHandle(self::PKGHANDLE)->getRelativePath();
         $variables['gb_img_base'] = $variables['gb_root_base'] . '/images';
-        $variables['gb_api_base'] = '/dashboard/greenbean/api';
+        $variables['gb_url_base'] = '/dashboard/greenbean';
+        $variables['gb_api_base'] = $variables['gb_url_base'].'/api';
         $html = $this->twig->render($template, $variables);
         if($render) {
             $this->set('html', $html);
@@ -113,6 +114,7 @@ abstract class GreenbeanDashboardPageController extends DashboardPageController
             ['javascript', 'bootstrap/tooltip'],
             ['javascript', 'bootstrap/popover'],
             ['javascript', 'bootstrap-editable'],
+            ['css', 'font-awesome'],
             ['javascript', 'url-search-params'],
             ['javascript', 'throbber'],
             ['javascript', 'blockUI'],
@@ -122,8 +124,29 @@ abstract class GreenbeanDashboardPageController extends DashboardPageController
             ['manual'],
             ], $assets);
         foreach($assets as $asset) {
-            syslog(LOG_INFO, 'add asset: '.implode(' ',$asset));
             $this->requireAsset(...$asset);
         }
+    }
+
+    protected function is_digit($v) {
+        return is_int($v)||ctype_digit(($v));
+    }
+
+    protected function displayError(array $errors, string $menu, bool $errorFromApi=true)
+    {
+        if($errorFromApi) $errors=$this->combineError($errors);
+        $rs=['menu'=>$this->getMenu($menu), 'errors'=>$errors];
+        $this->addAssets();
+        $this->twig('dashboard/greenbean/error.php', $rs);
+    }
+
+    //Error provided by API as name => values array
+    protected function combineError(array $errors):array
+    {
+        $errorsOut=[];
+        foreach($errors as $name =>$error) {
+            $errorsOut[]="$name: $error";
+        }
+        return $errorsOut;
     }
 }

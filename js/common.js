@@ -15,6 +15,7 @@ window.onerror = function(msg, url, line, col, error) {
 };
 
 var gb_img_base=document.getElementById('gb_img_base').value;
+var gb_url_base=document.getElementById('gb_url_base').value;
 var gb_api_base=document.getElementById('gb_api_base').value;
 (function (global) {
     'use strict';

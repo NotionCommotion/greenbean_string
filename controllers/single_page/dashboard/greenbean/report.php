@@ -5,13 +5,21 @@ class Report extends GreenbeanDashboardPageController
 {
     public function view($id=null)
     {
-        if($id) {
-            $rs=$this->getServerBridge()->getPageContent(['report'=>"/reports/$id"]);
-            $rs=empty($rs['report'])?$this->gbHelper->getDefaultReportValues():$rs['report'];
+        if(!is_null($id)) {
+            if($this->is_digit($id) && $rs=$this->getServerBridge()->getPageContent(['report'=>"/reports/$id"])['report']??null) {
+                $this->_view($rs);
+            }
+            else {
+                $this->displayError(['Invalid page'], '/dashboard/greenbean/report', false);
+            }
         }
         else {
-            $rs=[];
+            $this->_view($this->gbHelper->getDefaultReportValues());
         }
+    }
+
+    private function _view($rs)
+    {
         $rs['menu']=$this->getMenu('/dashboard/greenbean/report');
         $this->addAssets([
             //['bootstrap-editable'],

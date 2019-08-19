@@ -28,7 +28,7 @@ class Point extends GreenbeanDashboardPageController
             $this->twig('dashboard/greenbean/point.php', $rs);
         }
         else {
-            $this->twig('dashboard/greenbean/error.php', $rs);
+            $this->displayError($rs['errors'], '/dashboard/greenbean/point');
         }
     }
 }

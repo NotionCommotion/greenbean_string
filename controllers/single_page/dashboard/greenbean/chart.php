@@ -28,7 +28,7 @@ class Chart extends GreenbeanDashboardPageController
             $this->twig('dashboard/greenbean/chart.php', $rs);
         }
         else {
-            $this->twig('dashboard/greenbean/error.php', $rs);
+            $this->displayError($rs['errors'], '/dashboard/greenbean/chart');
         }
     }
 }

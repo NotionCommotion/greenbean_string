@@ -473,9 +473,9 @@ $(function(){
                         type:'POST',
                         url:gb_api_base+'/reports',
                         data:data,
-                        //dataType: 'json',
+                        dataType: 'json',
                         success: function (rsp){
-                            window.location = "reports/"+rsp.id;
+                            window.location = "report/"+rsp.id;
                         },
                         error: function (xhr) {
                             alert('Error adding report: '+xhr.responseJSON.message);

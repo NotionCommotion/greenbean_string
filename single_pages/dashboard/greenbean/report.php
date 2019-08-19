@@ -3,16 +3,17 @@
 {% include 'dashboard/menu.html' %}
 <div id="list-header">
     <button type="button" class="btn btn-primary download-data">Download Data</button>
-    {% if id is defined %}
+    {% if id %}
     <button type="button" class="btn btn-secondary update-report">Save Report Changes</button>
     <button type="button" class="btn btn-secondary schedule-report">Schedule Report</button>
-    <a href="reports" class="btn btn-info" role="button">Create New</a>
+    <a href="{{ gb_url_base }}/report" class="btn btn-info" role="button">Create New</a>
     {% else %}
     <button type="button" class="btn btn-secondary save-report">Save New Report</button>
     {% endif %}
     <button type="button" class="btn btn-success saved-reports">Existing Reports</button>
     <h1>Reports</h1>
 </div>
+
 {{ forms.displayErrors(errors??null) }}
 <div id="report-header2">
     <a href="javascript:void(0)" id="name">{{ name }}</a>

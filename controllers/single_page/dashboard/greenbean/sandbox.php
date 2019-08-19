@@ -53,17 +53,14 @@ class Sandbox extends GreenbeanDashboardPageController
                 $this->twig('dashboard/greenbean/sandbox_edit.php', $rs);
             }
             else {
-                $this->twig('dashboard/greenbean/error.php', $rs);
+                $this->displayError($rs['errors'], '/dashboard/greenbean/sandbox');
             }
         }
         else {
             $errors = new ErrorList;
             $errors->add("Page $id does not exist");
             $this->redirect('/dashboard/sandbox');
-            /*
-            $rs['menu']=$this->getMenu('/dashboard/greenbean/sandbox');
-            $this->twig('dashboard/greenbean/error.php', $rs);
-            */
+            //$this->displayError($rs['errors'], '/dashboard/greenbean/sandbox');
         }
     }
 }
