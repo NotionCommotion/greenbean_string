@@ -1,6 +1,7 @@
 //Api source_bacnet_gateway.js
 $(function(){
 
+    const FONT = 'fa';     //FONT can be fa for font-awesome, glyphicon for twitter bootstrap, or null or raw for just data
     $.fn.myEdit = function(type, pk, name, options, optionsAutocomplete, method) {
         //Helper plugin to reduce script content
         //Doesn't support autocomplete
@@ -238,6 +239,7 @@ $(function(){
             $.ajax({
                 type: "GET",
                 url: gb_api_base+'/sources/'+sourceId+'/points',
+                data: {font:FONT},
                 success: function(points){
                     var tbody=$('#dialog-point-browser tbody').empty();
                     var clone=$('#dialog-point-browser tr.point-clone');
@@ -279,12 +281,12 @@ $(function(){
     function getJsTreeObj(lowDeviceId, highDeviceId) {
         return function (node, cb) {
             var t=this;
-            var data;
+            var data={font: FONT};
             switch(node.parents.length) {
                 case 0:
                     //Initial load.  Get devices
                     var url=gb_api_base+'/sources/'+sourceId+'/bacnet/devices';
-                    data={lowDeviceId: lowDeviceId, highDeviceId:highDeviceId};
+                    data={lowDeviceId: lowDeviceId, highDeviceId:highDeviceId, font: FONT};
                     break;
                 case 1:
                     //Get device
@@ -303,6 +305,7 @@ $(function(){
                 default:
                     throw 'Node depth of '+node.parents.length+' is not supported';
             }
+            var data={font: FONT};
             $.ajax({
                 type: "GET",
                 url: url,
@@ -347,14 +350,15 @@ $(function(){
                 var idAndType=object.attr('id').split('.');
                 var device=object.parents('li').parents('li');
                 var data={
-                    "name": params.value,
-                    "sourceId": sourceId,
-                    "objectId": idAndType[0],
-                    "objectType": idAndType[1],
-                    "deviceId": device.attr('id'),
+                    name: params.value,
+                    sourceId: sourceId,
+                    objectId: idAndType[0],
+                    objectType: idAndType[1],
+                    deviceId: device.attr('id'),
                     //Use default or bacnet values for: unit, slope, intercept, virtualLanId, trend, pollrate, covLifetime.  objectName, deviceName not used.
-                    "type": "real",
-                    "protocol": "bacnet"
+                    type: "real",
+                    protocol: "bacnet",
+                    font: FONT
                 };
                 return data;
             },
