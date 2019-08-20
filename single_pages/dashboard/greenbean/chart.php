@@ -25,7 +25,7 @@
             <td class="chName link">{{ row.name }}</td>
             <td>{{ row.id }}</td>
             <td>{{ row.type }}</td>
-            <td><span class="delete glyphicon glyphicon-trash" data-toggle="tooltip" data-placement="top" title="Delete Chart"></span></td>
+            <td><i class="delete fa fa-trash fa-lg" data-toggle="tooltip" data-placement="top" title="Delete Chart"></i></td>
         </tr>
         {% endfor %}
     </tbody>
@@ -218,14 +218,14 @@
     <tr>
     <th></th>
     {{#each categories}}
-    <th><a href="javascript:void(0)" class="hb_category">{{this.name}}</a><span class="deleteCategory glyphicon glyphicon-trash" data-toggle="tooltip" data-placement="top" title="Delete Category"></span></th>
+    <th><a href="javascript:void(0)" class="hb_category">{{this.name}}</a><i class="deleteCategory fa fa-trash fa-lg" data-toggle="tooltip" data-placement="top" title="Delete Category"></i></th>
     {{/each}}
             </tr>
             </thead>
             <tbody>
             {{#each series}}
         <tr>
-        <td><a href="javascript:void(0)" class="hb_series">{{this.name}}</a><span class="deleteSeries glyphicon glyphicon-trash" data-toggle="tooltip" data-placement="top" title="Delete Series"></span></td>
+        <td><a href="javascript:void(0)" class="hb_series">{{this.name}}</a><i class="deleteSeries fa fa-trash fa-lg" data-toggle="tooltip" data-placement="top" title="Delete Series"></i></td>
     {{#each this.points}}
     <td><a href="javascript:void(0)" class="hb_point" data-id="{{this.id}}">{{this.name}}</a></td>
     {{/each}}
@@ -258,7 +258,7 @@
     <tr id="clone-pie">
     <td><a href="javascript:void(0)" class="hb_category"></a></td>
     <td><a href="javascript:void(0)" class="hb_point"></a></td>
-    <td><span class="deleteData glyphicon glyphicon-trash" data-toggle="tooltip" data-placement="top" title="Delete Point"></span></td>
+    <td><i class="deleteData fa fa-trash fa-lg" data-toggle="tooltip" data-placement="top" title="Delete Point"></i></td>
     </tr>
     </thead>
     <tbody>
@@ -266,7 +266,7 @@
     <tr>
     <td><a href="javascript:void(0)" class="hb_category">{{this.name}}</a></td>
     <td><a href="javascript:void(0)" class="hb_point" data-id="{{this.point.id}}">{{this.point.name}}</a></td>
-    <td><span class="deleteData glyphicon glyphicon-trash" data-toggle="tooltip" data-placement="top" title="Delete Point"></span></td>
+    <td><i class="deleteData fa fa-trash fa-lg" data-toggle="tooltip" data-placement="top" title="Delete Point"></i></td>
     </tr>
     {{/each}}
     </tbody>
@@ -297,7 +297,7 @@
     <td><a href="javascript:void(0)" class="hb_point"></a></td>
     <td class="timeOffset"><a href="javascript:void(0)" class="hb_historyTimeValue"></a> <a href="javascript:void(0)" class="hb_historyTimeUnit"></a></td>
     <td><a href="javascript:void(0)" class="hb_aggrType"></a></a></td>
-    <td><span class="deleteTimeSeries glyphicon glyphicon-trash" data-toggle="tooltip" data-placement="top" title="Delete Series"></span></td>
+    <td><i class="deleteTimeSeries fa fa-trash fa-lg" data-toggle="tooltip" data-placement="top" title="Delete Series"></i></td>
     </tr>
     </tr>
     </thead>
@@ -308,7 +308,7 @@
     <td><a href="javascript:void(0)" class="hb_point" data-id="{{this.point.id}}">{{this.point.name}}</a></td>
     <td class="timeOffset"><a href="javascript:void(0)" class="hb_historyTimeValue">{{this.historyTimeValue}}</a> <a href="javascript:void(0)" class="hb_historyTimeUnit" data-value="{{this.historyTimeUnit}}"></a></td>
     <td><a href="javascript:void(0)" class="hb_aggrType" data-value='{{this.aggrType}}'></a></a></td>
-    <td><span class="deleteTimeSeries glyphicon glyphicon-trash" data-toggle="tooltip" data-placement="top" title="Delete Series"></span></td></tr>
+    <td><i class="deleteTimeSeries fa fa-trash fa-lg" data-toggle="tooltip" data-placement="top" title="Delete Series"></i></td></tr>
     {{/each}}
     </tbody>
     </table>

@@ -253,7 +253,7 @@ $(function(){
     var dialogEditPoint=$('#dialog-editPoint')
     .on('click','.addCustomPoint',function(){
         $("#dialog-addPointCust").dialog("open");
-    }).on('click','#customPointList img.delete',function(){
+    }).on('click','#customPointList i.delete',function(){
         if (confirm("Are you sure?")) {
             $.blockUI();
             var $this=$(this),

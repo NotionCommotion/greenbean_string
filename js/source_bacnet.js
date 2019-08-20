@@ -340,6 +340,7 @@ $(function(){
             pk: 1,
             value: '',
             url: gb_api_base+'/points',
+            placement: 'right',
             params: function(params) {
                 //originally params contain pk, name and value
                 var object=$(this).closest('li:has(ul)');

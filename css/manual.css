@@ -17,7 +17,7 @@
 .extraInstructions { text-align: center; color:#666666; font-size:10px; }
 
 /* Help Dialog */
-#dialog-help .header img {cursor:pointer;}
+#dialog-help .header i {cursor:pointer;}
 #dialog-help ul.list li,#dialog-help div.content span.link,#dialog-help div.content a{color:#0066CA;cursor:pointer;text-decoration:none;}
 #dialog-help input.searchHelp {float:right; border:0; color:#929292; font-size:0.7em;}
 #dialog-help p.name {font-size: 24px;line-height: 1.4em; padding-bottom: 12px;}
@@ -62,7 +62,7 @@ div.component-instructions p{
     padding:2px;
 }
 
-img.vertical-align {vertical-align:middle;}
+i.vertical-align {vertical-align:middle;}
 
 .look-editable{
     border-bottom: 1px dashed #08c;

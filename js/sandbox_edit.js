@@ -13,24 +13,18 @@ $(function(){
         content_css: [
             '//fonts.googleapis.com/css?family=Lato:300,300i,400,400i',
             '//www.tinymce.com/css/codepen.min.css',
+            '//stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css',
             //'/lib/gb/css/tinymce.css'
         ],
         setup : function(ed) {
             ed.addButton('addPoint', {
-                //text: 'Add Point',
-                //title : 'Add Point',
-                image : gb_img_base+'/insert.png',
+                icon: 'fa fa-info-circle',
                 tooltip: 'Add Point',
                 onclick : function() {$("#dialog-addPoint").dialog("open");}
             });
             ed.addButton('addChart', {
-                //text: 'Add Chart',
-                //icon: 'dashicons dashicons-clipboard',
-                //classes:'glyphicon glyphicon-signal',
-                //classes: 'fa fa-bar-chart',
-                //title : 'Add Chart',
+                icon: 'fa fa-bar-chart',
                 tooltip : 'Add Chart',
-                image : gb_img_base+'/insert.png',
                 onclick : function() {$("#dialog-addChart").dialog("open");}
             });
         },
@@ -63,7 +57,7 @@ $(function(){
         var $t=$(this),
         ed=tinymce.get('frontContent');
         ed.focus();
-        ed.selection.setContent('<img class="GB_point" data-id="'+$t.data('id')+'" src=gb_img_base+"/point.png" alt="'+$t.text()+'" title="'+$t.text()+'">');
+        ed.selection.setContent('<span class="GB_point fa fa-info-circle fa-5x" data-id="'+$t.data('id')+'" title="'+$t.text()+'">&nbsp;</span>');
         $t.closest('div.dialog').dialog("close");
     });
     var addChartDialog = $("#dialog-addChart");
@@ -80,7 +74,7 @@ $(function(){
         var $t=$(this),
         ed=tinymce.get('frontContent');
         ed.focus();
-        ed.selection.setContent('<img class="GB_chart" data-id="'+$t.data('id')+'" src=gb_img_base+"/chart.png" alt="'+$t.text()+'" title="'+$t.text()+'">');
+        ed.selection.setContent('<span class="GB_chart fa fa-bar-chart-o fa-5x" data-id="'+$t.data('id')+'" title="'+$t.text()+'">&nbsp;</span>');
         $t.closest('div.dialog').dialog("close");
     });
 

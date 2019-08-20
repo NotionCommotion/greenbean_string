@@ -32,7 +32,7 @@
                 <div class='input-group date' id='datepickerStart'>
                     <input type='text' class="form-control date" name="startDate" />
                     <span class="input-group-addon">
-                        <span class="glyphicon glyphicon-calendar"></span>
+                        <i class="fa fa-calendar-check-o fa-lg"></i>
                     </span>
                 </div>
             </div>
@@ -43,7 +43,7 @@
                 <div class='input-group date' id='datepickerEnd'>
                     <input type='text' class="form-control date" name="endDate" />
                     <span class="input-group-addon">
-                        <span class="glyphicon glyphicon-calendar"></span>
+                        <i class="fa fa-calendar-check-o fa-lg"></i>
                     </span>
                 </div>
             </div>
@@ -60,7 +60,7 @@
         </div>
     </div>
     <div class="row">
-        <div class='col-md-2'><a id="open-point" href="javascript:void(0)" data-toggle="tooltip" title="Add point to report"><span class="glyphicon glyphicon-plus"></span>Add Point</a></div>
+        <div class='col-md-2'><a id="open-point" href="javascript:void(0)" data-toggle="tooltip" title="Add point to report"><i class="fa fa-plus fa-lg"></i>Add Point</a></div>
         <div class='col-md-4'>
             <input type='text' id="add-point" class="form-control" />
         </div>
@@ -90,7 +90,7 @@
             </tr>
             <tr id="clone-report">
                 <td><a></a></td>
-                <td><span class="delete glyphicon glyphicon-trash" data-toggle="tooltip" data-placement="top" title="Delete Report"></span></td>
+                <td><i class="delete fa fa-trash fa-lg" data-toggle="tooltip" data-placement="top" title="Delete Report"></i></td>
             </tr>
         </thead>
         <tbody>

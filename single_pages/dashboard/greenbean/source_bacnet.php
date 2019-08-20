@@ -138,7 +138,7 @@
         <div>
             <table class="table">
                 <thead>
-                    <tr id="discovery-clone"><td><input type="checkbox" checked></td><td></td><td class="status" title="Discovery for this device is pending">Pending</td><td><span class="glyphicon glyphicon-time"></span></td></tr>
+                    <tr id="discovery-clone"><td><input type="checkbox" checked></td><td></td><td class="status" title="Discovery for this device is pending">Pending</td><td><i class="fa fa-clock-o fa-lg"></i></td></tr>
                 </thead>
                 <tbody id="discovery-list"></tbody>
             </table>

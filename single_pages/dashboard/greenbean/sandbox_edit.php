@@ -39,7 +39,7 @@
                 <td></td>
                 <td></td>
                 <td></td>
-                <td><span class="delete glyphicon glyphicon-trash" data-toggle="tooltip" data-placement="top" title="Delete Resource"></span></td>
+                <td><i class="delete fa fa-trash fa-lg" data-toggle="tooltip" data-placement="top" title="Delete Resource"></i></td>
             </tr>
         </thead>
         <tbody></tbody>

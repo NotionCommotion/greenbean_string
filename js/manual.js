@@ -14,17 +14,17 @@ $(function() {
             helpHistory.updateHelp(1);
         }
     });
-    $("#dialog-help img.back").click(function(){
+    $("#dialog-help i.back").click(function(){
         if(helpHistory.isBackPossible()){helpHistory.updateHelp(helpHistory.back())}
     });
-    $("#dialog-help img.forward").click(function(){
+    $("#dialog-help i.forward").click(function(){
         if(helpHistory.isForwardPossible()){helpHistory.updateHelp(helpHistory.forward())}
     });
-    $("#dialog-help img.home").click(function(){
+    $("#dialog-help i.home").click(function(){
         helpHistory.navigate(1);
         helpHistory.updateHelp(1);
     });
-    $("#dialog-help img.print").printIt({elems:'#dialog-help'});
+    $("#dialog-help i.print").printIt({elems:'#dialog-help'});
     $("#dialog-help input.searchHelp").autocomplete({source: gb_api_base+"/manual", minLength: 3,select: function(event, ui){
         $(this).val('').blur();
         helpHistory.updateHelp(ui.item.id);

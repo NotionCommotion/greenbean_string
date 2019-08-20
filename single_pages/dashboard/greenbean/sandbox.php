@@ -20,7 +20,7 @@
         {% for page in pages %}
         <tr data-id="{{ page.id }}">
             <td><a href="sandbox/{{ page.id }}">{{ page.name }}</a></td>
-            <td><span class="delete glyphicon glyphicon-trash" data-toggle="tooltip" data-placement="top" title="Delete Sandbox Page"></span></td>
+            <td><i class="delete fa fa-trash fa-lg" data-toggle="tooltip" data-placement="top" title="Delete Sandbox Page"></i></td>
         </tr>
         {% endfor %}
     </tbody>

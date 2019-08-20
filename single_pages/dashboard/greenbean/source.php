@@ -30,7 +30,7 @@
                 <td>{{ row.device_id }}</td>
                 <td>{{ row.timeout }}</td>
                 <td>{{ row.discovery_timeout }}</td>
-                <td><span class="delete glyphicon glyphicon-trash" data-toggle="tooltip" data-placement="top" title="Delete Source"></span></td>
+                <td><i class="delete fa fa-trash fa-lg" data-toggle="tooltip" data-placement="top" title="Delete Source"></i></td>
             </tr>
             {% endfor %}
         </tbody>
@@ -61,7 +61,7 @@
             <td>{{ row.url }}</td>
             <td>{{ row.port }}</td>
             <td>{{ row.encryptKey }}</td>
-            <td><span class="delete glyphicon glyphicon-trash" data-toggle="tooltip" data-placement="top" title="Delete Source"></span></td>
+            <td><i class="delete fa fa-trash fa-lg" data-toggle="tooltip" data-placement="top" title="Delete Source"></i></td>
         </tr>
         {% endfor %}
     </tbody>
@@ -87,7 +87,7 @@
             <td>{{ row.url }}</td>
             <td>{{ row.port }}</td>
             <td>{{ row.encryptKey }}</td>
-            <td><span class="delete glyphicon glyphicon-trash" data-toggle="tooltip" data-placement="top" title="Delete Source"></span></td>
+            <td><i class="delete fa fa-trash fa-lg" data-toggle="tooltip" data-placement="top" title="Delete Source"></i></td>
         </tr>
         {% endfor %}
     </tbody>

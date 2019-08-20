@@ -346,7 +346,7 @@ $(function(){
                         }
                     }).on("shown", function(ev, editable) {
                         const buttons = editable.container.$form.find(".editable-buttons")[0];
-                        buttons.insertAdjacentHTML("beforeend", '<button type="button" class="btn btn-default btn-sm editable-delete"><i class="glyphicon glyphicon-trash"></i></button>');
+                        buttons.insertAdjacentHTML("beforeend", '<button type="button" class="btn btn-default btn-sm editable-delete"><i class="fa fa-trash fa-lg"></i></button>');
                         buttons.children.item(2).addEventListener("click", function(){
                             //Change UX to allow deleting of series and categories this way instead of the X to delete?
                             console.log('delete')
@@ -532,7 +532,7 @@ $(function(){
         }
     });
 
-    dialogEditChart.on('click','img.deleteSeries',function(){
+    dialogEditChart.on('click','i.deleteSeries',function(){
         console.log(this)
         if (confirm("Are you sure?")) {
             $.blockUI();
@@ -554,7 +554,7 @@ $(function(){
             });
         }
     });
-    dialogEditChart.on('click','#chartListCategory img.deleteCategory',function(){
+    dialogEditChart.on('click','#chartListCategory i.deleteCategory',function(){
         console.log(this)
         if (confirm("Are you sure?")) {
             $.blockUI();
@@ -576,7 +576,7 @@ $(function(){
             });
         }
     });
-    dialogEditChart.on('click','#chartListPie img.deleteData',function(){
+    dialogEditChart.on('click','#chartListPie i.deleteData',function(){
         if (confirm("Are you sure?")) {
             $.blockUI();
             var $this=$(this),tr=$this.closest('tr');
@@ -595,7 +595,7 @@ $(function(){
             });
         }
     });
-    dialogEditChart.on('click','img.deleteTimeSeries',function(){
+    dialogEditChart.on('click','i.deleteTimeSeries',function(){
         if (confirm("Are you sure?")) {
             $.blockUI();
             var $this=$(this),tr=$this.closest('tr');

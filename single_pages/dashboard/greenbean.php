@@ -54,5 +54,6 @@
     </div>
 </div>
 <input type='hidden' id='gb_img_base' value='{{ gb_img_base }}'>
+<input type='hidden' id='gb_url_base' value='{{ gb_url_base }}'>
 <input type='hidden' id='gb_api_base' value='{{ gb_api_base }}'>
 {% include 'dashboard/manual.html' %}

@@ -2,11 +2,6 @@ footer.footer {
     text-align:center;
 }
 
-#dialog-editSource img.ajaxLoader {
-    margin-left: 20px;
-    display: none;
-}
-
 .link {color:blue; cursor:pointer}
 a:link {color:blue;}
 .hidden, .tempStuff {
@@ -186,4 +181,14 @@ input[name="search"] { border:0; width:164px; height:24px; background:url(../ima
 
 .previouslyDiscovered {
     color: blue;
+}
+
+/* Used to allow tinymce4 to use fontawesome. addButton => icon: 'fa fa-info-circle',*/
+.mce-ico.mce-i-fa {
+    display: inline-block;
+    font: normal normal normal 14px/1 FontAwesome;
+    font-size: inherit;
+    text-rendering: auto;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
 }

@@ -413,7 +413,7 @@ $(function(){
             });
         }
     });
-    $("#dialog-saved-reports").on("click", "img.delete", function(){
+    $("#dialog-saved-reports").on("click", "i.delete", function(){
         if (confirm("Are you sure?")) {
             $.blockUI();
             var $row=$(this).closest('tr');
@@ -540,7 +540,7 @@ $(function(){
         }
     } );
 
-    $("#points-table tbody").on("click", "img.delete", function(){
+    $("#points-table tbody").on("click", "i.delete", function(){
         var row=$(this).closest('tr');
         uxState.removePoints(row.data('id'));
         row.remove();

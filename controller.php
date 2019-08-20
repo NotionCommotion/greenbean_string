@@ -48,8 +48,6 @@ class Controller extends Package    // implements ProviderAggregateInterface
         //Only needed if shipped old jquery-ui is used!
         ['javascript', 'jquery-ui-autocomplete', 'js/jquery-ui-autocomplete.js', []],
 
-        //C5 has bugs regarding bootstrap icons.  See link for what I did: https://www.concrete5.org/community/forums/customizing_c5/using-bootstrop-glyphicon-with-c5/#965410
-
         //['javascript', 'bootstrap', '//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js', ['local'=>false], 'bootstrap'],    //Not used?
         //['css', 'bootstrap', '//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css', ['local'=>false], 'bootstrap'],    //Not used?
 

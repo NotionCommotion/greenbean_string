@@ -19,7 +19,7 @@
     {% set virtualLansAvailable = virtualLansAvailable|merge([{value: row.id, text: row.name}]) %}
     <tr data-id="{{ row.id }}">
         <td><a href='javascript:void(0)' class='name'>{{ row.name }}</a>{{ row.id==defaultValues.base.virtualLanId?' (PRIMARY)' }}</td>
-        <td><span class="delete glyphicon glyphicon-trash" data-toggle="tooltip" data-placement="top" title="Delete Virtual LAN"></span></td>
+        <td><i class="delete fa fa-trash fa-lg" data-toggle="tooltip" data-placement="top" title="Delete Virtual LAN"></i></td>
     </tr>
     {% endfor %}
 </tbody>
