@@ -38,7 +38,7 @@
 <div id="dialog-edit-virtual-lan" title="Virtual LAN Info" style="display:none"></div>
 
 <h3>BACnet Settings</h3>
-<ul class='xeditable'>
+<ul class='editable'>
     <li>Pollrate: <a href='javascript:void(0)' data-name='bacnet.pollrate' title='Pollrate'>{{ defaultValues.bacnet.pollrate }}</a></li>
     <li>COV Lifetime: <a href='javascript:void(0)' data-name='bacnet.covLifetime' title='COV Lifetime'>{{ defaultValues.bacnet.covLifetime }}</a></li>
     <li>Port: <a href='javascript:void(0)' data-name='bacnet.port' title='Port'>{{ defaultValues.bacnet.port }}</a></li>
@@ -48,14 +48,14 @@
 </ul>
 {#
 <h3>Webservice Settings (not currently implemented)</h3>
-<ul class='xeditable'>
+<ul class='editable'>
     <li>Pollrate: <a href='javascript:void(0)' data-name='webservice.pollrate' title='Pollrate'>{{ defaultValues.webservice.pollrate }}</a></li>
     <li>Port: <a href='javascript:void(0)' data-name='webservice.port' title='Port'>{{ defaultValues.webservice.port }}</a></li>
     <li>Timeout: <a href='javascript:void(0)' data-name='webservice.timeout' title='Timeout'>{{ defaultValues.webservice.timeout }}</a></li>
 </ul>
 #}
 <h3>Other Settings</h3>
-<ul class='xeditable'>
+<ul class='editable'>
     <li>Timezone: <a href='javascript:void(0)' data-name='base.timezone' title='Timezone' id="timezone">{{ defaultValues.base.timezone }}</a></li>
     <li>Trend Points: <a href='javascript:void(0)' data-name='realPnts.trend' data-value="{{ defaultValues.realPnts.trend }}" title='Trend Points' data-type='select' data-source="[{value: 1, text: 'Yes'},{value: 0, text: 'No'}]"></a></li>
     <li>Default Virtual LAN: <a href='javascript:void(0)' data-name='base.virtualLanId' data-value="{{ defaultValues.base.virtualLanId }}" title='Default Virtual LAN' data-type='select' data-source='{{ virtualLansAvailable|json_encode()|raw }}'></a></li>
@@ -67,7 +67,7 @@
 </ul>
 <!--
 <h3>Chart Settings (future - make configurable on a per chart basis)</h3>
-<ul class='xeditable'>
+<ul class='editable'>
 <li>Tickmarks: <a href='javascript:void(0)' data-name='chart.tickmarks' data-value="1" title='Chart Tickmarks' data-type='select' data-source="[{value: 1, text: 'Yes'},{value: 0, text: 'No'}]"></a></li>
 </ul>
 -->

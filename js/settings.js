@@ -84,7 +84,7 @@ $(function(){
         //url: gb_api_base+'/tags/lans/'+$(this).parent().data('id')
     })
 
-    $('ul.xeditable a:not(#timezone)').editable({
+    $('ul.editable a:not(#timezone)').editable({
         send: 'always',
         ajaxOptions: {type: "PUT"},
         url: gb_api_base+'/account',

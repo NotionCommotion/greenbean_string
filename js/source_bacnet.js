@@ -2,6 +2,7 @@
 $(function(){
 
     const FONT = 'fa';     //FONT can be fa for font-awesome, glyphicon for twitter bootstrap, or null or raw for just data
+    //fa-ban = glyphicon-ban-circle, fa-clock-o = glyphicon-time, fa-refresh=glyphicon-refresh fa-check=glyphicon-ok, fa-times-circle=glyphicon-remove-circle
     $.fn.myEdit = function(type, pk, name, options, optionsAutocomplete, method) {
         //Helper plugin to reduce script content
         //Doesn't support autocomplete
@@ -177,11 +178,11 @@ $(function(){
         var tds=$(this).closest('tr').children('td')
         if(this.checked) {
             tds.eq(2).text('Pending').toolTip('change', 'Discovery for this device is pending');
-            tds.eq(3).children('span').removeClass('glyphicon-ban-circle').addClass('glyphicon-time');
+            tds.eq(3).children('i').removeClass('fa-ban').addClass('fa-clock-o');
         }
         else {
             tds.eq(2).text('Cancelled').toolTip('change', 'Discovery for this device is cancelled');
-            tds.eq(3).children('span').addClass('glyphicon-ban-circle');
+            tds.eq(3).children('i').addClass('fa-ban');
         }
     });
 
@@ -198,7 +199,7 @@ $(function(){
         var input=$(inputs.shift());
         var tds=input.closest('tr').children('td');
         tds.eq(2).text('In Progress').toolTip('change', 'Discovery for this device is in progress');
-        tds.eq(3).children('span').removeClass('glyphicon-time').addClass('glyphicon-refresh');
+        tds.eq(3).children('i').removeClass('fa-clock-o').addClass('fa-refresh fa-spin');
         $.ajax({
             type: "POST",
             url: gb_api_base+'/sources/'+sourceId+'/discovery/'+input.val(),
@@ -207,14 +208,14 @@ $(function(){
             success: function(response){
                 console.log('success', response)
                 tds.eq(2).text('Complete').toolTip('change', response.object_name+': '+response.model_name+' ('+response.vendor_name+')');
-                tds.eq(3).children('span').removeClass('glyphicon-refresh').addClass('glyphicon-ok');
+                tds.eq(3).children('i').removeClass('fa-refresh fa-spin').addClass('fa-check');
                 tds.eq(0).find('input:checkbox').addClass('complete');
                 processDiscovery(id, inputs)
             },
             error: function(jqXHR, status, err) {
                 console.log('error', jqXHR, status, err) //status=error, err=Internal Server Error
                 tds.eq(2).text('Error').toolTip('change', 'Error: '+jqXHR.responseJSON.message); //responseJSON not set, only statusText
-                tds.eq(3).children('span').removeClass('glyphicon-refresh').addClass('glyphicon-remove-circle');
+                tds.eq(3).children('i').removeClass('fa-refresh fa-spin').addClass('fa-times-circle');
                 processDiscovery(id, inputs)
             },
             dataType: 'json'
