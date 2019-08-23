@@ -1,5 +1,5 @@
 <?php
-namespace Concrete\Package\GreenbeanDataIntegrator;
+namespace Concrete\Package\GreenbeanString;
 
 use Concrete\Core\Package\Package as Package;
 use Concrete\Core\Page\Single as SinglePage;
@@ -9,12 +9,12 @@ use Concrete\Core\Support\Facade\Events;
 use Concrete\Core\Asset\AssetList;
 use Concrete\Core\Asset\Asset;
 use Concrete\Core\Backup\ContentImporter;
-use Concrete\Package\GreenbeanDataIntegrator\Controller\SinglePage\Dashboard\Greenbean\Sandbox;
-use Greenbean\Concrete5\GreenbeanDataIntegrator\RouteList;
+use Concrete\Package\GreenbeanString\Controller\SinglePage\Dashboard\Greenbean\Sandbox;
+use Greenbean\Concrete5\GreenbeanString\RouteList;
 //use Concrete\Core\Database\EntityManager\Provider\ProviderAggregateInterface;
 //use Concrete\Core\Database\EntityManager\Provider\StandardPackageProvider;
 use Doctrine\ORM\EntityManager;
-use Greenbean\Concrete5\GreenbeanDataIntegrator\Entity\SandboxPage;
+use Greenbean\Concrete5\GreenbeanString\Entity\SandboxPage;
 
 defined('C5_EXECUTE') OR die("Access Denied.");
 
@@ -22,12 +22,12 @@ class Controller extends Package    // implements ProviderAggregateInterface
 {
 
     protected $appVersionRequired = '8.2';
-    protected $pkgVersion = '0.4';
-    protected $pkgHandle = 'greenbean_data_integrator';
-    protected $pkgName = 'Greenbean Data Integrator';
+    protected $pkgVersion = '1.0';
+    protected $pkgHandle = 'greenbean_string';
+    protected $pkgName = 'Greenbean String';
     protected $pkgDescription = 'Interface to the Greenbean data Api';
     protected $pkgAutoloaderRegistries = [
-        'src/' => 'Greenbean\\Concrete5\\GreenbeanDataIntegrator'
+        'src/' => 'Greenbean\\Concrete5\\GreenbeanString'
     ];
 
     //Forth element is an optional group name
@@ -126,7 +126,7 @@ class Controller extends Package    // implements ProviderAggregateInterface
 
     public function uninstall()
     {
-        syslog(LOG_ERR, 'Consider not deleting database upon removing Greenbean Data Integrator');
+        syslog(LOG_ERR, 'Consider not deleting database upon removing Greenbean String');
         parent::uninstall();
         $db = \Database::connection();
         $db->query('DROP TABLE IF EXISTS SandboxPages');
@@ -141,7 +141,7 @@ class Controller extends Package    // implements ProviderAggregateInterface
         $al = AssetList::getInstance();
         foreach(self::ASSETS as $asset) {
             if(isset($asset[4])) $groups[$asset[4]][]=array_slice($asset, 0, 2);
-            $asset[4]='greenbean_data_integrator';
+            $asset[4]='greenbean_string';
             $al->register(...$asset);    //returns JavascriptAsset if javascript, etc
         }
         foreach($groups as $name => $assets) {
@@ -150,7 +150,7 @@ class Controller extends Package    // implements ProviderAggregateInterface
 
         $gbUser = $this->app->make('session')->get('greenbeen-user');
 
-        $this->app->when('Greenbean\Concrete5\GreenbeanDataIntegrator\ValidGbUserMiddleware')->needs('$gbUser')->give($gbUser);
+        $this->app->when('Greenbean\Concrete5\GreenbeanString\ValidGbUserMiddleware')->needs('$gbUser')->give($gbUser);
 
         if($config = $this->getFileConfig()->get('server')) {
             $this->app->bind(ServerBridge::class, function(Application $app) use($gbUser, $config) {

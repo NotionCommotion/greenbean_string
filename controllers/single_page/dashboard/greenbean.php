@@ -1,5 +1,5 @@
 <?php
-namespace Concrete\Package\GreenbeanDataIntegrator\Controller\SinglePage\Dashboard;
+namespace Concrete\Package\GreenbeanString\Controller\SinglePage\Dashboard;
 class Greenbean extends GreenbeanDashboardPageController
 {
     public function view()

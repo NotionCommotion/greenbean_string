@@ -1,8 +1,8 @@
 <?php
-namespace Concrete\Package\GreenbeanDataIntegrator\Controller\Api;
-use Greenbean\Concrete5\GreenbeanDataIntegrator\GbHelper;
+namespace Concrete\Package\GreenbeanString\Controller\Api;
+use Greenbean\Concrete5\GreenbeanString\GbHelper;
 use Doctrine\ORM\EntityManager;
-use Greenbean\Concrete5\GreenbeanDataIntegrator\Entity\SandboxPage;
+use Greenbean\Concrete5\GreenbeanString\Entity\SandboxPage;
 use Concrete\Core\Support\Facade\Application;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Concrete\Core\Error\ErrorList\ErrorList;

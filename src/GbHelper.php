@@ -1,9 +1,9 @@
 <?php
 /**
 Or should this class be located in the package's controller directory?
-If so, change path to __DIR__.'/../../single_pages' assuming namespace Concrete\Package\GreenbeanDataIntegrator\Controller\SinglePage.
+If so, change path to __DIR__.'/../../single_pages' assuming namespace Concrete\Package\GreenbeanString\Controller\SinglePage.
 */
-namespace Greenbean\Concrete5\GreenbeanDataIntegrator;
+namespace Greenbean\Concrete5\GreenbeanString;
 class GbHelper
 {
     private $filetypes=['js'=>'JavaScript','css'=>'CSS'];

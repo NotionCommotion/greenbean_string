@@ -1,5 +1,5 @@
 {
-    "name": "concrete5/greenbean_data_integrator",
+    "name": "concrete5/greenbean_string",
     "description": "Interface for Greenbean API",
     "type": "concrete5-package",
     "version": "1.0.0",
@@ -10,7 +10,7 @@
     },
     "autoload": {
         "psr-4": {
-            "Greenbean\\Concrete5\\GreenbeanDataIntegrator\\": "src"
+            "Greenbean\\Concrete5\\GreenbeanString\\": "src"
         }
     }
 }

@@ -1,7 +1,7 @@
 <?php
-namespace Concrete\Package\GreenbeanDataIntegrator\Controller\Api;
+namespace Concrete\Package\GreenbeanString\Controller\Api;
 use Symfony\HttpFoundation\JsonResponse;
-use Greenbean\Concrete5\GreenbeanDataIntegrator\GbHelper;
+use Greenbean\Concrete5\GreenbeanString\GbHelper;
 use Greenbean\ServerBridge\ServerBridge;
 class ProxyRouteController
 {

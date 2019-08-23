@@ -1,5 +1,5 @@
 <?php
-namespace Concrete\Package\GreenbeanDataIntegrator\Controller\SinglePage;
+namespace Concrete\Package\GreenbeanString\Controller\SinglePage;
 use Concrete\Core\Page\Controller\PageController;
 class DataReporter extends PageController
 {

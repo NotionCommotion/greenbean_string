@@ -1,8 +1,8 @@
 <?php
-namespace Concrete\Package\GreenbeanDataIntegrator\Controller\SinglePage\Dashboard\Greenbean;
-use Concrete\Package\GreenbeanDataIntegrator\Controller\SinglePage\dashboard\GreenbeanDashboardPageController;
+namespace Concrete\Package\GreenbeanString\Controller\SinglePage\Dashboard\Greenbean;
+use Concrete\Package\GreenbeanString\Controller\SinglePage\dashboard\GreenbeanDashboardPageController;
 use Doctrine\ORM\EntityManager;
-use Greenbean\Concrete5\GreenbeanDataIntegrator\Entity\SandboxPage;
+use Greenbean\Concrete5\GreenbeanString\Entity\SandboxPage;
 use Concrete\Core\Error\ErrorList\ErrorList;
 
 class Sandbox extends GreenbeanDashboardPageController

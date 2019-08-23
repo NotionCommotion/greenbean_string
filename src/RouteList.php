@@ -1,8 +1,8 @@
 <?php
-namespace Greenbean\Concrete5\GreenbeanDataIntegrator;
+namespace Greenbean\Concrete5\GreenbeanString;
 use Concrete\Core\Routing\RouteListInterface;
 use Concrete\Core\Routing\Router;
-use Greenbean\Concrete5\GreenbeanDataIntegrator\ValidGbUserMiddleware;
+use Greenbean\Concrete5\GreenbeanString\ValidGbUserMiddleware;
 use Concrete\Core\Http\Middleware\OAuthAuthenticationMiddleware;
 class RouteList implements RouteListInterface
 {
@@ -82,9 +82,9 @@ class RouteList implements RouteListInterface
         ->addMiddleware(ValidGbUserMiddleware::class)
         ->routes(function($groupRouter) {
             $this->addProxyRoutes($groupRouter, self::PRIVATE_ROUTES);
-            $groupRouter->post('/dashboard/greenbean/api/sandbox', 'Concrete\Package\GreenbeanDataIntegrator\Controller\Api\SandboxRouteController::create');
-            $groupRouter->delete('/dashboard/greenbean/api/sandbox/{id}', 'Concrete\Package\GreenbeanDataIntegrator\Controller\Api\SandboxRouteController::delete');//->setRequirements(['id' => '[0-9]+']);
-            $groupRouter->put('/dashboard/greenbean/api/sandbox/{page}', 'Concrete\Package\GreenbeanDataIntegrator\Controller\Api\SandboxRouteController::save')->setRequirements(['page' => '[0-9]+']);
+            $groupRouter->post('/dashboard/greenbean/api/sandbox', 'Concrete\Package\GreenbeanString\Controller\Api\SandboxRouteController::create');
+            $groupRouter->delete('/dashboard/greenbean/api/sandbox/{id}', 'Concrete\Package\GreenbeanString\Controller\Api\SandboxRouteController::delete');//->setRequirements(['id' => '[0-9]+']);
+            $groupRouter->put('/dashboard/greenbean/api/sandbox/{page}', 'Concrete\Package\GreenbeanString\Controller\Api\SandboxRouteController::save')->setRequirements(['page' => '[0-9]+']);
         });
     }
 
@@ -93,7 +93,7 @@ class RouteList implements RouteListInterface
         //$routes is something like: [['/path/{id}', ['post','put'], ['id']]],
         foreach ($routes as $route) {
             foreach ($route[1] as $method) {
-                $r=$router->$method('/dashboard/greenbean/api'.$route[0], 'Concrete\Package\GreenbeanDataIntegrator\Controller\Api\ProxyRouteController::proxyRoute');
+                $r=$router->$method('/dashboard/greenbean/api'.$route[0], 'Concrete\Package\GreenbeanString\Controller\Api\ProxyRouteController::proxyRoute');
                 if(isset($route[2])) {
                     foreach($route[2] as $key=>$value) {
                         $r->setRequirements(is_int($key)?[$value=>'[0-9]+']:[$key => $value]);

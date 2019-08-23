@@ -1,16 +1,16 @@
 <?php
-namespace Concrete\Package\GreenbeanDataIntegrator\Controller\SinglePage\Dashboard;
+namespace Concrete\Package\GreenbeanString\Controller\SinglePage\Dashboard;
 use Concrete\Core\Page\Controller\DashboardPageController;
 use Concrete\Core\User\User;
 use Concrete\Core\User\UserInfo;
 use Concrete\Core\Support\Facade\Events;
-use Greenbean\Concrete5\GreenbeanDataIntegrator\GbHelper;
+use Greenbean\Concrete5\GreenbeanString\GbHelper;
 
 abstract class GreenbeanDashboardPageController extends DashboardPageController
 {
     private $twig, $serverBridge;
     protected $gbHelper;
-    protected const PKGHANDLE = 'greenbean_data_integrator';    //How should this be accomplished?
+    protected const PKGHANDLE = 'greenbean_string';    //How should this be accomplished?
 
     public function __construct(...$args)
     {

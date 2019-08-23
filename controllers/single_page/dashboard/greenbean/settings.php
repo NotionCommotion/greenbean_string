@@ -1,6 +1,6 @@
 <?php
-namespace Concrete\Package\GreenbeanDataIntegrator\Controller\SinglePage\Dashboard\Greenbean;
-use Concrete\Package\GreenbeanDataIntegrator\Controller\SinglePage\dashboard\GreenbeanDashboardPageController;
+namespace Concrete\Package\GreenbeanString\Controller\SinglePage\Dashboard\Greenbean;
+use Concrete\Package\GreenbeanString\Controller\SinglePage\dashboard\GreenbeanDashboardPageController;
 class Settings extends GreenbeanDashboardPageController
 {
     public function view()

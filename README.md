@@ -1,33 +1,3 @@
-Composer packages:
-
-Install:
-composer require concrete5/your_package_name
-./vendor/bin/concrete5 c5:package-install your_package_name
-
-Create new:
-Using this project as a skeleton
-composer create-project concrete5/your_package_name
-Once this is done, modify the composer.json to have information about your project and an updated name. Then set up your VCS
-Add to github and then packaglist.
-
-
-Create single pages for frontend: Reports
-Create single pages for backend: GB Data Integrator, and sub-pages Points, Charts, Data Sources, Settings, Help Desk.
-Create routes to API for both front and back end.
-
-
-mkdir gb_data_integrator
-mkdir gb_data_integrator/single_pages
-mkdir gb_data_integrator/single_pages/dashboard
-mkdir gb_data_integrator/single_pages/dashboard/greenbean
-mkdir gb_data_integrator/controllers
-mkdir gb_data_integrator/controllers/single_page
-mkdir gb_data_integrator/controllers/single_page/dashboard
-mkdir gb_data_integrator/controllers/single_page/dashboard/greenbean
-
-
-
-
 # Sample Composer Package
 This project is a concrete5 sample package that is powered entirely by [composer](https://getcomposer.org).
 

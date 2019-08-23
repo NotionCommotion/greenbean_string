@@ -2,38 +2,38 @@
 <concrete5-cif version="1.0">
 
     <singlepages>
-        <page package="greenbean_data_integrator" name="Greenbean" description="Greenbean Energy and Environmmental Data Manager" pagetype="" path="/dashboard/greenbean" filename="/dashboard/greenbean.php" />
-        <page package="greenbean_data_integrator" name="Greenbean" description="Greenbean Energy and Environmmental Data App" pagetype="" path="/greenbean" filename="/greenbean.php" />
-        <page package="greenbean_data_integrator" name="Greenbean Configure" description="" pagetype="" path="/dashboard/greenbean/configure" filename="/dashboard/greenbean/configure.php">
+        <page package="greenbean_string" name="Greenbean" description="Greenbean Energy and Environmmental Data Manager" pagetype="" path="/dashboard/greenbean" filename="/dashboard/greenbean.php" />
+        <page package="greenbean_string" name="Greenbean" description="Greenbean Energy and Environmmental Data App" pagetype="" path="/greenbean" filename="/greenbean.php" />
+        <page package="greenbean_string" name="Greenbean Configure" description="" pagetype="" path="/dashboard/greenbean/configure" filename="/dashboard/greenbean/configure.php">
             <attributes><attributekey handle="exclude_nav"><value>1</value></attributekey></attributes>
         </page>
-        <page package="greenbean_data_integrator" name="Greenbean - Report Manager" description="" pagetype="" path="/dashboard/greenbean/report" filename="/dashboard/greenbean/report.php">
+        <page package="greenbean_string" name="Greenbean - Report Manager" description="" pagetype="" path="/dashboard/greenbean/report" filename="/dashboard/greenbean/report.php">
             <attributes><attributekey handle="exclude_nav"><value>1</value></attributekey></attributes>
         </page>
-        <page package="greenbean_data_integrator" name="Greenbean - Point Manager" description="" pagetype="" path="/dashboard/greenbean/point" filename="/dashboard/greenbean/point.php">
+        <page package="greenbean_string" name="Greenbean - Point Manager" description="" pagetype="" path="/dashboard/greenbean/point" filename="/dashboard/greenbean/point.php">
             <attributes><attributekey handle="exclude_nav"><value>1</value></attributekey></attributes>
         </page>
-        <page package="greenbean_data_integrator" name="Greenbean - Chart Manager" description="" pagetype="" path="/dashboard/greenbean/chart" filename="/dashboard/greenbean/chart.php">
+        <page package="greenbean_string" name="Greenbean - Chart Manager" description="" pagetype="" path="/dashboard/greenbean/chart" filename="/dashboard/greenbean/chart.php">
             <attributes><attributekey handle="exclude_nav"><value>1</value></attributekey></attributes>
         </page>
-        <page package="greenbean_data_integrator" name="Greenbean - Data Source Manager" description="" pagetype="" path="/dashboard/greenbean/source" filename="/dashboard/greenbean/source.php">
+        <page package="greenbean_string" name="Greenbean - Data Source Manager" description="" pagetype="" path="/dashboard/greenbean/source" filename="/dashboard/greenbean/source.php">
             <attributes><attributekey handle="exclude_nav"><value>1</value></attributekey></attributes>
         </page>
         <!--
-        <page package="greenbean_data_integrator" name="Greenbean - Sandbox" description="" pagetype="" path="/dashboard/greenbean/sandbox/edit" filename="/dashboard/greenbean/sandbox/edit.php">
+        <page package="greenbean_string" name="Greenbean - Sandbox" description="" pagetype="" path="/dashboard/greenbean/sandbox/edit" filename="/dashboard/greenbean/sandbox/edit.php">
             <attributes><attributekey handle="exclude_nav"><value>1</value></attributekey></attributes>
         </page>
         -->
-        <page package="greenbean_data_integrator" name="Greenbean - Sandbox" description="" pagetype="" path="/dashboard/greenbean/sandbox" filename="/dashboard/greenbean/sandbox.php">
+        <page package="greenbean_string" name="Greenbean - Sandbox" description="" pagetype="" path="/dashboard/greenbean/sandbox" filename="/dashboard/greenbean/sandbox.php">
             <attributes><attributekey handle="exclude_nav"><value>1</value></attributekey></attributes>
         </page>
-        <page package="greenbean_data_integrator" name="Greenbean - Account Settings" description="" pagetype="" path="/dashboard/greenbean/settings" filename="/dashboard/greenbean/settings.php">
+        <page package="greenbean_string" name="Greenbean - Account Settings" description="" pagetype="" path="/dashboard/greenbean/settings" filename="/dashboard/greenbean/settings.php">
             <attributes><attributekey handle="exclude_nav"><value>1</value></attributekey></attributes>
         </page>
-        <page package="greenbean_data_integrator" name="Greenbean - Users Manual" description="" pagetype="" path="/dashboard/greenbean/manual" filename="/dashboard/greenbean/manual.php">
+        <page package="greenbean_string" name="Greenbean - Users Manual" description="" pagetype="" path="/dashboard/greenbean/manual" filename="/dashboard/greenbean/manual.php">
             <attributes><attributekey handle="exclude_nav"><value>1</value></attributekey></attributes>
         </page>
-        <page package="greenbean_data_integrator" name="Greenbean - Help Desk" description="" pagetype="" path="/dashboard/greenbean/helpdesk" filename="/dashboard/greenbean/helpdesk.php">
+        <page package="greenbean_string" name="Greenbean - Help Desk" description="" pagetype="" path="/dashboard/greenbean/helpdesk" filename="/dashboard/greenbean/helpdesk.php">
             <attributes><attributekey handle="exclude_nav"><value>1</value></attributekey></attributes>
         </page>
     </singlepages>

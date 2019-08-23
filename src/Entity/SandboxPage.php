@@ -1,15 +1,15 @@
 <?php
 
-namespace Greenbean\Concrete5\GreenbeanDataIntegrator\Entity;
+namespace Greenbean\Concrete5\GreenbeanString\Entity;
 
 /**
-* Represents a sandbox pages for the Greenbean DataIntegrator.
+* Represents a sandbox pages for the Greenbean String.
 *
 * @\Doctrine\ORM\Mapping\Entity(
 * )
 * @\Doctrine\ORM\Mapping\Table(
 *     name="SandboxPages",
-*     options={"comment": "Sandbox pages for the Greenbean DataIntegrator"}
+*     options={"comment": "Sandbox pages for the Greenbean String"}
 * )
 */
 class SandboxPage implements \JsonSerializable

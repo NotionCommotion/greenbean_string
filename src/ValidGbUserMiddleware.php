@@ -1,6 +1,6 @@
 <?php
 
-namespace Greenbean\Concrete5\GreenbeanDataIntegrator;
+namespace Greenbean\Concrete5\GreenbeanString;
 
 use Concrete\Core\Http\Middleware\DelegateInterface;
 use Concrete\Core\Http\Middleware\MiddlewareInterface;
